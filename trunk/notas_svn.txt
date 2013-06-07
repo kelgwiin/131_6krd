@@ -6,7 +6,12 @@ svn co https://subversion.assembla.com/svn/131_6krd/
 (agregar un archivo)
 svn add nombre_archivo
 
+(para especificar el usuario)
 adjuntar --username  nombre
 
 (para ayuda)
 svn help comando
+
+(para hacer el commit)
+
+svn ci -m "etiqueta" 
