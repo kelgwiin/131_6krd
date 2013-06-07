@@ -16,4 +16,6 @@ svn help comando
 
 svn ci -m "etiqueta" 
 
-ahora estyo modificando
+(eliminar archivo)
+
+svn del nombre-archivo
