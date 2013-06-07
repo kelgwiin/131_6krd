@@ -19,3 +19,8 @@ svn ci -m "etiqueta"
 (eliminar archivo)
 
 svn del nombre-archivo
+
+direccion web 
+
+krd-daweb.dyndns.biz
+ip: 190.142.152.48
