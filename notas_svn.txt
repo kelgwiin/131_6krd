@@ -15,3 +15,5 @@ svn help comando
 (para hacer el commit)
 
 svn ci -m "etiqueta" 
+
+ahora estyo modificando
