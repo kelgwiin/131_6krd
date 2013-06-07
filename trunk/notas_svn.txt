@@ -2,3 +2,6 @@ SVN
 
 (dentro del proyecto)
 svn co https://subversion.assembla.com/svn/131_6krd/
+
+(agregar un archivo)
+svn add nombre_archivo
