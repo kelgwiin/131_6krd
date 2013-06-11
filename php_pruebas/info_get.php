@@ -10,7 +10,7 @@
 
 <body>
 	
-	<h1> Mis datos</h1>
+	<h1> Mis datos (GET)</h1>
 	
 	<?php
 	printf("<strong>Nombre</strong> %s <br>",$_GET["nombre"]);
