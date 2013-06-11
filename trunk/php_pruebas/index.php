@@ -17,10 +17,17 @@
 	Edad : 
 	
 	<select>
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-		</select>
+	<?php
+		for ($i = 1; $i <= 150; $i++)
+		{
+			printf("<option>%d</option>",$i);
+		}
+		
+	?>
+	</select>
+	
+	<br>
+	
 	
 	<input type = "submit" value = "Enviar">
 	</form>
