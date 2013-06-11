@@ -15,8 +15,16 @@
 	Nombre: <input type = "text"> <br>
 	Apellido: <input type = "text"> <br>
 	Edad : 
+	
+	<select>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+		</select>
+	
+	<input type = "submit" value = "Enviar">
 	</form>
 </body>
 
 </html>
-sí
+
