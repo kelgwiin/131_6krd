@@ -24,7 +24,7 @@
 	?>
 	
 	<br>
-	<a href = "index.php"> Atras</a>
+	<a href = "index_get.php"> Atras</a>
 </body>
 
 </html>
