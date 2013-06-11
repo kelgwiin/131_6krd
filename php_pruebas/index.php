@@ -12,11 +12,11 @@
 	
 	<h1> Mi primer formulario </h1>
 	<form name = "prueba de formularios" action = "info.php" method = "POST"> 
-	Nombre: <input type = "text"> <br>
-	Apellido: <input type = "text"> <br>
+	Nombre: <input type = "text" name = "nombre"> <br>
+	Apellido: <input type = "text" name = "apellido"> <br>
 	Edad : 
 	
-	<select>
+	<select name = "edad">
 	<?php
 		for ($i = 1; $i <= 150; $i++)
 		{
@@ -28,10 +28,10 @@
 	
 	<br>
 	<br>
-	Telefono: <input type = "text"> <br>
+	Telefono: <input type = "text" name = "tlf"> <br>
 	
 	Sexo: M <input type = "radio" name = "sexo_tipo" value = "M">
-	F<input type = "radio" name = "sexo_tipo" value = "F"><br>
+	F<input type = "radio" name = "sexo_tipo" value = "F"> <br> <br>
 	
 	<input type = "submit" value = "Enviar">
 	</form>
