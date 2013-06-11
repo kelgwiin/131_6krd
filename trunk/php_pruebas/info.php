@@ -13,8 +13,8 @@
 	<h1> Mis datos</h1>
 	
 	<?php
-	printf("Nombre %s",$__POST("nombre"));
-	printf("Apellido%s",$__POST("apellido"));
+	printf("Nombre %s",$_POST["nombre"]);
+	printf("Apellido%s",$_POST["apellido"]);
 	
 	?>
 </body>
