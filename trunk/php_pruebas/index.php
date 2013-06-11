@@ -27,7 +27,11 @@
 	</select>
 	
 	<br>
+	<br>
+	Telefono: <input type = "text"> <br>
 	
+	Sexo: <input type = "radio" name = "sexo_tipo" value = "M"></input>
+	<input type = "radio" name = "sexo_tipo" value = "S"></input> <br>
 	
 	<input type = "submit" value = "Enviar">
 	</form>
