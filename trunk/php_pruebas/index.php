@@ -30,8 +30,8 @@
 	<br>
 	Telefono: <input type = "text"> <br>
 	
-	Sexo: <input type = "radio" name = "sexo_tipo" value = "M"></input>
-	<input type = "radio" name = "sexo_tipo" value = "S"></input> <br>
+	Sexo: M <input type = "radio" name = "sexo_tipo" value = "M">
+	F<input type = "radio" name = "sexo_tipo" value = "F"><br>
 	
 	<input type = "submit" value = "Enviar">
 	</form>
