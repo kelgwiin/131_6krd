@@ -9,7 +9,9 @@
 </head>
 
 <body>
-	<form name = "prueba de formularios" action = "info.php"> 
+	
+	<h1> Mi primer formulario </h1>
+	<form name = "prueba de formularios" action = "info.php" method = "POST"> 
 	Nombre: <input type = "text"> <br>
 	Apellido: <input type = "text"> <br>
 	</form>
