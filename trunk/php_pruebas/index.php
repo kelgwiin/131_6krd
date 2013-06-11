@@ -14,6 +14,7 @@
 	<form name = "prueba de formularios" action = "info.php" method = "POST"> 
 	Nombre: <input type = "text"> <br>
 	Apellido: <input type = "text"> <br>
+	Edad : 
 	</form>
 </body>
 
