@@ -16,9 +16,9 @@
 	printf("<strong>Nombre</strong> %s <br>",$_POST["nombre"]);
 	printf("<strong>Apellido</strong>%s ",$_POST["apellido"]);
 	
-	printf("<strong> Edad</strong> %s",$_POST["edad"]);
-	printf("<strong> Telefono</strong> %s",$_POST["telefono"]);
-	printf("<strong> Sexo</strong> %s",$_POST["sexo"]);
+	printf("<strong> Edad</strong> %s <br>",$_POST["edad"]);
+	printf("<strong> Telefono</strong> %s <br>",$_POST["tlf"]);
+	printf("<strong> Sexo</strong> %s <br>",$_POST["sexo_tipo"]);
 	
 	
 	?>
