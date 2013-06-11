@@ -22,6 +22,9 @@
 	
 	
 	?>
+	
+	<br>
+	<a href = "index.php"> Atras</a>
 </body>
 
 </html>
