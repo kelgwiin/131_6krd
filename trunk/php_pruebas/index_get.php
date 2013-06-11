@@ -11,7 +11,7 @@
 <body>
 	
 	<h1> Mi primer formulario </h1>
-	<form name = "prueba de formularios" action = "info.php" method = "GET"> 
+	<form name = "prueba de formularios" action = "info_get.php" method = "GET"> 
 	Nombre: <input type = "text" name = "nombre"> <br>
 	Apellido: <input type = "text" name = "apellido"> <br>
 	Edad : 
