@@ -77,7 +77,7 @@
 			</form>	<!--  Fin Formulario Agregar -->
 			
 			<div class = "grid_12">
-				<button class="enviar" id = "bt_save">Guardar</button>
+				<button class="enviar" id = "bt_save" action="guardar.php">Guardar</button>
 			</div>
 			
 		
