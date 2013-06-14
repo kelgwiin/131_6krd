@@ -20,7 +20,13 @@ svn ci -m "etiqueta"
 
 svn del nombre-archivo
 
-direccion web 
-
+Direccion WEB 
 krd-daweb.dyndns.biz
 ip: 190.142.152.48
+
+BASE DE DATOS
+$user = 'daweb_krd';
+$pass = 'krd';
+$database = 'daweb_krd';
+
+
