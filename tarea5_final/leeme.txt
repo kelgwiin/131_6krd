@@ -1,0 +1,17 @@
+NOTAS
+
+* Los archivos que se mencionar a continuación se llaman desde aplicación
+mediante el uso de "jquery ajax", en el archivo app.js
+
+1.- eliminar_contactos.php
+2.- guarda_info_contacto.php: registra mensaje hacia la empresa
+3.- guardar_contactos.php: Registra un contacto
+
+
+* El archivo libreria_config.php contiene la conexión a la
+base de datos y unos pequeñas funcionesss.
+
+* Hay varios cambios en app.js
+
+
+
