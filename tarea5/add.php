@@ -32,7 +32,7 @@
 		<div class = "clear"></div>
 		
 		<!--  Inicio Formulario Agregar -->
-		<form  name = "add_contacto">
+		<form  name = "add_contacto" method="POST"action="guardar.php">
 			
 			<div class = "grid_2 alpha">
 				<!--Columna 0: etiquetas -->
@@ -77,7 +77,8 @@
 			</form>	<!--  Fin Formulario Agregar -->
 			
 			<div class = "grid_12">
-				<button class="enviar" id = "bt_save" action="guardar.php">Guardar</button>
+				<!--<input tabindex="6" name="submit" id="bt_save" type="button" class="enviar" OnClick="location.href='guardar.php'" value="Guardar">-->
+				<button name="submit" class="enviar" id = "bt_save" type="submit">Guardar</button>
 			</div>
 			
 		

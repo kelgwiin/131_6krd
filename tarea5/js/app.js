@@ -81,9 +81,9 @@ $(document).ready(function(){
 		//validar: nombre,apellido, tlf
 		if(nombre.length >0  && apellido.length > 0 && tlf.length > 0 
 		 && isNumber(tlf) ){
-			alert('se puede guardar');
+		
 			//Procesar llamada al servidor
-			
+			window.location = "guardar.php";
 			$('span#error_camposObligatorios').hide();
 		}else{
 			$('span#error_camposObligatorios').show();
