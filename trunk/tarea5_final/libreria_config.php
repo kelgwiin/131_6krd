@@ -35,7 +35,7 @@ class BaseDatos{
 	}
 	
 	public function connect(){
-		$this->conexion = mysql_connect($server,$database,$pass);
+		$this->conexion = mysql_connect($server,$this->database,$this->pass);
 		//Selecionando la base de datos
 		$this->bd_object = mysql_select_db($database,$conexion);
 
