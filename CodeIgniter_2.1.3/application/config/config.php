@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://krd-daweb.dyndns.biz/CodeIgniter_2.1.3/';
+$config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------
