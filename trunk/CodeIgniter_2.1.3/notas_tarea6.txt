@@ -1,0 +1,18 @@
+LO QUE HACE
+* Carga los contactos iniciales (index)
+* Guarda y valida un nuevo contacto.
+* Despliega informción adicional de los contactos.
+
+LO QUE FALTA
+* Eliminar contacto
+* Guardar info de contacto a la empresa.
+* Acerca de los autores.
+
+PENDIENTE
+*CI = CodeIgniter
+* Cambiar la BASE cuando vayas a trabajar localmente 
+(en el header de las vistas lo está la base) 
+* Modifique el archivo de ROUTES
+* Fusioné ajax con peticiones de CI, fíjense en app.js en el tratamiento
+del botton guardar.
+*El modelo está agregado, "agenda_model"
