@@ -10,7 +10,7 @@ LO QUE FALTA
 
 PENDIENTE
 *CI = CodeIgniter
-* Cambiar la BASE cuando vayas a trabajar localmente 
+* Cambiar la BASE cuando vayas a trabajar localmente (En el HEADER de agenda_vw)
 (en el header de las vistas lo está la base) 
 * Modifique el archivo de ROUTES
 * Fusioné ajax con peticiones de CI, fíjense en app.js en el tratamiento
