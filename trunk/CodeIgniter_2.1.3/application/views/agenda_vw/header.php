@@ -3,12 +3,12 @@
 <head>
 	<?php
 	//Para otros en vez de ciuc es localhost
-	//~ echo '<base href = "http://ciuc/CodeIgniter_2.1.3/">';
+	echo '<base href = "http://ciuc/CodeIgniter_2.1.3/">';
 	?>
 	
 	<!-- Cambiar por:  -->
 	<?php
-	echo '<base href = "http://krd-daweb.dyndns.biz/CodeIgniter_2.1.3/">';
+	//~ echo '<base href = "http://krd-daweb.dyndns.biz/CodeIgniter_2.1.3/">';
 	?>
 	
 	<link rel="stylesheet" type="text/css" media="all"

@@ -16,3 +16,5 @@ PENDIENTE
 * Fusioné ajax con peticiones de CI, fíjense en app.js en el tratamiento
 del botton guardar.
 *El modelo está agregado, "agenda_model"
+
+PD: Agreguen lo que falta
