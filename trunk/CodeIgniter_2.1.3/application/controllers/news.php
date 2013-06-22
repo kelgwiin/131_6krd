@@ -1,19 +1,33 @@
 <?php
-	class News_model extends CI_Model {
+	class News extends CI_Controller {
 		public function __construct()
 		{
-			$this->load->database();
+			parent::__construct();
+			$this->load->model('news_model');
 		}
-	
 
-	public function get_news($slug = FALSE)
-	{
-		if ($slug === FALSE)
+		public function index()
 		{
-			$query = $this->db->get('news');
-			return $query->result_array();
+			$data['news'] = $this->news_model->get_news();
+			$data['title'] = 'Archivo de noticias';
+		
+			$this->load->view('templates/header', $data);
+			$this->load->view('news/index', $data);
+			$this->load->view('templates/footer');
 		}
-			$query = $this->db->get_where('news', array('slug' => $slug));
-			return $query->row_array();
-	}
+		
+		public function view($slug)
+		{
+			$data['news_item'] = $this->news_model->get_news($slug);
+			
+			if (empty($data['news_item']))
+			{
+				show_404();
+			}
+			
+			$data['title'] = $data['news_item']['title'];
+			$this->load->view('templates/header', $data);
+			$this->load->view('news/view', $data);
+			$this->load->view('templates/footer');
+		}
 }
