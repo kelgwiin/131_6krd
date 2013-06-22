@@ -46,10 +46,13 @@ $route['default_controller'] = 'pages/view';
 **/
 
 $route['default_controller'] = "welcome";
-$route['404_override'] = '';
+$route['agenda'] = "agenda_ct/agenda";
+$route['agenda/info/(:any)'] = "agenda_ct/agenda/info/$1";
+$route['agenda/(:any)'] = "agenda_ct/agenda/$1";
 
 $route['test'] = "welcometest/indextest";
 
+$route['404_override'] = '';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
