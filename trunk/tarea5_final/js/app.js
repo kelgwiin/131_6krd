@@ -104,8 +104,13 @@ $(document).ready(function(){
 				direccion:direccion_
 			};
 			
+			
 			//se envía la info al servidor para eliminar (ajax)
-			$.post("guardar_contactos.php",params,
+			//Probando a ver si se liga CI con AJAX...
+			
+			//PD: Probado, si funciona, todas las peticiones al servidor
+			//se deben hacer en formato MVC
+			$.post("index.php/agenda/guardar",params,
 				function(data){
 					$('div#ContenedorMedio').hide();
 					
