@@ -29,7 +29,8 @@
 			$this->load->view('agenda_vw/footer');
 		}
 		
-		public function agregar(){
+		public function agregar()
+		{
 			$data['title'] = 'Agregar - Guía Telefónica';
 			
 			$this->load->view('agenda_vw/header', $data);
@@ -37,11 +38,38 @@
 			$this->load->view('agenda_vw/footer');
 		}
 		
-		public function guardar(){
+		
+		public function hola()
+		{
+			echo ' <h1> Hola mundo </h1>';
+		}		
+		
+		public function guardar()
+		{
 			//Tratamiento desde ajax
 			//Obtener la información del post
 			
 			$this->agenda_model->guardar();
 			echo "El contacto ha sido agregado con exito!";
 		}
+		
+		public function integrantes()
+		{
+			$data['title'] = 'Integrantes - Guía Telefónica';
+			
+			$this->load->view('agenda_vw/header', $data);
+			$this->load->view('agenda_vw/about');
+			$this->load->view('agenda_vw/footer');	
+		}
+		
+		public function eliminar()
+		{
+			//Tratamiento desde ajax
+			//Obtener la información del post
+			
+			$this->agenda_model->eliminar();
+			//echo "El contacto ha sido eliminado con exito!";
+		}		
+		
+		
 }
