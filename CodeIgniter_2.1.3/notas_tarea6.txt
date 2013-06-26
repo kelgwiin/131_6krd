@@ -31,4 +31,45 @@ PENDIENTE
 * Fusioné ajax con peticiones de CI, fíjense en app.js en el tratamiento de guardar contacto, eliminar contacto y guardar info.
 *El modelo está agregado, "agenda_model"
 
+notas de clase del martes 25/06/2013
 
+
+Zambrano Roynny
+epale
+hubo clase de wb?
+
+5:46pm
+Esteban Díaz
+sip
+el profe
+vio que hicimos para hoy osea de la agenda
+dijo que lo podíamos terminar para el jueves
+explicó unas cosas de codeigniter ...
+y dijo que trabajaramos en el proyecto para la semana que viene
+ah el lunes no hay clase
+el martes si
+y que si le asignaban un lab para el martes en la mañana cambiaría
+la hora....
+
+5:50pm
+Zambrano Roynny
+fino!
+ultima cosita
+menciono algo de interes sobre codeigniter?
+algo que deberia saber
+que solo un chemello nos podria explicar?
+
+5:52pm
+Esteban Díaz
+bueno te digo de lo que me acuerdo que nos critico a nuestro proyecto..
+uno que separaramos los código javascript css html .. y eso ..
+otro que en el codeigniter le pusieramos extensión php incluso al html..
+que si queríamos tener imagenes tenía que estar al nivel del index principal
+que usarmas <meta base url> algo así, para modificar el url base
+que separaramos footer y el header ..
+creo que mas nada
+
+5:57pm
+Zambrano Roynny
+fino
+gracias mi negro!
