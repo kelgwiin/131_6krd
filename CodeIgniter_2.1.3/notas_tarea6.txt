@@ -1,4 +1,9 @@
 
+Para Probar
+:. 
+http://krd-daweb.dyndns.biz/CodeIgniter_2.1.3/index.php/agenda   
+.:
+
 LO QUE HACE
 
 * Carga los contactos iniciales (index)
@@ -10,6 +15,7 @@ LO QUE HACE
 
 LO QUE FALTA
 
+* Agregar el arhivo .htaccess
 * Mejorarlo en todos los aspecto
 * Quizas utilizar las librerias y funciones que prove CI para validar y usar los formularios (QUIZAS)
 
@@ -26,4 +32,3 @@ PENDIENTE
 *El modelo está agregado, "agenda_model"
 
 
-PD: no falta mas nada.
