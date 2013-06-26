@@ -1,0 +1,29 @@
+
+LO QUE HACE
+
+* Carga los contactos iniciales (index)
+* Guarda y valida un nuevo contacto.
+* Despliega informción adicional de los contactos.
+* Eliminar contacto
+* Guardar info de contacto a la empresa.
+* Acerca de los autores.
+
+LO QUE FALTA
+
+* Mejorarlo en todos los aspecto
+* Quizas utilizar las librerias y funciones que prove CI para validar y usar los formularios (QUIZAS)
+
+PENDIENTE
+
+*CI = CodeIgniter
+* Cambiar la BASE cuando vayas a trabajar localmente
+
+	1.(En el HEADER de agenda_vw)
+	2.(en el archivo config.php)
+	3.(el archivo config_krd.css; necesario para la imagen del body que requiere direccion absoluta)
+
+* Fusioné ajax con peticiones de CI, fíjense en app.js en el tratamiento de guardar contacto, eliminar contacto y guardar info.
+*El modelo está agregado, "agenda_model"
+
+
+PD: no falta mas nada.
