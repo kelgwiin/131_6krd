@@ -60,9 +60,9 @@
 
 <div class="row">
   <div class="small-2 large-4 columns">
-	<table width = "100%">
+	<table width = "100%" border = "2">
 		<tr>
-			<td> </td>
+			<td bgcolor = "green"> </td>
 		</tr>
 	</table>
 	<?php
@@ -74,16 +74,16 @@ for ($i = 0; $i < 100; $i++)
 ?>
   </div>
   <div class="small-4 large-4 columns">
-	<table width = "100%">
+	<table width = "100%" border = "2">
 		<tr>
-			<td> </td>
+			<td bgcolor = "yellow"> </td>
 		</tr>
 	</table>
   </div>
-  <div class="small-6 large-4 columns">
-	<table width = "100%">
+  <div class="small-6 large-4 columns" >
+	<table width = "100%" border = "2">
 		<tr>
-			<td> </td>
+			<td bgcolor = "pink"> </td>
 		</tr>
 	</table>
   </div>
