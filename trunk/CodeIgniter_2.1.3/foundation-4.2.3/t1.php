@@ -58,6 +58,14 @@
 </nav>
 
 
+<nav class="breadcrumbs">
+  <a href="#">Home</a>
+  <a href="#">Features</a>
+  <a class="unavailable" href="#">Gene Splicing</a>
+  <a class="current" href="#">Cloning</a>
+</nav>
+
+
 <div class="row">
   <div class="small-2 large-4 columns">
 	<table width = "100%" border = "2">

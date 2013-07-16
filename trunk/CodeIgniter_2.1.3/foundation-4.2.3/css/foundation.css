@@ -10,7 +10,9 @@ body {
   font-size: 100%; }
 
 body {
-  background: white;
+  
+  background-image:url(../img/fondo3.png);background-repeat:repeat-x;
+  /** background:white; **/
   color: #222222;
   padding: 0;
   margin: 0;
@@ -1321,11 +1323,15 @@ button, .button {
   padding-bottom: 0.8125em;
   padding-left: 1.5em;
   font-size: 1em;
-  background-color: #2ba6cb;
-  border-color: #2284a1;
+  
+  background-color: #880000 ;
+  border-color: #880000 ;  
+  
+  /*background-color: #2ba6cb;
+  border-color: #2284a1;*/
   color: white; }
   button:hover, button:focus, .button:hover, .button:focus {
-    background-color: #2284a1; }
+    background-color: #FF0000 ; }
   button:hover, button:focus, .button:hover, .button:focus {
     color: white; }
   button.secondary, .button.secondary {
@@ -4250,13 +4256,13 @@ a.th {
     margin-left: 0;
     padding: 1.25em;
     width: 100%;
-    height: auto;
-    max-height: none;
+    height: 250px;
+    max-height:300px;
     background: white;
     border: solid 1px #cccccc;
     font-size: 16px;
     z-index: 99;
-    max-width: 200px; }
+    max-width: 250px; }
     .f-dropdown.content > *:first-child {
       margin-top: 0; }
     .f-dropdown.content > *:last-child {
