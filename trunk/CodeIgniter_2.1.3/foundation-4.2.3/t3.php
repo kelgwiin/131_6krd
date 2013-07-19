@@ -8,18 +8,13 @@
   <title>Foundation 4</title>
 
   <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
-  <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/config_f_krd.css" />
-  <link rel="stylesheet" href="css/foundation.css" />
-  <link rel="stylesheet" href="css/orbit.css">
+  <link rel="stylesheet" href="foundation/css/normalize.css" />
+  <link rel="stylesheet" href="foundation/css/config_f_krd.css" />
+  <link rel="stylesheet" href="foundation/css/foundation.css" />
+  <link rel="stylesheet" href="foundation/css/orbit.css">
+  <link rel="stylesheet" href="foundation/css/social_foundicons.css"/>  
+  <link rel="stylesheet" href="foundation/css/social_foundicons_ie7.css"/>
   
-  <!--  
-  <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
-  <script src="js/jquery.orbit.min.js" type="text/javascript"></script>
-	-->
-	
-  <script src="js/vendor/custom.modernizr.js"></script>
-
 </head>
 <body>
 
@@ -29,7 +24,7 @@
 	<nav class = "top-bar">   
 	<ul class = "title-area">
 		<li class = "name">
-		<h1><a href="#"> <img src="img/D1.jpg">D'roche</a></h1>
+		<h1><a href="#"> <img src="foundation/img/D1.jpg">D'roche</a></h1>
 		</li>
 	</ul>
 		
@@ -80,15 +75,15 @@
 					<div class="orbit-container" style="width:720px; height:450px;">
 					<ul data-orbit="" class="orbit-slides-container">
 						<li>
-							<img src="img/hotel444.jpg">
+							<img src="foundation/img/hotel444.jpg">
 							<div class="orbit-caption">Descripcion de la imagen</div>
 						</li>
 						<li>
-							<img src="img/hotel555.jpg">
+							<img src="foundation/img/hotel555.jpg">
 							<div class="orbit-caption">Descripcion de la imagen</div>
 						</li>
 						<li>
-							<img src="img/hotel777.jpg">
+							<img src="foundation/img/hotel777.jpg">
 							<div class="orbit-caption">Descripcion de la imagen</div>
 						</li>
 					</ul>
@@ -98,52 +93,39 @@
 	  
 		<!-- Panel Disponibilidad -->
 		<div class="large-3 columns" >
-			<div class="panel" style="width:240px; height:450px; background-color:#D8D8D8; border: black 1px solid; ">
-				<h3 style="text-align:center;">Disponibilidad</h3><br>
-					  <form>
-							<label for="fecha_entrada"> <h5> Fecha de entrada </h5> </label>
-							<div class="row collapse">						
-								<div class="large-8 columns ">
-									<input id="fecha_entrada" type="text" placeholder="">
-								</div>
-							
-								<div class="large-4 columns">
-									<a href="#" id="botones" class="tiny button" style="height:33px">Fecha</a>
-								</div>
-							
-							</div>
-							
-							<br>
-							<label for="fecha_salida"> <h5> Fecha de salida </h5> </label>
-							<div class="row collapse">						
-								<div class="large-8 columns">					
-									<input id="fecha_salida"type="text" placeholder="">
-								</div>
-							
-								<div class="large-4 columns">
-									<a href="#" id="botones" class="tiny button" style="height:33px">Fecha</a>
-								</div>
-							
-							</div>							
-							<br>
-							<div class="row"> 
-								<div class="large-12 columns">
-									<label for="customDropdown1"><h5> Tipo Habitacion </h5></label>
-										<select id="customDropdown1" class="medium">
-											<option DISABLED> Presidencial </option>
-											<option>Normal</option>
-											<option>Business</option>
-											<option>Alta</option>
-										 </select>
-								</div>							
-							</div>
-							
-							<div class="row">
-								<div class="large-12 columns" style="text-align:center;">
-									<br> <a href="#" id="botones" class="button"  >Buscar</a>
-								</div>
-							</div>
-					</form>		
+			<div class="panel" style="width:240px; height:450px; background-color:#383838; border: black 1px solid; ">
+				<h4 style="color:white; text-align:center;">Habitaciones Disponibles</h4><br>
+				  <form>
+					<h6 style="color:white;" > Fecha de entrada </h6>
+					<div class="row collapse">						
+						<div class="large-8 columns ">
+							<input id="datepicker_entrada" type="text" placeholder="MM/DD/AAAA">
+						</div>
+					</div><br>
+					
+					
+					<h6 style="color:white;" > Fecha de salida </h6>
+					<div class="row collapse">						
+						<div class="large-8 columns">					
+							<input id="datepicker_salida" type="text" placeholder="MM/DD/AAAA">										 									
+						</div>
+					</div><br>
+					
+					
+					<div class="row">
+						<div class="large-12 columns" style="text-align:center;">
+							<br> <a href="#" id="botones" class="button"  >Buscar</a>
+						</div>
+					</div>
+					
+					
+					<div class="row" >
+						<div class="large-12 columns" style="text-align:center;">
+							<i class="foundicon-facebook"> <a href="#" > Like us on Facebook </a> </i>
+							<i class="foundicon-twitter"> <a href="#" > Follow us on Twitter </a></i>
+						</div>
+					</div>								
+				</form>		
 			</div>
 		</div>
 		<hr/>
@@ -152,7 +134,7 @@
 
 	<div class="row">
 		<div class="large-4 columns">
-			<img src="img/hotel88.jpg" />
+			<img src="foundation/img/hotel88.jpg" />
 		  
 			<ul class="pricing-table">
 			  <li class="title">Normal</li>
@@ -166,7 +148,7 @@
 		</div>
     
 		<div class="large-4 columns">
-			<img src="img/hotel99.jpg" />
+			<img src="foundation/img/hotel99.jpg" />
 		  
 			<ul class="pricing-table">
 			  <li class="title">Business</li>
@@ -180,7 +162,7 @@
 		</div>
     
 		<div class="large-4 columns">
-			<img src="img/hotel1010.jpg" />
+			<img src="foundation/img/hotel1010.jpg" />
 		  
 			<ul class="pricing-table">
 			  <li class="title">Alta</li>
@@ -194,27 +176,45 @@
 		</div>
    </div>
     
-  <!-- footer -->
-   <footer class="row" style="background-color:gray">
-	<div class="large-12 columns" >
-		<hr/>
-		<div class="panel" style="width:1000px; height:80px;">
-		<div class="row">
-			<div class="large-6 columns">
-				<p>&copy; Copyright no one at all. Go to town.</p>
-			</div>
-			
-			<div class="large-6 columns">
-			<ul class="inline-list right">
-				<li><a href="#">Contacto</a></li>
-			</ul>
-			</div>
-			
-		</div>
-		</div>
-	</div> 
-  </footer> 
-  
+	<!-- footer -->
+   <div id="footerr">
+		<div style="color:white;font-size:13px;background-color:#383838;height:220px"> 
+        <br>
+               
+			<div style="margin-left:230px; width:200px;float:left">
+				
+			<h3>¿Quienes Somos?</h3>   
+		    <p> Rodeado del frondoso paisaje de un parque natural,
+			 el Hesperia D'roche, de cinco estrellas, ofrece 
+			 vistas a la resplandeciente arena blanca y al pacífico 
+			 y cristalino mar. A sólo 35 minutos del aeropuerto de Isla Margarita</p>
+			 </div>
+				
+				
+			<div style="margin-left:150px; width:200px;float:left">
+			<h3>¿Nuesta Vision?</h3>
+		    <p> Rodeado del frondoso paisaje de un parque natural,
+			 el Hesperia D'roche, de cinco estrellas, ofrece 
+			 vistas a la resplandeciente arena blanca y al pacífico 
+			 y cristalino mar. A sólo 35 minutos del aeropuerto de Isla Margarita</p>               
+		     </div>
+               
+               
+               
+		    <div style="margin-left:150px; width:200px;float:left">
+			<h3>¿Donde Estamos?</h3>
+			<ul class="vcard" style="font-size:14px">
+			<li class="fn">Salto Angel</li>
+			<li class="street-address">123 Mata verde</li>
+			<li class="locality">Venezuela</li>
+			<li><span class="state">Carabobo/valencia</span> 
+			<li><span class="zip">12345</span></li>
+			<li class="email"><a href="#">baltazar@gmail.com</a></li>
+			</ul>              
+		    </div>
+        </div>  
+		<div style="background-color:#181818 ;height:30px"></div>                                  
+	</div>
   
   
   <!-- Carga de script -->
@@ -223,22 +223,42 @@
   ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
   '.js><\/script>')
   </script>
-  <script src="js/foundation.min.js"></script>
-  <script src="js/foundation/foundation.js"></script>
-  <script src="js/foundation/foundation.alerts.js"></script>
-  <script src="js/foundation/foundation.clearing.js"></script>
-  <script src="js/foundation/foundation.cookie.js"></script>
-  <script src="js/foundation/foundation.dropdown.js"></script>
-  <script src="js/foundation/foundation.forms.js"></script>
-  <script src="js/foundation/foundation.joyride.js"></script>
-  <script src="js/foundation/foundation.magellan.js"></script>
-  <script src="js/foundation/foundation.orbit.js"></script>
-  <script src="js/foundation/foundation.placeholder.js"></script>
-  <script src="js/foundation/foundation.reveal.js"></script>
-  <script src="js/foundation/foundation.section.js"></script>
-  <script src="js/foundation/foundation.tooltips.js"></script>
-  <script src="js/foundation/foundation.topbar.js"></script>
-  <script src="js/foundation/foundation.interchange.js"></script>
+  
+ 	<script src="foundation/js/jquery-1.9.1.js" type="text/javascript"></script> 
+	<link rel="stylesheet" href="foundation/css/ui-lightness/jquery-ui.custom.css" />
+	<script src="foundation/js/jquery-ui-1.10.3.custom.js"></script>
+	<script src="foundation/js/jquery-ui-1.10.3.custom.min.js"></script>
+
+	<script>
+	  $(function() {
+		$("#datepicker_entrada" ).datepicker();
+	  });
+	 </script> 
+	 
+	<script>
+	  $(function() {
+		$("#datepicker_salida" ).datepicker();
+	  });
+	 </script> 			 
+			 
+  
+  <script src="foundation/js/vendor/custom.modernizr.js"></script>
+  <script src="foundation/js/foundation.min.js"></script>
+  <script src="foundation/js/foundation/foundation.js"></script>
+  <script src="foundation/js/foundation/foundation.alerts.js"></script>
+  <script src="foundation/js/foundation/foundation.clearing.js"></script>
+  <script src="foundation/js/foundation/foundation.cookie.js"></script>
+  <script src="foundation/js/foundation/foundation.dropdown.js"></script>
+  <script src="foundation/js/foundation/foundation.forms.js"></script>
+  <script src="foundation/js/foundation/foundation.joyride.js"></script>
+  <script src="foundation/js/foundation/foundation.magellan.js"></script>
+  <script src="foundation/js/foundation/foundation.orbit.js"></script>
+  <script src="foundation/js/foundation/foundation.placeholder.js"></script>
+  <script src="foundation/js/foundation/foundation.reveal.js"></script>
+  <script src="foundation/js/foundation/foundation.section.js"></script>
+  <script src="foundation/js/foundation/foundation.tooltips.js"></script>
+  <script src="foundation/js/foundation/foundation.topbar.js"></script>
+  <script src="foundation/js/foundation/foundation.interchange.js"></script>
   
   <script>
     $(document).foundation();

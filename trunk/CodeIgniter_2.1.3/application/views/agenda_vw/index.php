@@ -7,8 +7,10 @@ $dir = "";
 	foreach($contactos as  $fila ){
 		//contactos: 
 		$c .= '<li><input type = "checkbox" name = "' .  $fila['cod_contacto'] .
-		 '" class = "new"> &nbsp;&nbsp;&nbsp; <a class = "info_c" href = "index.php/agenda/info/'. 
-		 $fila['cod_contacto'] .'" >' .
+		 '" class = "new"> &nbsp;&nbsp;&nbsp; '.
+		 
+		 '<a class = "info_c" href = "index.php/agenda/info/'. $fila['cod_contacto'] .'" >' .
+		 
 		 $fila['nombre'] .' ' . $fila['apellido'] . '</a></li> ';
 	
 		//telefonos: 
