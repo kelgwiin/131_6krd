@@ -53,6 +53,11 @@ $route['agenda/integrantes'] = "agenda_ct/agenda/integrantes";
 $route['agenda/contactar'] = "agenda_ct/agenda/contactar";
 $route['agenda/(:any)'] = "agenda_ct/agenda/$1";
 $route['test'] = "welcometest/indextest";
+
+
+$route['hotel'] = "hotel/hotel";
+$route['hotel/(:any)'] = "hotel/hotel/$1";
+
 $route['404_override'] = '';
 
 /* End of file routes.php */
