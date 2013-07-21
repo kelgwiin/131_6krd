@@ -57,6 +57,7 @@ $route['test'] = "welcometest/indextest";
 
 $route['hotel'] = "hotel/hotel";
 $route['hotel/(:any)'] = "hotel/hotel/$1";
+$route['droche'] = "droche_prueba_cll";
 
 $route['404_override'] = '';
 
