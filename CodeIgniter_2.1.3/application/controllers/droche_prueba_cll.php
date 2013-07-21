@@ -31,21 +31,46 @@ class Droche_prueba_cll extends CI_Controller {
 //         $this->droche_model->add($user_data,"usuario");
 //         
          //ELIMINAR
-         echo "eliminar <br>";
+//         echo "eliminar <br>";
          
-         $var = $this->droche_model->del('habitacion', array('id_habitacion' => 2));
-         echo $var;
+//         $var = $this->droche_model->del('habitacion', array('id_habitacion' => 2));
+//         
+//         if ($var){
+//            echo "lo eliminoo<br>";
+//         }else{
+//             echo "no lo hizo<br>";
+//         }
          
-         if ($var){
-            echo "lo eliminoo<br>";
-         }else{
-             echo "no lo hizo<br>";
-         }
-         
-         //LISTAR
+         //Eliminacion pero con doble codigo
+//            $this->droche_model->del('table1', array('id1' => 2, 'id2' => 3));
+//         echo "listo doble";
+//         
+//         //LISTAR
 //         print_r($this->droche_model->all('habitacion') );
+//         
          
-         echo "cuerpo";
+         //Prueba de CONTEO
+         //con el select count(*) probada cosas de CI
+//         echo $this->droche_model->contar('habitacion');
+         
+         //UPDATE 
+//         echo "actualizar <br>";
+//         $this->droche_model->update('usuario',array('id_usuario'=>'kelgwiin'),
+//                 array('id_usuario'=>'kelwin_gamez'));
+         
+//         $this->droche_model->update('table1',array('id1'=>11, 'id2' => 22),
+//                 array('dato2'=>'cosa cambiada', 'dat2' => 'siiiiii'));
+         
+         // NUM HABITACIONES TOTALES
+//         printf("Num habitaciones %d <br>",$this->droche_model->
+//                 rsva_num_habitaciones('N',1) );
+         
+         //NUM HABITACIONES POR RANGO FECHA
+         printf("Num habitaciones  por rango de fecha: %d de usuario <br>",
+                 $this->droche_model->rsva_num_habitaciones_ocupadas(
+                         'B',2,'2013-02-03','2013-02-14') );
+         
+         echo "<br> <br>cuerpo<br>";
          echo'</body> </html>';
 	
     }

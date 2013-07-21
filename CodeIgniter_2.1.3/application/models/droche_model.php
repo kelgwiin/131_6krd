@@ -62,8 +62,7 @@ class Droche_model extends CI_Model {
      * @return Boolean True/False dependiendo si tiene éxito o no.
      */
     public function del($nombre_tabla, $claves_vals){
-        
-        $sql = "DELETE FROM " . $nombre_tabla . " ";
+        $sql = "DELETE FROM " . $nombre_tabla . " ".
                 "WHERE ";
         $where = "";
         
@@ -77,12 +76,9 @@ class Droche_model extends CI_Model {
             if($i !== $num_vals-1 ){
                 $where .= " AND ";
             }
-            echo "entraaa";
         }
         
         $sql .= $where . " ;";
-        print_r($sql);
-        
         return $this->db->query($sql, $vals);
     }
     
@@ -125,16 +121,20 @@ class Droche_model extends CI_Model {
         //Preparando el WHERE
         $claves =  array_keys($claves_vals);
         $vals = array_values($claves_vals);
-        $num_vals = array_count_values($claves_vals);
-                
-        $where = "WHERE ";
-        for ($i = 0; $i < $num_vals-1; $i++){
-            $where .= $claves[$i] . " = ? AND ";
+        $num_vals = count($claves_vals);
+        
+        $where = " WHERE ";
+        for ($i=0; $i < $num_vals; $i++){
+            $where .= $claves[$i] . " = ? ";
+           
+            if($i !== $num_vals-1 ){
+                $where .= " AND ";
+            }
         }
-        $where .= $vals[$num_vals-1]  . " = ? ;";
-    
         //terminando de armar la sentencia
-        $sql .= $set . $where;
+        $sql .= $set . $where. ";";
+        
+        //print_r($sql);
         
         return $this->db->query($sql,$vals);
     }
@@ -215,7 +215,6 @@ class Droche_model extends CI_Model {
     //--------------------------------------------------------------------------
     /**
      * Listar cantidad de habitaciones disponibles dado un rando de fecha.
-     * @param String $usuario Nombre del usuario
      * @param Date $fecha_ini Fecha inicial
      * @param Date $fecha_fin Fecha final
      * 
@@ -229,44 +228,44 @@ class Droche_model extends CI_Model {
      *      Alta, individual | cantidad
      *      Alta, doble | cantidad
      */
-    public function rsva_disponibilidad($usuario, $fecha_ini, $fecha_fin){
+    public function rsva_disponibilidad( $fecha_ini, $fecha_fin){
         $data = Array();
         $data['cabecera'] = Array('#','Categoría','Tipo','Cantidad');
         
         $filas = Array();
         //normal/individual
         $num_1 = $this->rsva_num_habitaciones('N', 1) -
-                $this->rsva_num_habitaciones_ocupadas($usuario, 'N',1,
-                         $fecha_ini, $fecha_fin);
+                $this->rsva_num_habitaciones_ocupadas('N',1,
+                        $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Normal','Individual',$num_1);
         
        //normal/doble
         $num_2 = $this->rsva_num_habitaciones('N', 2) -
-                $this->rsva_num_habitaciones_ocupadas($usuario, 'N',2,
+                $this->rsva_num_habitaciones_ocupadas('N',2,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Normal','Doble',$num_2);
        
         //Business/Individual
         $num_3 = $this->rsva_num_habitaciones('B', 1) -
-                $this->rsva_num_habitaciones_ocupadas($usuario, 'B',1,
+                $this->rsva_num_habitaciones_ocupadas('B',1,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Business','Individual',$num_3);
         
         //Business/Doble
         $num_4 = $this->rsva_num_habitaciones('B', 2) -
-                $this->rsva_num_habitaciones_ocupadas($usuario, 'B',2,
+                $this->rsva_num_habitaciones_ocupadas('B',2,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Business','Doble',$num_4);
         
         //Alta/Individual
         $num_5 = $this->rsva_num_habitaciones('A', 1) -
-                $this->rsva_num_habitaciones_ocupadas($usuario, 'A',1,
+                $this->rsva_num_habitaciones_ocupadas( 'A',1,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Business','Doble',$num_5);
         
         //Alta/Individual
         $num_6 = $this->rsva_num_habitaciones('A', 2) -
-                $this->rsva_num_habitaciones_ocupadas($usuario, 'A',2,
+                $this->rsva_num_habitaciones_ocupadas( 'A',2,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Business','Doble',$num_6);
         
@@ -282,7 +281,7 @@ class Droche_model extends CI_Model {
      */
     public function rsva_num_habitaciones($categoria, $tipo){
         $sql = 'SELECT count(*)
-                FROM habitaciones
+                FROM habitacion
                 WHERE categoria = ? AND tipo = ? ;';
         $query = $this->db->query($sql, Array($categoria,$tipo));
         $row = $query->first_row('array');
@@ -291,24 +290,69 @@ class Droche_model extends CI_Model {
     }
     /**
      * Número de habitaciones reservadas
-     * @param String Nombre del usuario
      * @param char $categoria 'N', 'B', 'A'
-     * @param int $tipo 1: individual, 2:doble
+     * @param int $tipo 1: individual, 2: doble
      * @return int Número de habitaciones reservadas.
      */
-    public function rsva_num_habitaciones_ocupadas($id_usuario, $categoria, $tipo,
+    public function rsva_num_habitaciones_ocupadas($categoria, $tipo,
             $fecha_ini, $fecha_fin){
+//        select count(*)
+//from usuario as usr join reserva_ocupa as rsv on usr.id_usuario = rsv.id_usuario
+//where '2013-02-02' between fecha_ini and fecha_fin and 
+// '2013-02-14' between fecha_ini and fecha_fin and rsv.categoria_habitacion = 'B' 
+//and rsv.tipo_habitacion = 2 and ( estatus_reserva = 'activa' or estatus_reserva = 'ocupada' );
         $sql = 'SELECT count(*)
-                FROM reserva_ocupa
-                WHERE id_usuario = ? AND ? >= fecha_ini AND ? <= fecha_ini AND ' .
-                '? >= fecha_fin AND ? <= fecha_fin ' .
-                'AND categoria_habitacion = ? AND tipo = ? ' .
-                "estatus_reserva = 'activa' OR estatus_reserva = 'ocupada' ;";
+                
+                FROM reserva_ocupa AS rsv JOIN  usuario AS usr 
+                     ON rsv.id_usuario = usr.id_usuario
+                
+                WHERE ? BETWEEN fecha_ini AND fecha_fin ' .
+                'AND ? BETWEEN fecha_ini AND fecha_fin ' .
+                'AND rsv.categoria_habitacion = ? AND rsv.tipo_habitacion = ? AND '.
+                " ( estatus_reserva = 'activa' OR estatus_reserva = 'ocupada' );";
         
-        $query = $this->db->query($sql, Array($id_usuario, $fecha_ini,$fecha_ini,
-            $fecha_fin, $fecha_fin, $categoria, $tipo));
+        $query = $this->db->query($sql, Array($fecha_ini,$fecha_fin,$categoria,
+            $tipo));
         $row = $query->first_row('array');
         return $row['count(*)'];
+    }
+    /**
+     * Obtiene las reservas asociadas a un usuario. Si se omite el estatus de
+     * reserva se listan todas las que tiene asociada.
+     * 
+     * @param String $id_usuario
+     * @param String $estatus_reserva Puede ser {activa,ocupada,cerrada,cancelada}
+     * @return Array Es un array de array que contiene la data de la consulta
+     */
+    public function rsv_por_usuario($id_usuario, $estatus_reserva = NULL){
+        if($estatus_reserva !== NULL ){
+            $sql = "SELECT * FROM reserva_ocupa " .
+                "WHERE id_usuario = ? AND estatus_reserva = ? ;";
+            $query = $this->db->query($sql, array($id_usuario,$estatus_reserva));
+        }else{
+            $sql = "SELECT * FROM reserva_ocupa  " .
+                    "WHERE id_usuario = ? ;";
+            $query = $this->db->query($sql, array($id_usuario));
+        }
+        
+        return $query->result_array();
+    }
+    /**
+     * Genera el Minibar con los items predeterminados segun su categoría
+     * 
+     * 4 cerveza
+     * 2 vinos
+     * 4 aguas
+     * 4 refrescos
+     * 4 alcohol
+     * 
+     * @param int $id_reserva
+     * @return boolean Si fue efectiva la generación del minibar
+     */
+    public function rsv_generar_minibar($id_reserva){
+        
+        //... en proceso
+        return true;
     }
     //end-of Gestión de Reservas
 }
