@@ -13,9 +13,10 @@ WHERE categoria = '?';
 -- Número de habitaciones reservadas para una fecha dada
 SELECT count(*)
 FROM reserva_ocupa
-WHERE '?_ini' >= fecha_ini AND '?_ini' <= fecha_ini 
+WHERE id_usuario = ? AND '?_ini' >= fecha_ini AND '?_ini' <= fecha_ini 
 AND '?_fin' >= fecha_fin AND '?_fin' <= fecha_fin
-AND categoria_habitacion = '?'  AND estatus_reserva != 'cancelada';
+AND categoria_habitacion = '?'  AND tipo = ? AND estatus_reserva = 'activa'
+OR estatus_reserva = 'ocupada'; 
 
 -->>>DOBLES
 SELECT count(*)
