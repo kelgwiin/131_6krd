@@ -41,7 +41,7 @@ class Droche_prueba_cll extends CI_Controller {
 //             echo "no lo hizo<br>";
 //         }
          
-         //Eliminacion pero con doble codigo
+         //ELIMINACIÓN pero con DOBLE CODIGO
 //            $this->droche_model->del('table1', array('id1' => 2, 'id2' => 3));
 //         echo "listo doble";
 //         
@@ -63,15 +63,89 @@ class Droche_prueba_cll extends CI_Controller {
          
          // NUM HABITACIONES TOTALES
 //         printf("Num habitaciones %d <br>",$this->droche_model->
-//                 rsva_num_habitaciones('N',1) );
+//                 rsv_num_habitaciones('B',2) );
          
-         //NUM HABITACIONES POR RANGO FECHA
-         printf("Num habitaciones  por rango de fecha: %d de usuario <br>",
-                 $this->droche_model->rsva_num_habitaciones_ocupadas(
-                         'B',2,'2013-02-03','2013-02-14') );
+         //NUM RESERVAS DE HABITACIONES POR RANGO FECHA
+//         printf("Num habitaciones reservadas por rango de fecha: %d de usuario <br>",
+//                 $this->droche_model->rsv_num_habitaciones_ocupadas(
+//                         'B',2,'2013-02-03','2013-02-14') );
+         
+         //DISPOBILIDAD DE HABITACIONES
+//         $this->_disponibilidad();
+         
+         //RESERVAS POR USUARIO
+//         $this->_reservas_por_usuario("kelwin_gamez");
+         
+         //VERIFICAR EXISTENCIA DE USUARIO
+//         $this->_usuario();
+         
+         //AGREGAR MINIBAR A UNA RESERVA (se debe hacer sólo una vez por cada reserva)
+//         $this->droche_model->generar_minibar(2,'B');// este sería el asociado a kelwin_gamez
+         
          
          echo "<br> <br>cuerpo<br>";
          echo'</body> </html>';
 	
+    }
+    /**
+     * TODAS LAS FUNCIONES ABAJO DESARROLLADAS SON DE PRUEBA y ESTAS SON 
+     * A MANERA DE EJEMPLO DEL USO DE LAS FUNCIONES DEL MODELO
+     * 
+     * LAS UNICAS FUNCIONES OFICIALES DEL SISTEMA SON LAS DE 
+     * ::droche_model.php:: 
+     */
+    
+    
+    private function _disponibilidad (){
+        $data = $this->droche_model->rsv_disponibilidad('2013-02-08','2013-02-10');
+        echo "<br>-------------------------------------<br>";
+        foreach ($data['cabecera'] as $val){
+            printf("%s ",$val);
+        }echo "<br><br>";
+        
+        foreach ($data['filas'] as $fila){
+            foreach($fila as $item){
+                printf("\t %s \t",$item);
+            }echo "<br>";
+        }
+    }
+    
+    private function _reservas_por_usuario($user){
+        $data = $this->droche_model->rsv_por_usuario($user);// sin estatus
+//        $data = $this->droche_model->rsv_por_usuario($user,'activa'); //con estatus
+        
+        echo "<br> <br>";
+        $cabecera = array_keys($data[0]);
+        
+        foreach($cabecera as $val) {
+            printf(" %s ",$val);
+        }
+        echo "<br><br>";
+        
+        foreach ($data as $fila ){
+            foreach( $fila as $item){
+                printf(" %s ",$item);
+            }echo "<br><br>";
+        }
+    }
+    
+    private function _usuario(){
+        //para validar clave y usuario
+//        $resp = $this->droche_model->usuario_existe('kelwin_gamez','123456');
+        
+        //solo para validar existencia de usuario
+        $resp = $this->droche_model->usuario_existe('kelwin_gamez');
+         
+         if($resp['usuario']){
+             printf("Existe usuario %s <br>",$resp['usuario']);
+             
+             if(isset($resp['clave']) && $resp['clave']){
+                 echo "Clave correcta<br>";
+             }else
+                 echo "Clave incorrecta o no aplica<br>";
+         }else{
+             printf("NO Existe usuario %s <br>",$resp['usuario']);
+         }
+         
     }
 }
