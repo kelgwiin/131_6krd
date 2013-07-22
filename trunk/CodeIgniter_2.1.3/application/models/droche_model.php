@@ -177,9 +177,9 @@ class Droche_model extends CI_Model {
      * @param String $usuario Nombre de usuario (id_usuario)
      * @param String $clave Clave asociada al usuario
      * 
-     * @return Array $resp array( 'usuario' => ? , 'clave' => ?)
+     * @return Array $resp array( 'usuario' => boolean , 'clave' => boolean)
      */
-    public function usuario_exist($usuario , $clave = NULL){
+    public function usuario_existe($usuario , $clave = NULL){
         $resp = Array();
         
         $sql = "SELECT clave ".
@@ -228,44 +228,44 @@ class Droche_model extends CI_Model {
      *      Alta, individual | cantidad
      *      Alta, doble | cantidad
      */
-    public function rsva_disponibilidad( $fecha_ini, $fecha_fin){
+    public function rsv_disponibilidad($fecha_ini, $fecha_fin){
         $data = Array();
         $data['cabecera'] = Array('#','Categoría','Tipo','Cantidad');
         
         $filas = Array();
         //normal/individual
-        $num_1 = $this->rsva_num_habitaciones('N', 1) -
-                $this->rsva_num_habitaciones_ocupadas('N',1,
+        $num_1 = $this->rsv_num_habitaciones('N', 1) -
+                $this->rsv_num_habitaciones_ocupadas('N',1,
                         $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Normal','Individual',$num_1);
         
        //normal/doble
-        $num_2 = $this->rsva_num_habitaciones('N', 2) -
-                $this->rsva_num_habitaciones_ocupadas('N',2,
+        $num_2 = $this->rsv_num_habitaciones('N', 2) -
+                $this->rsv_num_habitaciones_ocupadas('N',2,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Normal','Doble',$num_2);
        
         //Business/Individual
-        $num_3 = $this->rsva_num_habitaciones('B', 1) -
-                $this->rsva_num_habitaciones_ocupadas('B',1,
+        $num_3 = $this->rsv_num_habitaciones('B', 1) -
+                $this->rsv_num_habitaciones_ocupadas('B',1,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Business','Individual',$num_3);
         
         //Business/Doble
-        $num_4 = $this->rsva_num_habitaciones('B', 2) -
-                $this->rsva_num_habitaciones_ocupadas('B',2,
+        $num_4 = $this->rsv_num_habitaciones('B', 2) -
+                $this->rsv_num_habitaciones_ocupadas('B',2,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Business','Doble',$num_4);
         
         //Alta/Individual
-        $num_5 = $this->rsva_num_habitaciones('A', 1) -
-                $this->rsva_num_habitaciones_ocupadas( 'A',1,
+        $num_5 = $this->rsv_num_habitaciones('A', 1) -
+                $this->rsv_num_habitaciones_ocupadas( 'A',1,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Business','Doble',$num_5);
         
         //Alta/Individual
-        $num_6 = $this->rsva_num_habitaciones('A', 2) -
-                $this->rsva_num_habitaciones_ocupadas( 'A',2,
+        $num_6 = $this->rsv_num_habitaciones('A', 2) -
+                $this->rsv_num_habitaciones_ocupadas( 'A',2,
                          $fecha_ini, $fecha_fin);
         $filas[] = Array('check-off','Business','Doble',$num_6);
         
@@ -279,7 +279,7 @@ class Droche_model extends CI_Model {
      * @param int $tipo 1: individual, 2:doble
      * @return int Número de habitaciones.
      */
-    public function rsva_num_habitaciones($categoria, $tipo){
+    public function rsv_num_habitaciones($categoria, $tipo){
         $sql = 'SELECT count(*)
                 FROM habitacion
                 WHERE categoria = ? AND tipo = ? ;';
@@ -289,18 +289,13 @@ class Droche_model extends CI_Model {
         return $row['count(*)'];
     }
     /**
-     * Número de habitaciones reservadas
+     * Número de habitaciones RESERVADAS
      * @param char $categoria 'N', 'B', 'A'
      * @param int $tipo 1: individual, 2: doble
      * @return int Número de habitaciones reservadas.
      */
-    public function rsva_num_habitaciones_ocupadas($categoria, $tipo,
+    public function rsv_num_habitaciones_ocupadas($categoria, $tipo,
             $fecha_ini, $fecha_fin){
-//        select count(*)
-//from usuario as usr join reserva_ocupa as rsv on usr.id_usuario = rsv.id_usuario
-//where '2013-02-02' between fecha_ini and fecha_fin and 
-// '2013-02-14' between fecha_ini and fecha_fin and rsv.categoria_habitacion = 'B' 
-//and rsv.tipo_habitacion = 2 and ( estatus_reserva = 'activa' or estatus_reserva = 'ocupada' );
         $sql = 'SELECT count(*)
                 
                 FROM reserva_ocupa AS rsv JOIN  usuario AS usr 
@@ -337,6 +332,8 @@ class Droche_model extends CI_Model {
         
         return $query->result_array();
     }
+    //end-of Gestión de Reservas
+
     /**
      * Genera el Minibar con los items predeterminados segun su categoría
      * 
@@ -349,10 +346,67 @@ class Droche_model extends CI_Model {
      * @param int $id_reserva
      * @return boolean Si fue efectiva la generación del minibar
      */
-    public function rsv_generar_minibar($id_reserva){
+    public function generar_minibar($id_reserva,$categoria){
+        //id de CERVEZA del almacen
+        $id_cerveza = $this->_get_id_ca('cerveza', $categoria);
         
-        //... en proceso
+        //id de VINO del almacen
+        $id_vino = $this->_get_id_ca('vino', $categoria);
+        
+        //id de ALCOHOL del almacen
+        $id_alcohol = $this->_get_id_ca('alcohol', $categoria);
+        
+        //id de AGUA
+        $id_agua = $this->_get_id_ca('agua','N');
+        
+        //id de REFRESCO
+        $id_refresco = $this->_get_id_ca('refresco', 'N');
+        
+        //insercion de 4 cervezas
+        $this->_add_minibar($id_reserva, $id_cerveza, 4);
+        
+        //insercion de 2 vinos
+        $this->_add_minibar($id_reserva, $id_vino, 2);
+        
+        //insercion de 4 aguas
+        $this->_add_minibar($id_reserva, $id_agua, 4);
+        
+        //insercion de 4 refrescos
+        $this->_add_minibar($id_reserva, $id_refresco, 4);
+        
+        //insercion de 4 alcohol
+        $this->_add_minibar($id_reserva, $id_alcohol, 4);
+        
         return true;
     }
-    //end-of Gestión de Reservas
+    /**
+     * Obtiene el id de un producto del almancen
+     * @param String $nombre
+     * @param char $categoria
+     * @return int id asociado al producto
+     */
+    private function _get_id_ca($nombre, $categoria){
+        $sql = "SELECT id_consumible_almacen " .
+                "FROM consumible_almacen ".
+                "WHERE nombre = ? AND categoria = ? ;";
+        $q = $this->db->query($sql, array($nombre,$categoria));
+        $row = $q->first_row('array');
+        return  $row['id_consumible_almacen'];
+    }
+    /**
+     * Agrega el item a la tabla consumible
+     * @param int $id_reserva
+     * @param int $id_ca id de consumible almacen
+     * @param int $cant cantidad de productos asociados
+     */
+    private function _add_minibar($id_reserva,$id_ca,$cant){
+        $data = array(
+            'id_reserva_ocupa' => $id_reserva,
+            'ids_consumible_almacen' => $id_ca,
+            'cantidad' => $cant
+        );
+        $this->add($data,'consumible');
+    }
+    //end of mini-bar
+    
 }
