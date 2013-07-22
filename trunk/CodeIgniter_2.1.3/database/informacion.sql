@@ -1,6 +1,13 @@
+-- Insercion de Usuario 
+insert into usuario (id_usuario, clave, nombre, apellido, correo, sexo, cedula, fecha_nac,
+ num_tarjeta,tipo_cuenta, nacionalidad, rif) values 
+('kelgwiin','123456','Kelwin','Gamez', 'kelgwiin@gmail.com','m','20542093','1992-02-02',
+'21221543131','corriente','venezolano','v-20542093-9');
+
+
 -- Inserción de una reserva del usuario -> kelgwiin
 insert into reserva_ocupa (id_usuario,fecha_ini,fecha_fin,categoria_habitacion,tipo_habitacion)
-values ('kelgwiin','2013/02/02','2013/02/14','B','2');
+values ('kelgwiin','2013-02-02','2013-02-14','B','2');
 
 -- Inserciones de campos en CONSUMIBLE ALMACEN
 insert into consumible_almacen(nombre,precio,categoria,cantidad,marca) values
@@ -152,6 +159,3 @@ insert into habitacion (tipo, categoria) values
 (2, 'A') ,
 (2, 'A') ,
 (2, 'A') ;
-
-
-
