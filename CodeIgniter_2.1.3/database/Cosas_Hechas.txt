@@ -1,0 +1,19 @@
+GENERAL
+    add: agregar 
+    del: borrar
+    update: actualizar
+    all: listar todo
+
+GESTION DE RESERVAS
+    rsv_dispobilidad: habitaciones dispobinibles en un rango de fecha
+    rsv_num_habitaciones: número de habitaciones en general
+    rsv_num_habitaciones_ocupadas: número de habitaciones ocupadas
+    rsv_por_usuario: lista las habitaciones por usuario, el estatus es opcional
+
+GESTION DE USUARIO
+    usuario_exist: verifica la existencia de un usuario
+
+MINIBAR
+    generar_minibar: genera el combo del minibar dada una categoría e id_reserva
+        _add_minibar: agrega un item al minibar
+        _get_id_ca: obtiene el id del un item del almacen

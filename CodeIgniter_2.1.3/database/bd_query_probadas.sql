@@ -23,3 +23,14 @@ and fecha_fin;
 select * from reserva_ocupa;
 
 select * from usuario;
+
+-- Habitaciones agrupadas por categoría y tipo
+select categoria, tipo, count(*)
+from habitacion
+group by categoria, tipo;
+
+select * from habitacion;
+
+select * from usuario;
+
+select * from consumible;
