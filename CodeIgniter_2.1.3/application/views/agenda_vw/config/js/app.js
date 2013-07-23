@@ -40,7 +40,7 @@ $(document).ready(function(){
 		if(longitud > 0 && confirm('¿Está seguro que desea eliminar el(los) contacto(s) ?') ){
 			checkboxs.each(				
 				function(){
-					nombres.push($(this).attr('name'))
+					nombres.push($(this).attr('name'));
 					indices_padres.push($(this).parent().index());
 				}
 			);

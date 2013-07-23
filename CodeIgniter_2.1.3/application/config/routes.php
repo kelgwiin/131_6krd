@@ -59,6 +59,22 @@ $route['hotel'] = "hotel/hotel";
 $route['hotel/(:any)'] = "hotel/hotel/$1";
 $route['droche'] = "droche_prueba_cll";
 
+$route['registro_usuario'] = "hotel/registro_usuario";
+$route['registro_usuario/(:any)'] = "hotel/registro_usuario/$1";
+
+$route['disponibilidad'] = "hotel/disponibilidad";
+$route['disponibilidad/(:any)'] = "hotel/disponibilidad/$1";
+
+
+$route['ver_reservas'] = "hotel/ver_reservas";
+$route['ver_reservas/(:any)'] = "hotel/ver_reservas/$1";
+
+$route['contactar'] = "hotel/contactar";
+$route['contactar/(:any)'] = "hotel/contactar/$1";
+
+
+
+
 $route['404_override'] = '';
 
 /* End of file routes.php */
