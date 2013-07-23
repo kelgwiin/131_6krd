@@ -38,7 +38,7 @@ class Droche_model extends CI_Model {
             $nom_cols .= $k.',';
 	}
         
-        $lon_vals = strlen($vals);
+    $lon_vals = strlen($vals);
 	$vals[$lon_vals-1] = ')';//sustituyendo la coma (',') por paréntesis (')')
 	$vals  .= ';';
         
