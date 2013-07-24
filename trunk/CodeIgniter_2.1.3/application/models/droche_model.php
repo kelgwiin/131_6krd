@@ -408,5 +408,5 @@ class Droche_model extends CI_Model {
         $this->add($data,'consumible');
     }
     //end of mini-bar
-    
+     
 }
