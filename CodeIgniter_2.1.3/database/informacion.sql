@@ -9,6 +9,8 @@ insert into usuario (id_usuario, clave, nombre, apellido, correo, sexo, cedula, 
 insert into reserva_ocupa (id_usuario,fecha_ini,fecha_fin,categoria_habitacion,tipo_habitacion)
 values ('kelgwiin','2013-02-02','2013-02-14','B','2');
 
+-- Generación de LLAMADAS
+-- Generación de MINIBAR (llamar a la función predeterminada del modelo)
 -- Inserciones de campos en CONSUMIBLE ALMACEN
 insert into consumible_almacen(nombre,precio,categoria,cantidad,marca) values
 ('cerveza',5,'N',1000,'Polar Light') ,
