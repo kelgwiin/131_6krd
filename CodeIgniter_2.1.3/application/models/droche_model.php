@@ -302,7 +302,7 @@ class Droche_model extends CI_Model {
                      ON rsv.id_usuario = usr.id_usuario
                 
                 WHERE ? BETWEEN fecha_ini AND fecha_fin ' .
-                'AND ? BETWEEN fecha_ini AND fecha_fin ' .
+                'OR ? BETWEEN fecha_ini AND fecha_fin ' .
                 'AND rsv.categoria_habitacion = ? AND rsv.tipo_habitacion = ? AND '.
                 " ( estatus_reserva = 'activa' OR estatus_reserva = 'ocupada' );";
         
