@@ -71,7 +71,7 @@ class Droche_prueba_cll extends CI_Controller {
 //                         'B',2,'2013-02-03','2013-02-14') );
          
          //DISPOBILIDAD DE HABITACIONES
-//         $this->_disponibilidad();
+      $this->_disponibilidad();
          
          //RESERVAS POR USUARIO
 //         $this->_reservas_por_usuario("kelwin_gamez");
@@ -97,7 +97,7 @@ class Droche_prueba_cll extends CI_Controller {
     
     
     private function _disponibilidad (){
-        $data = $this->droche_model->rsv_disponibilidad('2013-02-08','2013-02-10');
+        $data = $this->droche_model->rsv_disponibilidad('2013-08-15','2013-08-30');
         echo "<br>-------------------------------------<br>";
         foreach ($data['cabecera'] as $val){
             printf("%s ",$val);
