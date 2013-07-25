@@ -261,13 +261,13 @@ class Droche_model extends CI_Model {
         $num_5 = $this->rsv_num_habitaciones('A', 1) -
                 $this->rsv_num_habitaciones_ocupadas( 'A',1,
                          $fecha_ini, $fecha_fin);
-        $filas[] = Array('check-off','Business','Doble',$num_5);
+        $filas[] = Array('check-off','Alta','Individual',$num_5);
         
         //Alta/Individual
         $num_6 = $this->rsv_num_habitaciones('A', 2) -
                 $this->rsv_num_habitaciones_ocupadas( 'A',2,
                          $fecha_ini, $fecha_fin);
-        $filas[] = Array('check-off','Business','Doble',$num_6);
+        $filas[] = Array('check-off','Alta','Doble',$num_6);
         
         $data['filas'] = $filas;
         return $data;
@@ -288,6 +288,7 @@ class Droche_model extends CI_Model {
         
         return $row['count(*)'];
     }
+    
     /**
      * Número de habitaciones RESERVADAS
      * @param char $categoria 'N', 'B', 'A'
@@ -301,12 +302,13 @@ class Droche_model extends CI_Model {
                 FROM reserva_ocupa AS rsv JOIN  usuario AS usr 
                      ON rsv.id_usuario = usr.id_usuario
                 
-                WHERE ? BETWEEN fecha_ini AND fecha_fin ' .
-                'OR ? BETWEEN fecha_ini AND fecha_fin ' .
+                WHERE ( fecha_ini BETWEEN ? AND ? ' .
+                'OR fecha_fin BETWEEN ? AND ? ) ' .
                 'AND rsv.categoria_habitacion = ? AND rsv.tipo_habitacion = ? AND '.
                 " ( estatus_reserva = 'activa' OR estatus_reserva = 'ocupada' );";
         
-        $query = $this->db->query($sql, Array($fecha_ini,$fecha_fin,$categoria,
+        $query = $this->db->query($sql, Array($fecha_ini,$fecha_fin,
+        $fecha_ini, $fecha_fin, $categoria,
             $tipo));
         $row = $query->first_row('array');
         return $row['count(*)'];
@@ -331,6 +333,19 @@ class Droche_model extends CI_Model {
         }
         
         return $query->result_array();
+    }
+    
+    /**
+     * Se cambia el estatus de una reserva de 'activa' a 'ocupada'. Se verifica 
+     * si existe el tipo de habitación y se asigna el número de habitación. Además
+     * se llama a un procedimiento generar el minibar en función del tipo de
+     * habitación.
+     * @param int $id_reserva_ocupa id de la tabla de reserva_ocupa
+     * @param char $categoria_hab Categoría de la habitación {'N','B','A'}
+     * @param int $tipo_hab Tipo de habitación {1,2}.
+     */
+    function rsv_ocupar($id_reserva_ocupa,$categoria_hab, $tipo_hab){
+        
     }
     //end-of Gestión de Reservas
 
