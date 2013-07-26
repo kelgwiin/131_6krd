@@ -336,16 +336,36 @@ class Droche_model extends CI_Model {
     }
     
     /**
-     * Se cambia el estatus de una reserva de 'activa' a 'ocupada'. Se verifica 
-     * si existe el tipo de habitación y se asigna el número de habitación. Además
-     * se llama a un procedimiento generar el minibar en función del tipo de
+     * Se cambia el estatus de una reserva de 'activa' a 'ocupada'. Y
+     * se llama a un procedimiento para generar el minibar en función del tipo de
      * habitación.
      * @param int $id_reserva_ocupa id de la tabla de reserva_ocupa
      * @param char $categoria_hab Categoría de la habitación {'N','B','A'}
      * @param int $tipo_hab Tipo de habitación {1,2}.
      */
-    function rsv_ocupar($id_reserva_ocupa,$categoria_hab, $tipo_hab){
+    public function rsv_ocupar($id_reserva_ocupa,$categoria_hab, $tipo_hab){
+        //Generando el minibar
+        $this->generar_minibar($id_reserva_ocupa, $categoria_hab);
         
+        //seleccionando el id de una habitación libre
+        $sql = 'SELECT id_habitacion AS id ' . 
+                'FROM habitacion ' .
+                'WHERE categoria = ? AND tipo = ? '.
+                'LIMIT 1 ;';
+        $query = $this->db->query($sql, array($categoria_hab,$tipo_hab));
+        $rs = $query->first_row('array');
+        $id_hab = $rs['id'];
+                
+        //Actualizando el estatus de la reserva_ocupa y asignando la habitación en la
+        //reserva
+        $clave = array('id_reserva_ocupa'=>$id_reserva_ocupa);
+        $data_actualizar = array('estatus_reserva' => 'ocupada',
+            'id_habitacion_usr_hab' => $id_hab);
+        $this->update('reserva_ocupa', $clave, $data_actualizar);
+        
+        //Actualizar el estatus de la habitación
+        $this->update('habitacion', array('id_habitacion' => $id_hab) , 
+                array('estatus' => 'ocupada'));
     }
     //end-of Gestión de Reservas
 
@@ -423,5 +443,42 @@ class Droche_model extends CI_Model {
         $this->add($data,'consumible');
     }
     //end of mini-bar
-     
+    
+    //--------------------------------------------------------------------------
+    //                          Gestión de Facturas
+    //--------------------------------------------------------------------------
+    /**
+     * Genera la data de la factura.
+     * @param String $id_usuario Nombre de usuario 
+     * @param Array(int) $ids_reserva Un array de enteros por si se solicita
+     * cerrar más de una reserva.
+     */
+    public function facturar($id_usuario,$ids_reserva){
+        // Actualizar el estatus de facturas a viejas que el usuario pudiese tener
+        //previamente.
+        $condicion = array('id_usuario' => $id_usuario);
+        $data_actualizar = array('estatus_reserva' => 'vieja');
+        $this->update($condicion, $data_actualizar);
+        
+        //crear la factura (sin items)
+        $data = array('id_usuario' => $id_usuario,
+            'fecha_emision' => 'CURRENT_DATE()' ); 
+        $this->add($data, 'factura');
+        
+        //obteniendo el id de la última tupla de factura recien creada
+        $query = $this->db->query('SELECT last_insert_id() as id;');
+        $rs = $query->first_row('array');
+        $id_factura = $rs['id'];
+        
+        //agregar items a la factura
+        $num_reservas = count($ids_reserva);
+        
+        for ($i = 0 ; $i < $num_reservas; $i++){
+            //En desarrolloo..................
+        }
+    }
+    
+    
+    //end-of Gestión de Facturas
+    
 }
