@@ -35,6 +35,11 @@ select * from habitacion;
     delete from habitacion 
     where id_habitacion > 0;
 
+select id_habitacion as id
+from habitacion
+where categoria = 'B' and tipo = 2
+limit 1;
+
 select * from usuario;
 
     delete from usuario
@@ -47,3 +52,9 @@ select * from consumible;
 
 select * from llamadas_tlfs
 order by id_reserva_ocupa;
+
+select * from table1;
+
+insert into t1(dato) values ('aaa');
+select last_insert_id() as id;
+
