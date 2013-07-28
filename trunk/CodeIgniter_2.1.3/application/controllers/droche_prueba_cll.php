@@ -74,17 +74,25 @@ class Droche_prueba_cll extends CI_Controller {
       $this->_disponibilidad();
          
          //RESERVAS POR USUARIO
-//         $this->_reservas_por_usuario("kelwin_gamez");
+//         $this->_reservas_por_usuario("baltazar666");
          
          //VERIFICAR EXISTENCIA DE USUARIO
 //         $this->_usuario();
          
          //AGREGAR MINIBAR A UNA RESERVA (se debe hacer sólo una vez por cada reserva)
-//         $this->droche_model->generar_minibar(2,'B');// este sería el asociado a kelwin_gamez
+//         $this->droche_model->generar_minibar(1,'B');// este sería el asociado a baltazar666
+//         echo "<br> generado el minibar <br>";
          
-         
-         echo "<br> <br>cuerpo<br>";
-         echo'</body> </html>';
+        //OCUPAR HABITACION Y AGREGANDO EL MINIBAR DE una vez
+//        $this->droche_model->rsv_ocupar(1,'B',1);
+//        echo '<br>ocupando<br>';
+        
+        //PRUEBA DE FACTURACION
+//        $this->droche_model->facturar('baltazar666',array(array(1,'cierre')));
+//        echo "<br>fin de cierre facturacion<br>";
+        
+        echo "<br> <br>cuerpo<br>";
+        echo'</body> </html>';
 	
     }
     /**

@@ -30,4 +30,4 @@ MINIBAR
         _get_id_ca: obtiene el id del un item del almacen
 
 GESTIÓN DE FACTURAS
-    facturar: genera la data de la factura.
+    facturar: genera la data de la factura con sus respectivos items.
