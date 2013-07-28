@@ -173,8 +173,11 @@ insert into usuario (id_usuario, clave, nombre, apellido, correo, sexo, cedula, 
 ('paola','123456', 'Paola', 'Parra','paolapp@gmail.com','f','20888666','1990-05-22',
 '525222358345989','ahorro','V','V-20888666-5');
 
+-- la clave de todos los usuario es 123456 pero se almacena encriptada con 'sha1'
+
 -- ROLES
 insert into rol(descripcion) values ('admin'), ('estandar');
+
 -- ktrina (usuario ADMIN)
 insert into usuario (id_usuario, clave, nombre, apellido, correo, sexo, cedula, fecha_nac,
 nacionalidad,rif) values
