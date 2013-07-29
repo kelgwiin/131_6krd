@@ -64,6 +64,7 @@
 	
         <!-- DateTable-->
         <script src="application/views/hotel_vw/config/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
+        <script src="application/views/hotel_vw/config/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
         <!--<script src="application/views/hotel_vw/config/DataTables-1.9.4/media/js/jquery.js"></script>-->
         
         <!--<script src="application/views/hotel_vw/config/DataTables-1.9.4/extras/TableTools/media/js/TableTools.js"></script>
