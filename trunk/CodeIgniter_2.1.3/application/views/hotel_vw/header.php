@@ -25,7 +25,16 @@
   <link rel="stylesheet" href="application/views/hotel_vw/config/css/foundation.css" />
   <link rel="stylesheet" href="application/views/hotel_vw/config/css/orbit.css">
   
- 	<link rel="icon"   type="image/x-icon"  
+<!--   CSS del DataTable --> 
+  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/examples/examples_support/themes/smoothness/jquery-ui-1.8.4.custom.css">
+  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/jquery.dataTables_themeroller.css">
+  <!--  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/demo_table.css">-->
+  <!--<link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/demo_table_jui.css">-->
+  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/extras/TableTools/media/css/TableTools_JUI.css">
+  <!-- Fin de DateTable -->
+
+  <link rel="icon"   type="image/x-icon"  
 	href="application/views/hotel_vw/config/img/favicon.ico" /> 
   
   

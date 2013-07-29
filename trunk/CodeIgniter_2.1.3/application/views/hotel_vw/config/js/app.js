@@ -1,9 +1,31 @@
 $(document).ready(function(){
 	
-	$("#LogoTeam").animate({
+	//Configuraciones de la Tabla con 'DateTable
+        oTable = $('#tb_rsv').dataTable({
+             "bJQueryUI": true,
+            "sPaginationType": "full_numbers"
+            
+//            "oLanguage": {
+//                "sLengthMenu": "Desplegando _MENU_ Registros por página",
+//                "sZeroRecords": "Ninguna coincida encontrada",
+//                "sInfo": "Mostrando del  _START_ al _END_, de _TOTAL_ registros",
+//                "sInfoEmpty": "Mostrando de 0 a 0 de 0 registros",
+//                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)"
+//            }
+            
+        });
+        
+        $('#tb_rsv tr,th').click(function() {
+            $(this).toggleClass('row_selected');
+        } );
+        
+        //Fin de DateTable
+        
+        
+        $("#LogoTeam").animate({
 		height:'128px',
 		width:'128px'
-    });
+        });
     
 	$("#ContenedorMedio").fadeIn(2000);
 	
@@ -106,8 +128,9 @@ $(document).ready(function(){
 		}
 	   
 	  });	
-		
- 
+
+   
+   
 }); //End-of: Funcion ready
 
 function isNumber(num){
