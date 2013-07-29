@@ -1,6 +1,77 @@
 
-
 <div class="row" style="margin:auto;">
+	<div class="large-12 columns">
+            <!--Inicio de TABs -->
+            
+            <!--Fin de TABs -->
+            <h3>Reservas</h3>
+            <table id ="tb_rsv" cellpadding="0" cellspacing="0" border="0" class="display">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha de Entrada</th>
+                        <th>Fecha de Salida</th>
+                        <th>Categoría</th>
+                        <th>Tipo</th>
+                        <th>Cama Adicional</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr >
+                        <td>1</td>
+                        <td>2013-08-15</td>
+                        <td>2030-08-30</td>
+                        <td>N|B|A</td>
+                        <td>1|2</td>
+                        <td>N°</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2013-08-15</td>
+                        <td>2030-08-30</td>
+                        <td>N|B|A</td>
+                        <td>1|2</td>
+                        <td>N°</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>2013-08-15</td>
+                        <td>2030-08-30</td>
+                        <td>N|B|A</td>
+                        <td>1|2</td>
+                        <td>N°</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>2013-08-15</td>
+                        <td>2030-08-30</td>
+                        <td>N|B|A</td>
+                        <td>1|2</td>
+                        <td>N°</td>
+                    </tr>
+                    <?php
+                        for($i = 0 ; $i < 500; $i++){
+                            echo '<tr>
+                                <td>33</td>
+                        <td>2013-08-15</td>
+                        <td>2030-08-30</td>
+                        <td>N|B|A</td>
+                        <td>1|2</td>
+                        <td>N°</td>
+                    </tr>';
+                        }
+                    ?>
+                    
+                </tbody>
+                
+            </table>
+            
+        </div> 
+</div>
+
+
+<!--<div class="row" style="margin:auto;">
 	<div class="large-12 columns" style="text-align:center;">	
 		<div class="panel radius" style=" background-color:white;border-color:gray; border-width:3px; ">	
 
@@ -9,7 +80,7 @@
 			
 			<form> 
 			<div class="tabla_base" style="margin:auto;width:800px;" >
-               <table >
+               <table id ="reservas">
 					<tr name = "pp">
 						<td>
 							Check
@@ -91,5 +162,5 @@
         
 		</div>
 	</div>		
-</div>            
+</div>            -->
             

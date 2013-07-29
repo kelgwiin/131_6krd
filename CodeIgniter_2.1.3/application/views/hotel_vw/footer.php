@@ -61,9 +61,18 @@
 	<link rel="stylesheet" href="application/views/hotel_vw/config/css/ui-lightness/jquery-ui.custom.css" />
 	<script src="application/views/hotel_vw/config/js/jquery-ui-1.10.3.custom.js"></script>
 	<script src="application/views/hotel_vw/config/js/jquery-ui-1.10.3.custom.min.js"></script>
-
+	
+        <!-- DateTable-->
+        <script src="application/views/hotel_vw/config/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
+        <!--<script src="application/views/hotel_vw/config/DataTables-1.9.4/media/js/jquery.js"></script>-->
+        
+        <!--<script src="application/views/hotel_vw/config/DataTables-1.9.4/extras/TableTools/media/js/TableTools.js"></script>
+        <script src="application/views/hotel_vw/config/DataTables-1.9.4/extras/TableTools/media/js/ZeroClipboard.js"></script>-->
+        
+        <!-- Fin de DateTable-->
+        
 	<script src="application/views/hotel_vw/config/js/app.js" type="text/javascript"></script>
-
+          
 
 	<script>
 	  $(function() {

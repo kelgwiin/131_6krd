@@ -159,19 +159,19 @@ insert into habitacion (tipo, categoria) values
 -- -----------------------
     -- el número de tarjeta es de 16 (VISA ini 4, MASTERCARD 5)
 insert into usuario (id_usuario, clave, nombre, apellido, correo, sexo, cedula, fecha_nac,
- num_tarjeta,tipo_cuenta, nacionalidad, rif) values 
+ num_tarjeta,tipo_cuenta, nacionalidad, rif,id_rol) values 
 
 ('baltazar666','123456','Baltazar','Bueno', 'baltazar@gmail.com','m','1000000','1666-06-06',
-'422559658215569','corriente','E','E-1000000-9'),
+'422559658215569','corriente','E','E-1000000-9',1),
 
 ('rr_gutierrez','123456', 'Ramon', 'Gutierrez','rgutierrez@gmail.com','m','7500800','1970-05-16',
-'525482358345589','ahorro','V','V-7500800-3'),
+'525482358345589','ahorro','V','V-7500800-3',1),
 
 ('sandrab86','123456', 'Sandra', 'Baron','sandrab86@hotmail.com', 'f','21255897','1993-06-18',
-'425412358389489','corriente','V','V-21255897-6'),
+'425412358389489','corriente','V','V-21255897-6',1),
 
 ('paola','123456', 'Paola', 'Parra','paolapp@gmail.com','f','20888666','1990-05-22',
-'525222358345989','ahorro','V','V-20888666-5');
+'525222358345989','ahorro','V','V-20888666-5',1);
 
 -- la clave de todos los usuario es 123456 pero se almacena encriptada con 'sha1'
 
@@ -180,10 +180,10 @@ insert into rol(descripcion) values ('admin'), ('estandar');
 
 -- ktrina (usuario ADMIN)
 insert into usuario (id_usuario, clave, nombre, apellido, correo, sexo, cedula, fecha_nac,
-nacionalidad,rif) values
+nacionalidad,rif,id_rol) values
 
 ('ktrina','123456','Ktrina', 'Smith','ktrina@gmail.com','f','20888999','2013-07-24','V',
-'V-20888999-6');
+'V-20888999-6',2);
 
 -- ------------------------------------------------------
 -- ::: RESERVAS ::: (la data ser hara a partir de agosto)
