@@ -18,17 +18,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-
+<!--   CSS del DataTable --> 
+  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/examples/examples_support/themes/smoothness/jquery-ui-1.8.4.custom.css">
+  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/jquery.dataTables_themeroller.css">
+  
   <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
   <link rel="stylesheet" href="application/views/hotel_vw/config/css/normalize.css" />
   <link rel="stylesheet" href="application/views/hotel_vw/config/css/config_f_krd.css" />
   <link rel="stylesheet" href="application/views/hotel_vw/config/css/foundation.css" />
   <link rel="stylesheet" href="application/views/hotel_vw/config/css/orbit.css">
   
-<!--   CSS del DataTable --> 
-  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/jquery.dataTables.css">
-  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/examples/examples_support/themes/smoothness/jquery-ui-1.8.4.custom.css">
-  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/jquery.dataTables_themeroller.css">
+
   <!--  <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/demo_table.css">-->
   <!--<link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/demo_table_jui.css">-->
   <!--<link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/extras/TableTools/media/css/TableTools_JUI.css"> -->
@@ -44,11 +45,8 @@
   
   
  	<script src="application/views/hotel_vw/config/js/jquery-1.9.1.js" type="text/javascript"></script> 
-	<link rel="stylesheet" href="application/views/hotel_vw/config/css/ui-lightness/jquery-ui.custom.css" />
-	<script src="application/views/hotel_vw/config/js/jquery-ui-1.10.3.custom.js"></script>
-	<script src="application/views/hotel_vw/config/js/jquery-ui-1.10.3.custom.min.js"></script>
-	
-        <!-- DateTable-->
+ 	
+ 	<!-- DateTable-->
         <script src="application/views/hotel_vw/config/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
         <script src="application/views/hotel_vw/config/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
         <!--<script src="application/views/hotel_vw/config/DataTables-1.9.4/media/js/jquery.js"></script>-->
@@ -57,6 +55,12 @@
         <script src="application/views/hotel_vw/config/DataTables-1.9.4/extras/TableTools/media/js/ZeroClipboard.js"></script>-->
         
         <!-- Fin de DateTable-->
+        
+	<link rel="stylesheet" href="application/views/hotel_vw/config/css/ui-lightness/jquery-ui.custom.css" />
+	<script src="application/views/hotel_vw/config/js/jquery-ui-1.10.3.custom.js"></script>
+	<script src="application/views/hotel_vw/config/js/jquery-ui-1.10.3.custom.min.js"></script>
+	
+        
         
 	<script src="application/views/hotel_vw/config/js/app.js" type="text/javascript"></script>
 	
@@ -135,7 +139,7 @@
 	
 	<!-- Panel con logo y nombre -->
 	<br>
-	<div class="row" style="margin:o;" align = "center">
+	<div class="row" style="" align = "center">
 	<div class="panel radius" style="marigin:0px;width:840px; height:120px; background-color:white;
 	 border-color:#A52A2A; border-width:3px; ">		
 		<div class="large-2 columns ">

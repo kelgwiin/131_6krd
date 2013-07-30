@@ -95,6 +95,7 @@ class Droche_prueba_cll extends CI_Controller {
         echo'</body> </html>';
 	
     }
+   
     /**
      * TODAS LAS FUNCIONES ABAJO DESARROLLADAS SON DE PRUEBA y ESTAS SON 
      * A MANERA DE EJEMPLO DEL USO DE LAS FUNCIONES DEL MODELO
@@ -156,4 +157,10 @@ class Droche_prueba_cll extends CI_Controller {
          }
          
     }
+    
+    public function tabla(){
+		$this->load->view('templates/header');
+		$this->load->view('hotel_vw/ver_reservas');
+		$this->load->view('templates/footer');	
+	}
 }
