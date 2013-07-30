@@ -8,7 +8,10 @@ $(document).ready(function(){
                 "sUrl": "application/views/hotel_vw/config/DataTables-1.9.4/languages/datatable.es.txt"
             }
         });
-        
+        //Cuando cambia de tamaño
+         $(window).bind('resize', function () {
+			oTable.fnAdjustColumnSizing();
+		} );
         $('#tb_rsv tr').click(function() {
             $(this).toggleClass('row_selected');
         } );

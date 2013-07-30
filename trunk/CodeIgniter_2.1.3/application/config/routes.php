@@ -58,6 +58,7 @@ $route['test'] = "welcometest/indextest";
 $route['hotel'] = "hotel/hotel";
 $route['hotel/(:any)'] = "hotel/hotel/$1";
 $route['droche'] = "droche_prueba_cll";
+$route['droche/(:any)'] = "droche_prueba_cll/$1";
 
 $route['registro_usuario'] = "hotel/registro_usuario";
 $route['registro_usuario/(:any)'] = "hotel/registro_usuario/$1";
