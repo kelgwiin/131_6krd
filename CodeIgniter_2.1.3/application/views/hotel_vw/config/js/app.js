@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
-	//Configuraciones de la Tabla con 'DateTable
-        oTable = $('#tb_rsv').dataTable({
+	//Configuraciones de la Tabla con DataTable
+       var oTable = $('#tb_rsv').dataTable({
              "bJQueryUI": true,
              "sPaginationType": "full_numbers",
              "oLanguage": {
@@ -9,7 +9,7 @@ $(document).ready(function(){
             }
         });
         
-        $('#tb_rsv tr,th').click(function() {
+        $('#tb_rsv tr').click(function() {
             $(this).toggleClass('row_selected');
         } );
         
