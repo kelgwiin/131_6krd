@@ -34,6 +34,8 @@
   <!--<link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/demo_table_jui.css">-->
   <!--<link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/extras/TableTools/media/css/TableTools_JUI.css"> -->
   <!-- Fin de DateTable - CSS-->
+  
+  
 
 <!-- JavaScript-->
 <script>
@@ -141,7 +143,7 @@
 	<br>
 	<div class="row" style="" align = "center">
 	<div class="panel radius" style="marigin:0px;width:840px; height:120px; background-color:white;
-	 border-color:#A52A2A; border-width:3px; ">		
+	 border-color:#A52A2A; border-width:0px; ">		
 		<div class="large-2 columns ">
 			<img style="margin-left:45px; width:180px; height:94px;" src="application/views/hotel_vw/config/img/Logo2.jpg">
 			

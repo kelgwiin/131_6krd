@@ -27,7 +27,7 @@
 	  
 		<!-- Panel Disponibilidad -->
 		<div class="large-3 columns" >
-			<div class="panel radius" style="width:240px; height:450px; background-color:#282828; border-color:gray; border-width:3px; ">
+			<div class="panel radius" style="width:240px; height:450px; background-color:#383838; border-color:gray; border-width:1px; ">
 				<h4 style="color:white; text-align:center;">Habitaciones Disponibles</h4><br>
 				  <form>
 					<h6 style="color:white;" > Fecha de entrada </h6>

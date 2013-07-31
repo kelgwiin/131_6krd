@@ -1,7 +1,7 @@
 	
 <div class="row" style="margin:auto;">
 	<div class="large-12 columns" style="text-align:center;">	
-		<div class="panel radius" style=" background-color:white;border-color:gray; border-width:3px; ">		
+		<div class="panel radius" style=" background-color:#D9D8D7;border-color:gray; border-width:1px; border:radius; ">		
 
 		<h3>Registro de usuario</h3><hr>
 		<form style="margin-left:50px">
