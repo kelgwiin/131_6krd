@@ -177,12 +177,12 @@ class Droche_model extends CI_Model {
      * @param String $usuario Nombre de usuario (id_usuario)
      * @param String $clave Clave asociada al usuario
      * 
-     * @return Array $resp array( 'usuario' => boolean , 'clave' => boolean)
+     * @return Array $resp array( 'usuario' => boolean , 'clave' => boolean, 'rol' => string)
      */
     public function usuario_existe($usuario , $clave = NULL){
         $resp = Array();
         
-        $sql = "SELECT clave ".
+        $sql = "SELECT clave,rol ".
         "FROM usuario ".
         "WHERE id_usuario = ? ;";
         
@@ -190,21 +190,21 @@ class Droche_model extends CI_Model {
         
         if($rs->num_rows() > 0 ){ // si existe
             $resp['usuario'] = TRUE;
-          
-            if($clave !== NULL){// se valida la clave o no 
-                $r = $rs->first_row('array');
-                
-                if($r['clave'] == $clave){
+			$r = $rs->first_row('array');
+			
+			if($clave !== NULL){// se valida la clave o no 
+                if($r['clave'] == sha1($clave) ){
                     $resp['clave'] = TRUE;
                 }else{
                     $resp['clave'] = FALSE;
                 }
             }
-            
+			$resp['rol'] = $r['rol'];
             
         }else{
             $resp['usuario'] = FALSE;
             $resp['clave'] = FALSE;
+            $resp['rol'] = "";
         }
         return $resp;
     }

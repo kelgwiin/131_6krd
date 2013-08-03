@@ -81,10 +81,12 @@
   <script src="application/views/hotel_vw/config/js/foundation/foundation.topbar.js"></script>
   <script src="application/views/hotel_vw/config/js/foundation/foundation.interchange.js"></script>
   
+  <div class="reveal-modal-bg" style="display: none"></div>
+  
   <script>
     $(document).foundation();
   </script>
-  
+ 
   
   </body>
 </html>

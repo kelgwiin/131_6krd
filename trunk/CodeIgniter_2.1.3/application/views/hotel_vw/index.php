@@ -48,7 +48,10 @@
 					
 					<div class="row">
 						<div class="large-12 columns" style="text-align:center;">
-							<br> <a href="#" id="botones" class="button"  >Buscar</a>
+							<br> <a href="#" id="botones" class="button"  >
+								<img src="application/views/hotel_vw/config/img/buscar.png" width = "30px" >
+								Buscar
+							</a>
 						</div>
 					</div>
 					
