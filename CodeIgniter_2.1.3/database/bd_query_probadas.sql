@@ -113,3 +113,18 @@ where id_reserva_ocupa = 1;
 
 -- número de dias para contabilizar las penalizaciones
 select datediff('2013-08-02',current_date());
+
+
+select * from ci_sessions;
+
+delete from ci_sessions;
+
+CREATE TABLE IF NOT EXISTS  `ci_sessions` (
+	session_id varchar(40) DEFAULT '0' NOT NULL,
+	ip_address varchar(45) DEFAULT '0' NOT NULL,
+	user_agent varchar(120) NOT NULL,
+	last_activity int(10) unsigned DEFAULT 0 NOT NULL,
+	user_data text NOT NULL,
+	PRIMARY KEY (session_id),
+	KEY `last_activity_idx` (`last_activity`)
+);

@@ -71,14 +71,33 @@
   
   
   	<title>
-	<?php printf("%s </title>",$title);?>
+	<?php printf("%s(admin)</title>",$title);?>
   
 </head>
 
 
 <body>
 
+<!-- Avisos de Foundation -->
+<div id="aviso_inicio_sesion" class="reveal-modal small">
+  
+   
+  <p>
+	  <img src = "application/views/hotel_vw/config/img/aviso.png" width = "50px">
+   Usted ha iniciado sesión exitosamente.</p>
+
+ <a class="close-reveal-modal">&#215;</a>
+</div>
 	
+<div id="aviso_sesion_cerrada" class="reveal-modal small">
+  <p>
+	<img src = "application/views/hotel_vw/config/img/aviso.png" width = "50px">
+	Usted ha cerrado sesión exitosamente.
+  </p>
+<a class="close-reveal-modal">&#215;</a>
+</div>
+
+
 <!-- Barra superior-->
 <div class="contain-to-grid sticky"> 
 	<nav class = "top-bar">   
@@ -87,7 +106,7 @@
 		<section class="top-bar-section">
 			<ul class="left">
 				<li class="divider"></li>
-				<li><a href="index.php/hotel/hotel/"> Hotel D'roche </a></li>
+				<li><a href="index.php/hotel/"> Hotel D'roche </a></li>
 				<li class="divider"></li>
 			</ul>			
 		</section>
@@ -98,39 +117,99 @@
 		
 		<section class="top-bar-section">
 			<ul class="right">
-				<li class="divider"></li>
-				<li class="active"><a href="index.php/hotel/hotel/"> Inicio </a></li>
-				<li class="divider"></li>
-				<li><a href="index.php/hotel/registro_usuario/"> Registrarse </a></li>
-				<li class="divider"></li>
-					<li><a href="#" data-dropdown="drop2" >Iniciar Sesion</a>
+				
+				<!------------------------->
+				<!--Home-->
+				<!------------------------->
+				<li class="divider" id = "home_div"></li>
+				<li class="active" id  = "home">
+					<a href="index.php/hotel/">
+					<img alt = "icono usuario"src="application/views/hotel_vw/config/img/home_w.png" width="30px">
+					Inicio </a>
+				</li>
+				<!------------------------->
+				<!-- Registrarse (Oculta)-->
+				<!------------------------->
+				<li class="divider"  id = "registrarse_div" style = "display:none"></li>
+				<li id = "registrarse" style = "display:none">
+					<a href="index.php/hotel/registro_usuario/">
+						<img alt = "icono usuario"src="application/views/hotel_vw/config/img/vcard_add.png" width="30px">
+						Registrarse
+					</a>
+				</li>
+				
+				<li class="divider" id = "inicio_sesion_div"></li>
+				<!------------------------------->
+				<!-- Inicio de Sesión (oculta)--->
+				<!------------------------------->
+					<li id = "inicio_sesion" style = "display:none"><a  data-dropdown="drop2">
+						
+						<img alt = "icono usuario"src="application/views/hotel_vw/config/img/sesion.png" width="30px">
+						Iniciar Sesión
+						</a>
 					
 					<ul id="drop2" class="f-dropdown content" data-dropdown-content>
-					<form>
-						<label for="Correo_sesion"> <h6> Correo </h6> </label>
-							<div class="row">						
-							<div class="large-12 columns ">				
-								<input id="Correo_sesion" type="text" placeholder="">
+					<form >
+						<label for="usuario"> <h6> Usuario </h6> </label>
+							<div class="row">
+							<div class="large-12 columns ">
+								<input id="usuario" type="text" placeholder="">
 							</div></div>	
 								
 						  <br>			
-						  <label for="Contraseña_sesion"> <h6> Contraseña </h6> </label>
-							<div class="row">						
+						  <label for="clave"> <h6> Contraseña </h6> </label>
+							<div class="row">
 								<div class="large-12 columns ">
-									<input id="Contraseña_sesion" type="text" placeholder="">
+									<input id="clave" type="password" placeholder="">
+									
 							</div></div>	
 								
-							<div class="row">
+						<div class="row">
 							<div class="large-12 columns" style="text-align:center;">
-								<br> <a href="#" id="botones" class="button"> Entrar</a>
-							</div></div>
+								<br> <a  id="boton_inicio_sesion" class="button"> Entrar</a>
+							
 																
 					</form>
+							<!-- Mensaje de error, inicio sesión-->
+							<div id = "error_inicio_sesion" style = "display:none">
+							<br>
+							<span class="alert label">Clave o usuario incorrecto</span>
+							</div>
 					</ul>
-					</li>				
-				<li class="divider"></li>
+					</li> 
+				<!------------------------->
+				<!-- Sesión Iniciada     -->
+				<!------------------------->
+				<li id = "sesion_iniciada" >
+					<a  data-dropdown="drop3" >
+					<img alt = "icono usuario"src="application/views/hotel_vw/config/img/sesion.png" width="30px">
+					
+					<span id = "nombre_usuario">
+						<?php echo $usuario['nombre']; ?>
+					</span>
+					</a>
+				</li>
 				
-	
+				<!------------------------->
+				<!-- Ocupar reservas     -->
+				<!------------------------->
+				<li class="divider" id = "ocupar_reservas_div"></li>
+				
+					<li id = "ocupar_reservas" >
+						<a   title = "Ocupar reservas"><img alt = "cerrar sesión"src="application/views/hotel_vw/config/img/reserva.png" width="30px">Ocupar reservas</a>
+					</li>
+				
+				<!------------------------->
+				<!-- Cerrar sesión       -->
+				<!------------------------->
+				<li class="divider" id = "cerrar_sesion_div"></li>
+				
+				<li id = "cerrar_sesion" >
+						<a id = "boton_cerrar_sesion"  title = "Cerrar sesión"><img alt = "cerrar sesión"src="application/views/hotel_vw/config/img/salir.png" width="30px"></a>
+				</li>
+				
+				<li class="divider" id = "fin"></li>
+				
 			</ul>
 		</section>
 			    
@@ -155,3 +234,4 @@
 		</div>				
 	</div>		
 	</div>	
+

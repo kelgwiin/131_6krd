@@ -1,6 +1,7 @@
 $(document).ready(function(){
-	
-	//Configuraciones de la Tabla con DataTable
+		//----------------------
+		// DataTable
+		//----------------------
        var oTable = $('#tb_rsv').dataTable({
              "bJQueryUI": true,
              "sPaginationType": "full_numbers",
@@ -16,7 +17,91 @@ $(document).ready(function(){
             $(this).toggleClass('row_selected');
         } );
         
-        //Fin de DateTable
+        
+        //------------------
+        //Inicio de Sesion
+        //------------------
+        $('a#boton_inicio_sesion').on('click',function(){
+			pass = $('input#clave').val();
+			usuario_ = $('input#usuario').val();
+			
+			params = {
+				usuario:usuario_,
+				clave: pass
+			};
+			//~ alert("entrooo");
+			//haciendo la llamada ajax
+			$.post("index.php/hotel/ini_sesion",params,
+				function(data){
+					obj = eval("(" + data + ")");//transformando el JSON a un Objeto JS
+					
+					if(obj.estatus == "ok"){ // el usuario y contraseña coinciden
+						$('li#registrarse_div').hide();
+						$('li#registrarse').hide();
+						$('li#inicio_sesion_div').hide();
+						$('li#inicio_sesion').hide();
+						
+						
+						$('span#nombre_usuario').text(obj.usuario);
+						$('li#sesion_iniciada').show();
+						$('li#cerrar_sesion_div').show();
+						$('li#cerrar_sesion').show();
+						
+						//cargar opciones especiales de admin
+						if(obj.rol == "admin"){
+							$('li#ocupar_reservas').show();
+							$('li#ocupar_reservas_div').show();
+						}
+						
+						//resetear
+						$('input#usuario').val('');
+						$('input#clave').val('');
+						$('div#error_inicio_sesion').hide();
+						
+						$('#aviso_inicio_sesion').foundation('reveal', 'open');
+						
+					}else{
+						//~ alert('error');
+						$('div#error_inicio_sesion').show();
+					}
+					
+				}
+			);
+		});       
+        
+        
+        //----------------------------
+        // Cerrar sesión
+        //----------------------------
+        $("a#boton_cerrar_sesion").on('click',function(){
+			$.post("index.php/hotel/cerrar_sesion/",null,
+				function(data){
+					
+					$('li#registrarse_div').show();
+					$('li#registrarse').show();
+					$('li#inicio_sesion_div').show();
+					$('li#inicio_sesion').show();
+					
+					
+					$('li#sesion_iniciada').hide();
+					$('li#cerrar_sesion_div').hide();
+					$('li#cerrar_sesion').hide();
+					$('li#ocupar_reservas').hide();
+					$('li#ocupar_reservas_div').hide();
+					
+					
+				
+				$('#aviso_sesion_cerrada').foundation('reveal', 'open');
+			} 
+		);
+		
+		});
+        
+        
+        
+        
+        
+        
         
         
         $("#LogoTeam").animate({
@@ -35,13 +120,13 @@ $(document).ready(function(){
 		$(this).toggleClass('hightlighted');
 	});
 
-	$("input, textarea").focus(function(){
-		$(this).css("background-color","#cccccc");
-	});
-	
-	$("input, textarea").blur(function(){
-		$(this).css("background-color","#ffffff");
-	});
+	//~ $("input, textarea").focus(function(){
+		//~ $(this).css("background-color","#cccccc");
+	//~ });
+	//~ 
+	//~ $("input, textarea").blur(function(){
+		//~ $(this).css("background-color","#ffffff");
+	//~ });
 	
 	
 	  //$("div.tabla_base table td select").click(function(){
@@ -137,13 +222,4 @@ function isNumber(num){
 		return false;
 	}
 	
-}
-
-function isValidEmail(email){
-	//~ if(/^([a-z]||[A-Z])*@([a-z]||[A-Z])*(.([a-z]||[A-Z])*)*$/.test(email) ){
-		//~ return true;
-	//~ }else{
-		//~ return false;
-	//~ }
-	return true;
 }

@@ -16,7 +16,9 @@ a{color:#A52A2A; text-decoration: none }
 a:hover {color: #7CE660; text-decoration: underlined}
 a:active {color: #217111; text-decoration: none}
 
-
+div#sesion_iniciada{
+	display:none
+}
 
 
 p {
