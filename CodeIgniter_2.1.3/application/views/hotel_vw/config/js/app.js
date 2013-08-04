@@ -1,6 +1,81 @@
-$(document).ready(function(){
+//Principal
+_main();
+
+function _main(){
+	$(document).ready(function(){
+		msj_creacion_nuevo_usr();
 	
+		tabla();
+		
+		inicio_sesion();
+        
+		cerrar_sesion();
+    
+		msj_registro_usr();
+		
+		msj_error_claves();
 	
+		existe_usr();
+	
+		validacion_tarjeta();
+	
+		guardar_usuario();
+	
+		//pendiente viejo sin desarrollar mucho
+		boton_reservar();
+		
+	}); //End-of: Funcion ready
+	
+}//end-of-function: main
+
+
+
+/**Configuraciones para el inicio de sesión formateando y escondiendo
+* ciertos elementos
+*/ 
+function config_inicio_sesion(obj){
+			$('li#registrarse_div').hide();
+			$('li#registrarse').hide();
+			$('li#inicio_sesion_div').hide();
+			$('li#inicio_sesion').hide();
+						
+			$('span#nombre_usuario').text(obj.usuario);
+			$('li#sesion_iniciada').show();
+			$('li#cerrar_sesion_div').show();
+			$('li#cerrar_sesion').show();
+			
+						
+			//cargar opciones especiales de admin
+			if(obj.rol == "admin"){
+				$('li#reservas_admin').show();
+				$('li#reservas_admin_div').show();
+				$('li#reportes_div').show();
+				$('li#reportes').show();
+			}else{
+				$('li#reservas_estandar_div').show();
+				$('li#reservas_estandar').show();
+			}
+			
+			//resetear
+			$('input#usuario').val('');
+			$('input#clave').val('');
+			$('div#error_inicio_sesion').hide();
+						
+			$('#aviso_inicio_sesion').foundation('reveal', 'open');
+		
+		}
+
+function msj_creacion_nuevo_usr(){
+//mostrar mensaje de creación de nuevo usuario
+	
+	id_usr = $('div.mostrar_nuevo_usuario').attr('id');
+	if(id_usr == 'true'){
+		$('#aviso_nuevo_usuario').foundation('reveal', 'open');
+	}
+	
+}
+
+function tabla(){
 		//----------------------
 		// DataTable
 		//----------------------
@@ -18,8 +93,9 @@ $(document).ready(function(){
         $('#tb_rsv tr').click(function() {
             $(this).toggleClass('row_selected');
         } );
-        
-        
+}
+
+function inicio_sesion(){
         //------------------
         //Inicio de Sesion
         //------------------
@@ -40,7 +116,7 @@ $(document).ready(function(){
 					obj = data;
 					
 					if(obj.estatus == "ok"){ // el usuario y contraseña coinciden
-						config_inicio_sesion();
+						config_inicio_sesion(obj);
 					}else{
 						$('div#error_inicio_sesion').show();
 					}
@@ -53,8 +129,10 @@ $(document).ready(function(){
 			$.post( url, dataToSend, callback,tipo);
 
 		});
-        
-        //----------------------------
+}
+
+function cerrar_sesion(){
+		//----------------------------
         // Cerrar sesión
         //----------------------------
         $("a#boton_cerrar_sesion").on('click',function(){
@@ -72,14 +150,24 @@ $(document).ready(function(){
 					$('li#cerrar_sesion').hide();
 					$('li#ocupar_reservas').hide();
 					$('li#ocupar_reservas_div').hide();
+					$('li#reservas_estandar_div').hide();
+					$('li#reservas_estandar').hide();
+					$('li#reservas_admin').hide();
+					$('li#reservas_admin_div').hide();
+					$('li#reportes_div').hide();
+					$('li#reportes').hide();
 				
 				$('#aviso_sesion_cerrada').foundation('reveal', 'open');
 			} 
 		);
 		
 		});
-    
-    //Mensajes de Registro
+
+}
+
+
+function msj_registro_usr(){
+	//Mensajes de Registro
 	$('#fr_registro_usuario')
 		.on('invalid', function () {
 		var invalid_fields = $(this).find('[data-invalid]');
@@ -92,7 +180,9 @@ $(document).ready(function(){
 			console.log('valid!');
 			$('small.error').hide();
 		});
-		
+}
+
+function msj_error_claves(){
 	//Mensaje de error contraseñas no coinciden
 	$("input#confirmacion_clave").on('blur',function(){
 		c1 = $('input#clave_registro').val();
@@ -104,8 +194,9 @@ $(document).ready(function(){
 			$('span#error_claves_distintas').hide();
 		}
 	});	
-	
-	
+}
+
+function existe_usr(){
 	//------------------------------------------------------------------
 	//Existe usuario
 	//------------------------------------------------------------------
@@ -122,7 +213,23 @@ $(document).ready(function(){
 		}
 		$.post('index.php/hotel/existe_usuario',params, f1,'json');
 	});
-	
+}
+
+function validacion_tarjeta(){
+	//Validación ligera de Número de Tarjeta
+	$('input#num_tarjeta').on('blur',function(){
+		num = $(this).val();
+		
+		if(num.length != 16){
+			$('span#error_num_tarjeta').show();
+		}else{
+			$('span#error_num_tarjeta').hide();
+		}
+	});
+
+}
+
+function guardar_usuario(){
 	
 	//------------------------------------------------------------------
 	//Guardar usuario
@@ -138,131 +245,58 @@ $(document).ready(function(){
 		//Obteniendo la data del form
 		var dataToSend = bk_this.serialize();
 		
+		
 		//verificar existencia de usuario y que las claves coincidan
 		var c1 = $('input#clave_registro').val();
 		var c2 = $('input#confirmacion_clave').val();
 		
-		//~ var fecha = $('input#fecha_nac').val();
-		
+		//obteniendo el usuario
 		u = $('input#usuario_registro').val(); 
-		
 		params = {usuario:u};
+		
+		//validación sutil de la tarjeta
+		valid_card = false;
+		num_card = $('input#num_tarjeta').val();
+		if(num_card.length == 16){
+			valid_card = true;
+		}
+		
 		var f1 = function(data){
-			if(!data.existe_usr && c1 == c2){
+			//Validación de existencia de usuario, contraseña, número de tarjeta = 16
+			if(!data.existe_usr && c1 == c2 && valid_card){
 				
 				//declaracion de función
 				var fo_enviar_data = function(data){
 					obj = data;
-					if(obj.estatus == "ok"){ // el usuario y contraseña coinciden
-						//Redireccionando
-						
-						location.href = 'index.php/hotel/';
+					if(obj.estatus == "ok"){
+						/** Redireccionando si todo va bien
+						* 	en el registro automáticamente inicia sesión con
+						*	con los permisos correspondientes. Por defecto es
+						* 	un usuario estándar	
+						*/
+						$(location).attr('href','index.php/hotel/true');
 					}else{
 						$('#aviso_error_inesperado').foundation('reveal', 'open');
 					}
 				}//end-of funcion de retorno
 				
-				//Haciendo la llamda al post con AJAX
+				//Haciendo la llamada al post con AJAX
 				$.post( url, dataToSend, fo_enviar_data,'json');
 				
 			}else{
+				// Entraría aquí si pasa una cosa loca, pero la mayoría de 
+				//las veces no lo haría.
 				$('#aviso_error_registro').foundation('reveal', 'open');
 			}
-		}
+		}//end-of- var function: f1 validación de usuario, contraseña, num_tarjeta
+		
 		$.post('index.php/hotel/existe_usuario',params, f1,'json');
 			
-			
-			
-			
 		});
-		
-		/**Configuraciones para el inicio de sesión formateando y escondiendo
-		 * ciertos elementos
-		 */ 
-		function config_inicio_sesion(){
-			$('li#registrarse_div').hide();
-			$('li#registrarse').hide();
-			$('li#inicio_sesion_div').hide();
-			$('li#inicio_sesion').hide();
-						
-			$('span#nombre_usuario').text(obj.usuario);
-			$('li#sesion_iniciada').show();
-			$('li#cerrar_sesion_div').show();
-			$('li#cerrar_sesion').show();
-						
-			//cargar opciones especiales de admin
-			if(obj.rol == "admin"){
-				$('li#ocupar_reservas').show();
-				$('li#ocupar_reservas_div').show();
-							
-				//Colocando el titulo de admin
-				titulo = $('title').val()  + '(admin)';
-				$('title').val(titulo); 
-			}
-			
-			//resetear
-			$('input#usuario').val('');
-			$('input#clave').val('');
-			$('div#error_inicio_sesion').hide();
-						
-			$('#aviso_inicio_sesion').foundation('reveal', 'open');
-		
-		}
-		//~ //Evento de Registrarse
-		//~ $('a#registrarse').on('click',function(){
-			//~ $('li#registrarse_div').hide();
-			//~ $('li#registrarse').hide();
-			//~ $('li#inicio_sesion_div').hide();
-			//~ $('li#inicio_sesion').hide();
-		//~ });
-		
-		
-		
-		///-----------------------------------------------------
-		
-		
-		//abrir en la misma ventana
-        //~ window.top.location.href = 'miPagina.html'
-        
-        $("#LogoTeam").animate({
-		height:'128px',
-		width:'128px'
-        });
-    
-	$("#ContenedorMedio").fadeIn(2000);
-	
-	$('#ContenedorMedio').on('click', '#mas', function(){
-		var item = $('<li><i>item</i></li>');
-		$('#contactos').append(item);
-	});
+}
 
-	$('#contactos').on('click', '.hlt', function(){
-		$(this).toggleClass('hightlighted');
-	});
-
-	//~ $("input, textarea").focus(function(){
-		//~ $(this).css("background-color","#cccccc");
-	//~ });
-	//~ 
-	//~ $("input, textarea").blur(function(){
-		//~ $(this).css("background-color","#ffffff");
-	//~ });
-	
-	
-	  //$("div.tabla_base table td select").click(function(){
-	  
-	  /**
-		$('#bt_reservar_t').on('click',function(){  
-			
-		$('#bt_reservar')show();
-		$('#confirmar').hide();		
-		$('#bt_reservar_t').hide();
-		$('#here_table2').hide();
-			
-		});	
-	  */
-		  
-	$('a#bt_reservar').on('click',function(){		  
+function boton_reservar(){
+		$('a#bt_reservar').on('click',function(){		  
 		 
 		 alert("--");
 		checkboxs = $("div.tabla_base table td > :checked") ;
@@ -330,16 +364,67 @@ $(document).ready(function(){
 		}
 	   
 	  });	
-
-   
-   
-}); //End-of: Funcion ready
-
-function isNumber(num){
-	if(/^([0-9])*$/.test(num) ){
-		return true;
-	}else{
-		return false;
-	}
-	
 }
+
+
+function _notas_viejas(){
+		
+		//abrir en la misma ventana
+        //~ window.top.location.href = 'miPagina.html'
+        
+        $("#LogoTeam").animate({
+		height:'128px',
+		width:'128px'
+        });
+    
+	$("#ContenedorMedio").fadeIn(2000);
+	
+	$('#ContenedorMedio').on('click', '#mas', function(){
+		var item = $('<li><i>item</i></li>');
+		$('#contactos').append(item);
+	});
+
+	$('#contactos').on('click', '.hlt', function(){
+		$(this).toggleClass('hightlighted');
+	});
+
+	//~ $("input, textarea").focus(function(){
+		//~ $(this).css("background-color","#cccccc");
+	//~ });
+	//~ 
+	//~ $("input, textarea").blur(function(){
+		//~ $(this).css("background-color","#ffffff");
+	//~ });
+	
+	
+	  //$("div.tabla_base table td select").click(function(){
+	  
+	  /**
+		$('#bt_reservar_t').on('click',function(){  
+			
+		$('#bt_reservar')show();
+		$('#confirmar').hide();		
+		$('#bt_reservar_t').hide();
+		$('#here_table2').hide();
+			
+		});	
+	  */
+	  
+	  //~ //Evento de Registrarse
+		//~ $('a#registrarse').on('click',function(){
+			//~ $('li#registrarse_div').hide();
+			//~ $('li#registrarse').hide();
+			//~ $('li#inicio_sesion_div').hide();
+			//~ $('li#inicio_sesion').hide();
+		//~ });
+}
+
+
+
+
+
+
+
+
+
+

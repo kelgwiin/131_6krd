@@ -6,13 +6,16 @@
 			//Cargando la librería para el control de las sesiones
 			$this->load->library('session');
 			$this->load->model('droche_model');
-			
 		}
-
-		public function index()
+		
+		/* @param Boolean $msj_nuevo_usuario Para mostrar o no un mensaje
+		 * que indique que se creo un nuevo usuario
+		 */ 
+		public function index($msj_nuevo_usuario=false)
 		{
 			$data['title'] = "Hotel D'roche";
 			$data['usuario'] = $this->_get_usuario_activo();
+			$data['mostrar_mensaje'] = $msj_nuevo_usuario;
 			
 			$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],$data);
 			$this->load->view('hotel_vw/index');
@@ -21,8 +24,9 @@
 		
 		public function registro_usuario()
 		{
-			$data['title'] = "Hotel D'roche";
+			$data['title'] = "Registro usuario - Hotel D'roche";
 			$data['usuario'] = $this->_get_usuario_activo();
+			$data['mostrar_mensaje'] = false;
 			
 			$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 			 $data);
@@ -30,19 +34,47 @@
 			$this->load->view('hotel_vw/footer');
 		}
 		
-		
+		/* url: Mis reservas
+		 * Muestra las reservas que tiene un usuario
+		 */  
 		public function ver_reservas()
 		{
 			$data['usuario'] = $this->_get_usuario_activo();
 			
 			if($data['usuario']['rol'] == 'estandar' || 
 				$data['usuario']['rol'] == 'admin'){
-				$data['title'] = "Hotel D'roche";
-			
+				$data['title'] = "Ver reservas - Hotel D'roche";
+				$data['mostrar_mensaje'] = false;
+				
 				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				 $data);
 				$this->load->view('hotel_vw/ver_reservas');
 				$this->load->view('hotel_vw/footer');
+			}else{
+				$this->_pag_denegado();
+			}
+		}			
+		
+		/* url: Mis facturas
+		 * Muestra las reservas que tiene un usuario
+		 */  
+		public function ver_facturas()
+		{
+			$data['usuario'] = $this->_get_usuario_activo();
+			
+			if($data['usuario']['rol'] == 'estandar' || 
+				$data['usuario']['rol'] == 'admin'){
+				$data['title'] = "Ver reservas - Hotel D'roche";
+				$data['mostrar_mensaje'] = false;
+				
+				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
+				 $data);
+				 echo "facturas<br>";
+				//~ $this->load->view('hotel_vw/ver_reservas');
+				
+				$this->load->view('hotel_vw/footer');
+			}else{
+				$this->_pag_denegado();
 			}
 		}			
 		
@@ -52,36 +84,107 @@
 			
 			if($data['usuario']['rol'] == 'estandar' || 
 				$data['usuario']['rol'] == 'admin'){
-				$data['title'] = "Hotel D'roche";
-		
+				$data['title'] = "Disponibilidad - Hotel D'roche";
+				$data['mostrar_mensaje'] = false;
+				
 				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				 $data);
+				 
 				$this->load->view('hotel_vw/disponibilidad');
+				
 				$this->load->view('hotel_vw/footer');
+			}else{
+				$this->_pag_denegado();
 			}
 		}	
 		
+		/*Gestión de reservas adminstrador
+		 */ 
+		public function reservas_admin(){
+			$data['usuario'] = $this->_get_usuario_activo();
+			
+			if($data['usuario']['rol'] == 'admin'){
+				$data['title'] = "Gestión reservas - Hotel D'roche";
+				$data['mostrar_mensaje'] = false;
+				
+				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
+				 $data);
+				 echo "reservas admin<br>";
+				//~ $this->load->view('hotel_vw/ver_reservas');
+				
+				$this->load->view('hotel_vw/footer');
+			}else{
+				$this->_pag_denegado();
+			}
+		}
+		
+		/*Listar en una tabla toda la info asociada a una tabla del hotel:
+		 * -Reservas
+		 * -Usuarios
+		 * -Habitaciones
+		 * -Facturas
+		 * -Llamadas
+		 */ 
+		public function reportes($nombre_reporte="reservas"){
+			$data['usuario'] = $this->_get_usuario_activo();
+			
+			if($data['usuario']['rol'] == 'admin'){
+				$data['title'] = "Reporte de ".$nombre_reporte. 
+				" - Hotel D'roche";
+				
+				$data['mostrar_mensaje'] = false;
+				
+				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
+				 $data);
+				 echo "Reportes<br>";
+				//~ $this->load->view('hotel_vw/ver_reservas');
+				
+				$this->load->view('hotel_vw/footer');
+			}else{
+				$this->_pag_denegado();
+			}
+		}
 		public function contactar()
 		{
 			$data['usuario'] = $this->_get_usuario_activo();
 			
 			$data['title'] = "Hotel D'roche";
+			$data['mostrar_mensaje'] = false;
+			
 			$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				$data);
 			$this->load->view('hotel_vw/contactar');
 			$this->load->view('hotel_vw/footer');
 		}		
 		
+		
+		
 		//--------------------------------------------------------------
 		//	Sección de Funciones de Utilidades
 		//--------------------------------------------------------------
 		
+		/*Guarda el registro del usuario que se obtiene de la llamada
+		 * hecha en ajax.
+		 */ 
 		public function guardar_usuario(){
 			$data_insert = array();
 			$data_insert['rol'] = 'estandar';
 			
+			$p = $this->input->post();
+			$p['clave'] = sha1($p['clave']);
+			foreach( $p as $k=>$v){
+				//para que no tome la confirmacion de la clave del formulario
+				if($k != "confirmacion_clave"){
+					$data_insert[$k] = $v;
+				}
+			}
 			
-			printf('{"estatus":"ok"}');
+			//insertando en la BD
+			$r = $this->droche_model->add($data_insert,'usuario');
+			
+			//activando la sesion para el usuario que se acaba de registrar
+			
+			echo '{"estatus":"ok"}';
 		}
 		/*Obtiene el rol y el nombre del usuario de las cookies, cuyo
 		 * dominio es: {estandar,invitado,admin}. En función de ello se
@@ -146,14 +249,18 @@
 				printf('{"usuario":"%s","estatus":"%s","rol":"%s"}',$username,$msj,$rs['rol']);
 			}else{
 				//Vista de acceso denegado
-				$data['title'] = "Hotel D'roche";
-				$this->load->view('hotel_vw/header_plano', $data);
-				$this->load->view('hotel_vw/denegado');
-				$this->load->view('hotel_vw/footer_plano');
+				$this->_pag_denegado();
 			}
 			
 			
 		}//end-of function: iniciar sesión
+		
+		private function _pag_denegado(){
+			$data['title'] = "Hotel D'roche";
+			$this->load->view('hotel_vw/header_plano', $data);
+			$this->load->view('hotel_vw/denegado');
+			$this->load->view('hotel_vw/footer_plano');
+		}
 		
 		public function cerrar_sesion(){
 			$d = $this->session->all_userdata();

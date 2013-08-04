@@ -53,7 +53,7 @@
 <div id="title-sect">
 <h1>daweb_krd<br> Data Dictionay</h1>
 <p>
-<em>2013-07-28</em>
+<em>2013-08-04</em>
 </p>
 <p class="proj-desc">
 <em>Bases de datos del hotel</em>
@@ -67,9 +67,8 @@
 <li><a href='#habitacion'>habitacion</a></li>
 <li><a href='#items_factura'>items_factura</a></li>
 <li><a href='#llamadas_tlfs'>llamadas_tlfs</a></li>
-<li><a href='#modulo_sistema'>modulo_sistema</a></li>
+<li><a href='#mensajes_contactar'>mensajes_contactar</a></li>
 <li><a href='#reserva_ocupa'>reserva_ocupa</a></li>
-<li><a href='#rol'>rol</a></li>
 <li><a href='#usuario'>usuario</a></li>
 </ul>
 <table id='consumible'>
@@ -719,10 +718,9 @@ N: llamada Nacional
 I: llamada Internacional
 </td>
 </tr>
-<table id='modulo_sistema'>
-<caption>modulo_sistema</caption>
-<tr><td colspan='11'>Para la inserción de los módulos del sistema previamente deben haber sido ingresados
-los roles del sistema</td></tr>
+<table id='mensajes_contactar'>
+<caption>mensajes_contactar</caption>
+<tr><td colspan='11'>Donde se guardan los mensajes de la sección de contactar.</td></tr>
 <tr>
     <th>Column name</th>
     <th>DataType</th>
@@ -737,35 +735,21 @@ los roles del sistema</td></tr>
     <th>Comment</th>
 </tr>
 <tr>
-    <td>id_nombre_modulo_sistema</td>
-    <td>VARCHAR(100)</td>
-    <td>&#10004;</td>
-    <td>&#10004;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td class='attr'>&nbsp;</td>
-    <td></td>
-    <td>Identificador único autoincrementable.</td>
-</tr>
-<tr>
-    <td>descripcion</td>
-    <td>VARCHAR(200)</td>
-    <td>&#10004;</td>
-    <td>&#10004;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td class='attr'>&nbsp;</td>
-    <td></td>
-    <td>Nombre del módulo del
-sistema.</td>
-</tr>
-<tr>
-    <td>id_rol</td>
+    <td>id_mensajes_contactar</td>
     <td>INT</td>
+    <td>&#10004;</td>
+    <td>&#10004;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&#10004;</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>nombre</td>
+    <td>VARCHAR(100)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
     <td>&nbsp;</td>
@@ -774,8 +758,46 @@ sistema.</td>
     <td>&nbsp;</td>
     <td class='attr'>&nbsp;</td>
     <td></td>
-    <td>id del rol. Clave foránea 
-en la tabla rol.</td>
+    <td>Nombre de la persona</td>
+</tr>
+<tr>
+    <td>apellido</td>
+    <td>VARCHAR(100)</td>
+    <td>&nbsp;</td>
+    <td>&#10004;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td class='attr'>&nbsp;</td>
+    <td></td>
+    <td>apellido de la persona</td>
+</tr>
+<tr>
+    <td>sitio_web</td>
+    <td>VARCHAR(200)</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td class='attr'>&nbsp;</td>
+    <td></td>
+    <td>sitio web si lo pose.</td>
+</tr>
+<tr>
+    <td>mensaje</td>
+    <td>VARCHAR(1000)</td>
+    <td>&nbsp;</td>
+    <td>&#10004;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td class='attr'>&nbsp;</td>
+    <td></td>
+    <td>cuerpo del mensaje</td>
 </tr>
 <table id='reserva_ocupa'>
 <caption>reserva_ocupa</caption>
@@ -962,55 +984,6 @@ ocurre por falta de
 habitaciones del tipo
 individual.</td>
 </tr>
-<table id='rol'>
-<caption>rol</caption>
-<tr><td colspan='11'>Determinan qué modulos del sistema tendrá acceso un determinado.
-Cabe destacar que un usuario podrá solamente tener un sólor rol asignado</td></tr>
-<tr>
-    <th>Column name</th>
-    <th>DataType</th>
-    <th><abbr title='Primary Key'>PK</abbr></th>
-    <th><abbr title='Not Null'>NN</abbr></th>
-    <th><abbr title='Unique'>UQ</abbr></th>
-    <th><abbr title='Binary'>BIN</abbr></th>
-    <th><abbr title='Unsigned'>UN</abbr></th>
-    <th><abbr title='Zero Fill'>ZF</abbr></th>
-    <th><abbr title='Auto Increment'>AI</abbr></th>
-    <th>Default</th>
-    <th>Comment</th>
-</tr>
-<tr>
-    <td>id_rol</td>
-    <td>INT</td>
-    <td>&#10004;</td>
-    <td>&#10004;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&#10004;</td>
-    <td></td>
-    <td>Identificador único autoincrementable.</td>
-</tr>
-<tr>
-    <td>descripcion</td>
-    <td>ENUM('admin','estandar')</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td class='attr'>&nbsp;</td>
-    <td></td>
-    <td>
-Dominio {admin,estandar}
-admin: Usuario administrador
-
-Estándar:Usuario estándar
-que posee una vista más
-limitada</td>
-</tr>
 <table id='usuario'>
 <caption>usuario</caption>
 <tr><td colspan='11'>La información de la persona será manejada exclusivamente a través del usuario</td></tr>
@@ -1195,8 +1168,8 @@ E: extranjero</td>
 Fiscal del usuario.</td>
 </tr>
 <tr>
-    <td>id_rol</td>
-    <td>INT</td>
+    <td>rol</td>
+    <td>ENUM('estandar','admin')</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
     <td>&nbsp;</td>
@@ -1204,9 +1177,8 @@ Fiscal del usuario.</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td class='attr'>&nbsp;</td>
-    <td>1</td>
-    <td>id del rol que posee. Clave
-foránea en la tabla rol.</td>
+    <td>'estandar'</td>
+    <td>Dominio {admin,estándar}</td>
 </tr>
 </table>
 </body>

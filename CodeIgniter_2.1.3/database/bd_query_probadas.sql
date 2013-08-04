@@ -117,6 +117,8 @@ select datediff('2013-08-02',current_date());
 
 select * from ci_sessions;
 
+select * from usuario;
+
 delete from ci_sessions;
 
 CREATE TABLE IF NOT EXISTS  `ci_sessions` (
