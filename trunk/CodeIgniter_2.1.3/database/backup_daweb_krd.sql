@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-07-2013 a las 22:51:48
+-- Tiempo de generación: 04-08-2013 a las 19:16:21
 -- Versión del servidor: 5.5.31
 -- Versión de PHP: 5.3.10-1ubuntu3.6
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `daweb_krd`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ci_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) NOT NULL DEFAULT '0',
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_activity_idx` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
+('60f78a3fef5a35df600420bf3194f19a', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31', 1375659443, 'a:4:{s:9:"user_data";s:0:"";s:9:"logged_in";b:1;s:8:"username";s:8:"invitado";s:3:"rol";s:8:"invitado";}');
 
 -- --------------------------------------------------------
 
@@ -314,16 +337,17 @@ INSERT INTO `llamadas_tlfs` (`id_llamadas_tlf`, `fecha`, `hora_ini`, `hora_fin`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `modulo_sistema`
+-- Estructura de tabla para la tabla `mensajes_contactar`
 --
 
-CREATE TABLE IF NOT EXISTS `modulo_sistema` (
-  `id_nombre_modulo_sistema` varchar(100) NOT NULL COMMENT 'Identificador único autoincrementable.',
-  `descripcion` varchar(200) NOT NULL COMMENT 'Nombre del módulo del\nsistema.',
-  `id_rol` int(11) NOT NULL COMMENT 'id del rol. Clave foránea \nen la tabla rol.',
-  PRIMARY KEY (`id_nombre_modulo_sistema`,`descripcion`),
-  KEY `fk_modulo_sistema_rol` (`id_rol`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Para la inserción de los módulos del sistema previamente deb';
+CREATE TABLE IF NOT EXISTS `mensajes_contactar` (
+  `id_mensajes_contactar` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL COMMENT 'Nombre de la persona',
+  `apellido` varchar(100) NOT NULL COMMENT 'apellido de la persona',
+  `sitio_web` varchar(200) DEFAULT NULL COMMENT 'sitio web si lo pose.',
+  `mensaje` varchar(1000) NOT NULL COMMENT 'cuerpo del mensaje',
+  PRIMARY KEY (`id_mensajes_contactar`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Donde se guardan los mensajes de la sección de contactar.' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -390,26 +414,6 @@ INSERT INTO `reserva_ocupa` (`id_reserva_ocupa`, `id_habitacion_usr_hab`, `id_us
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rol`
---
-
-CREATE TABLE IF NOT EXISTS `rol` (
-  `id_rol` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador único autoincrementable.',
-  `descripcion` enum('admin','estandar') DEFAULT NULL COMMENT '\nDominio {admin,estandar}\nadmin: Usuario administrador\n\nEstándar:Usuario estándar\nque posee una vista más\nlimitada',
-  PRIMARY KEY (`id_rol`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Determinan qué modulos del sistema tendrá acceso un determin' AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `rol`
---
-
-INSERT INTO `rol` (`id_rol`, `descripcion`) VALUES
-(1, 'admin'),
-(2, 'estandar');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -426,21 +430,40 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `tipo_cuenta` enum('ahorro','corriente') DEFAULT NULL COMMENT 'Tipo de cuenta\n\nDominio{ahorro,corriente}',
   `nacionalidad` enum('V','E') NOT NULL COMMENT 'Domino{V,E}\nV: venezolano\nE: extranjero',
   `rif` varchar(45) NOT NULL COMMENT 'RIF: Registro de Información\nFiscal del usuario.',
-  `id_rol` int(11) NOT NULL DEFAULT '1' COMMENT 'id del rol que posee. Clave\nforánea en la tabla rol.',
-  PRIMARY KEY (`id_usuario`),
-  KEY `fk_usuario_rol` (`id_rol`)
+  `rol` enum('estandar','admin') NOT NULL DEFAULT 'estandar' COMMENT 'Dominio {admin,estándar}',
+  PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='La información de la persona será manejada exclusivamente a ';
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `clave`, `nombre`, `apellido`, `correo`, `sexo`, `cedula`, `fecha_nac`, `num_tarjeta`, `tipo_cuenta`, `nacionalidad`, `rif`, `id_rol`) VALUES
-('baltazar666', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Baltazar', 'Bueno', 'baltazar@gmail.com', 'M', '1000000', '1666-06-06', '422559658215569', 'corriente', 'E', 'E-1000000-9', 1),
-('ktrina', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Ktrina', 'Smith', 'ktrina@gmail.com', 'F', '20888999', '2013-07-24', NULL, NULL, 'V', 'V-20888999-6', 2),
-('paola', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Paola', 'Parra', 'paolapp@gmail.com', 'F', '20888666', '1990-05-22', '525222358345989', 'ahorro', 'V', 'V-20888666-5', 1),
-('rr_gutierrez', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Ramon', 'Gutierrez', 'rgutierrez@gmail.com', 'M', '7500800', '1970-05-16', '525482358345589', 'ahorro', 'V', 'V-7500800-3', 1),
-('sandrab86', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Sandra', 'Baron', 'sandrab86@hotmail.com', 'F', '21255897', '1993-06-18', '425412358389489', 'corriente', 'V', 'V-21255897-6', 1);
+INSERT INTO `usuario` (`id_usuario`, `clave`, `nombre`, `apellido`, `correo`, `sexo`, `cedula`, `fecha_nac`, `num_tarjeta`, `tipo_cuenta`, `nacionalidad`, `rif`, `rol`) VALUES
+('armando_p', '123456', 'Armanda', 'Manzilla', 'aafff@gmail.com', 'M', '324343432', '2013-08-20', '1231321321312312', 'corriente', 'E', 'V-343434-4234', 'estandar'),
+('baltazar666', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Baltazar', 'Bueno', 'baltazar@gmail.com', 'M', '1000000', '1666-06-06', '422559658215569', 'corriente', 'E', 'E-1000000-9', 'estandar'),
+('crismary', '123456', 'Crismary', 'Gamez', 'cirsma@hotmail.com', 'F', '20555889', '2012-09-18', '2343434345455545', 'ahorro', 'V', 'V2552020', 'estandar'),
+('dasdasdsa', '123', 'sdas', 'dsad', 'sddas@asds.csd', 'F', '42333', '2013-08-01', '4234324534543544', 'ahorro', 'V', '342423', 'estandar'),
+('ewqeqwe', 'qw', 'qweqweqweqwe', 'eqweqwe', 'ewqeqwew@fsf.asd', 'F', '2432434', '2013-08-07', '4132434343241433', 'ahorro', 'E', '341233423', 'estandar'),
+('fmdfmk', 'dfdf', 'dfdf', 'ddf', 'fsfd@dfd.com', 'F', '4234334', '2013-08-26', '4324354354545454', 'ahorro', 'V', '342343432', 'estandar'),
+('fsfs', 'sd', 'sdfdf', 'dfsdf', 'fsdfs@gdgdfg.cdsfd', 'F', '423', '2013-08-06', '3434324235435543', 'ahorro', 'V', 'fsdf', 'estandar'),
+('kel', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'kelw', 'gmz', 'kdd@gmail.com', 'M', '20542093', '2013-08-01', '6516165161616182', 'ahorro', 'V', 'V-20542093-9', 'estandar'),
+('ktrina', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Ktrina', 'Smith', 'ktrina@gmail.com', 'F', '20888999', '2013-07-24', NULL, NULL, 'V', 'V-20888999-6', 'admin'),
+('paola', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Paola', 'Parra', 'paolapp@gmail.com', 'F', '20888666', '1990-05-22', '525222358345989', 'ahorro', 'V', 'V-20888666-5', 'estandar'),
+('pedro_perez', '123456', 'Pedro', 'Perez', 'pedro_perz@gmail.com', 'M', '22000111', '2002-12-10', '1258921215212156', 'ahorro', 'V', 'V-22000111-2', 'estandar'),
+('pedro_perez2', '123456', 'Pedro', 'Perez', 'pedro_perz@gmail.com', 'M', '22000111', '2002-12-10', '1258921215212156', 'ahorro', 'V', 'V-22000111-2', 'estandar'),
+('pedro_perez3', '123456', 'Pedro', 'Perez', 'pedro_perz@gmail.com', 'M', '22000111', '2002-12-10', '1258921215212156', 'ahorro', 'V', 'V-22000111-2', 'estandar'),
+('pepe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'ke', 'gm', 'k@dsf.com', 'M', '220031122', '1992-02-02', '5652651651321316', 'ahorro', 'V', 'V23262134', 'estandar'),
+('rerwrer', 'wewe', 'rwerewr', 'rwere', 'rwerwer@sdf.csf', 'F', '423431434', '2013-08-07', '4234223434534255', 'ahorro', 'V', '33f432', 'estandar'),
+('rewr', 'dfdf', 'fsdfs', 'fsdfd', 'sdffds@fdsfd.cafas', 'F', '3443214', '2013-08-20', '2165123134513213', 'ahorro', 'V', 'r3rfedsf', 'estandar'),
+('rewre', '123', 'rwe', 're', 'rewrwe@uff.com', 'F', '4324324334', '2013-08-02', '4354354543543544', 'ahorro', 'V', '42342343', 'estandar'),
+('rr', 'rr', 'rr', 'rr', 'rrr@hot.com', 'F', '544354', '2013-08-14', '5454545454545452', 'corriente', 'V', '54545', 'estandar'),
+('rr_gutierrez', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Ramon', 'Gutierrez', 'rgutierrez@gmail.com', 'M', '7500800', '1970-05-16', '525482358345589', 'ahorro', 'V', 'V-7500800-3', 'estandar'),
+('rwere', 'rwere', 'ewrwer', 'rwer', 'rewrwer@fsdf.com', 'F', '32423324', '2013-08-27', '4324354354545454', 'ahorro', 'V', 'fsr3424', 'estandar'),
+('sandrab86', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Sandra', 'Baron', 'sandrab86@hotmail.com', 'F', '21255897', '1993-06-18', '425412358389489', 'corriente', 'V', 'V-21255897-6', 'estandar'),
+('sd', 'sss', 'sss', 'ss', 'dasds@hotmc.om', 'F', '5165165', '2013-08-01', '4324343434234346', 'ahorro', 'V', 'ss5151', 'estandar'),
+('ssooo', 'si', 'SKSAKD', 'sdjlfdk', 'ssdfsd@dsf.csc', 'F', '3453545', '2013-08-08', '2589658978596222', 'ahorro', 'V', '545345', 'estandar'),
+('usuarioprueba', '123456', 'Usuario', 'Prueba', 'dasd@dasd.fdssdf', 'F', '343243', '2013-08-16', '1222255555555555', 'ahorro', 'E', 'E-232223231-1', 'estandar'),
+('zfdfsdf', 'fff', 'edsff', 'sdfs', 'sdffs@fsf.com', 'F', '423434', '2013-08-13', '5345435453534535', 'ahorro', 'E', '4324234', 'estandar');
 
 --
 -- Restricciones para tablas volcadas
@@ -472,23 +495,11 @@ ALTER TABLE `llamadas_tlfs`
   ADD CONSTRAINT `fk_llamadas_tlfs_reserva_ocupa` FOREIGN KEY (`id_reserva_ocupa`) REFERENCES `reserva_ocupa` (`id_reserva_ocupa`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `modulo_sistema`
---
-ALTER TABLE `modulo_sistema`
-  ADD CONSTRAINT `fk_modulo_sistema_rol` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `reserva_ocupa`
 --
 ALTER TABLE `reserva_ocupa`
   ADD CONSTRAINT `fk_reserva_ocupa_habitacion` FOREIGN KEY (`id_habitacion_usr_hab`) REFERENCES `habitacion` (`id_habitacion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_reserva_ocupa_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_usuario_rol` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

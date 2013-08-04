@@ -61,7 +61,9 @@
 			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
 			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
 			
-			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+			changeYear:true,
+			yearRange:"c-100:c+100"
 		}); 
 		
 		});
@@ -77,7 +79,9 @@
 			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
 			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
 			
-			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+			changeYear:true,
+			yearRange:"c-100:c+100"
 		}); 
 	  });
 	 </script> 			 
@@ -103,6 +107,24 @@
   
   <div class="reveal-modal-bg" style="display: none"></div>
   
+  <!-- Modal de nuevo usuario-->
+<div id="aviso_nuevo_usuario" class="reveal-modal small">
+   <div class = "row">
+		<div class = "large-2 columns ">
+			<img src = "application/views/hotel_vw/config/img/aviso.png" width = "50px">
+		</div>
+		
+		<div class = "large-10 columns ">
+			<p>
+			Usuario creado exitosamente, ahora puede iniciar sesión.
+			</p>
+		</div>
+   </div>
+  
+<a class="close-reveal-modal">&#215;</a>
+
+  
+  
   <script>
     $(document).foundation()
      .foundation('abide', {
@@ -116,7 +138,8 @@
     alpha_numeric : /[a-zA-Z0-9]+/,
     integer: /-?\d+/,
     number: /-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?/,
-
+	
+	
     // generic password: upper-case, lower-case, number/special character, and min 8 characters
 /*
     password_valid : /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,

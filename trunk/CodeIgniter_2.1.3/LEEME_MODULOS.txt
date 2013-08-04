@@ -1,0 +1,86 @@
+
+Corre el scrip de BD para que puedas hacer pruebas sino no podrás
+se llama: "backup_daweb_krd.sql" , con ese script no necesitas tocar nada
+de la bd, ya que contiene la estructura y la data lógica.
+
+
+MODULOS
+
+ADMIN
+	-Reservas => reservas_admin()
+		Dentro de reserva se listan todas las reservas y se muestran las 
+		OPCIONES como botones de:
+			Facturar
+			Cancelar
+			Ocupar
+	-Reportes (reservas, usuarios, habitaciones, facturas, llamadas) =>reportes(tipo)
+
+ESTANDAR
+	-Mis reservas => ver_reservas()
+	-Mis facturar => ver_facturas()
+	
+	-Reservar			--
+							==> disponibilidad()	
+	-Disponibilidad Hab	--
+
+GENERAL
+	- Contactar => contactar()
+
+NOTAS:
+Ya el control de usuarios está listo sólo accenden los que tienen permiso 
+para ello, se hace mediante las cookies.
+
+
+DE LOS HEADERs
+Hay tres headers
+	header_invitado
+	header_admin	
+	header_estandar,
+ellos tres contienen la misma información salvo que como te darán cuenta
+unos tienen display:none, es decir, están ocultos.
+
+De	manera que cualquier modificación que se haga sobre un header se debe hacer
+en los tres respectivamente, para mantener la coherencia del sistema.
+		
+DEL APP.JS
+Este archivo lo que hice fue organizarlo un poco más, metiendo un monton 
+de cosas dentro de funciones y que de esa manera se pudiese navegar más
+fácil por el documento.
+
+DEL REGISTRO USUARIO
+Esta parte está completamente lista validada y todo, guarda el la base
+de datos tambien, sólo se crean usuarios estándares.
+
+DE LOS USUARIOS
+	ktrina,clave:123456  => único usuario administrador que existe
+	baltazar666,clave:123455 => estándar con data coherente.
+	pepe, clave:123 => para pruebas
+
+podrás observar de igual forma que hay un monton de usuarios todos locos
+pero sólo son de pruebas, no le pares a eso.
+
+DE LA BASE DE DATOS
+	backup_daweb_krd.sql: para que hagas pruebas y cargues de la BD
+	ER.png : modelo gráfico
+	diccionario.html
+	droche_model.php : modelo donde están hechas todas las consultas
+
+Recomiendo que instales WorkBench y crees una conexión en SQL DEVELOPMENT.
+Ya que por allí se hará más fácil y rápido que hagas las consultas en dado
+caso tengas que hacer que lo dudo.
+
+Pero sólo es una recomendación
+
+DE LOS ICONOS
+Los consegui la mayoría en esta página: http://findicons.com/ , es muy buena.
+
+DEL CALENDARIO
+Está completamente personalizadoa español y ya puedes modificar lo de los años.
+
+PRUEBAS DE LAS CONSULTAS
+Puedes hacer pruebas en el intervalo ('2013-08-15','2013-08-30') ya
+que allí es donde hay reservas hechas. Si haces en fuera de ese intervalo
+te dará muchas habitaciones disponibles.
+
+		
+		

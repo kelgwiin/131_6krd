@@ -77,11 +77,20 @@
 
 
 <body>
+<!-- Para mostrar msj de usuario nuevo registrado -->
+<?php 
+	if($mostrar_mensaje){
+		echo '<div id = "true" class = "mostrar_nuevo_usuario"></div>';
+	}else{
+		echo '<div id = "false" class = "mostrar_nuevo_usuario"></div>';
+	}
+?>
 
-<!-- Avisos de Foundation -->
+
+<!---------------------------------->
+<!-- AVISOS de Foundation (reveal)-->
+<!---------------------------------->
 <div id="aviso_inicio_sesion" class="reveal-modal small">
-  
-   
   <p>
 	  <img src = "application/views/hotel_vw/config/img/aviso.png" width = "50px">
 	Usted ha iniciado sesión exitosamente.</p>
@@ -95,7 +104,6 @@
   </p>
 <a class="close-reveal-modal">&#215;</a>
 </div>
-
 
 <!-- Barra superior-->
 <div class="contain-to-grid sticky"> 
@@ -121,11 +129,51 @@
 				<!--Home-->
 				<!------------------------->
 				<li class="divider" id = "home_div"></li>
-				<li class="active" id  = "home">
+				<li id  = "home">
 					<a id = "home" href="index.php/hotel/">
 					<img alt = "icono usuario"src="application/views/hotel_vw/config/img/home_w.png" width="30px">
 					Inicio </a>
 				</li>
+				
+				
+				<!---------------------------------->
+				<!-- Disponibilidad Hab. 		  -->
+				<!---------------------------------->
+				<li class="divider" id = "disponibilidad_div" ></li>
+				
+					<li id = "disponibilidad" >
+						<a  id = "disponibilidad" title = "Disponibilidad de habitaciones"><img alt = "disponibilidad de habitaciones"src="application/views/hotel_vw/config/img/reserva.png" width="30px">Disponibilidad de Hab.</a>
+					</li>
+				
+				<!-------------------------------->
+				<!-- Reservas (ADMIN)  (oculta) -->
+				<!-------------------------------->
+				<li class="divider" id = "reservas_admin_div" style = "display:none"></li>
+				
+					<li id = "reservas_admin" style = "display:none">
+						<a id= "reservas_admin" title = "Reservas"><img alt = "Reservas"src="application/views/hotel_vw/config/img/reserva.png" width="30px">Reservas (admin) </a>
+					</li>
+					
+				<!-- ------------------- ---------->
+				<!-- Reservas (ESTANDAR - oculto)-->
+				<!-- ------------------- ---------->
+				<li class="divider" id = "reservas_estandar_div" style="display:none"></li>
+				
+				<li id = "reservas_estandar" class = "has-dropdown" style="display:none">
+					<a >
+						<img alt = "cerrar sesión"
+						src="application/views/hotel_vw/config/img/reserva.png"
+						width="30px">
+						Reservas
+					</a>
+					
+					<ul class = "dropdown">
+						<li><a>Mis reservas</a></li>
+						<li><a>Mis facturas</a></li>
+						<li><a>Reservar</a></li>
+					</ul>
+				</li>
+				
 				<!------------------------->
 				<!-- Registrarse-->
 				<!------------------------->
@@ -136,6 +184,28 @@
 						Registrarse
 					</a>
 				</li>
+				
+				<!-- ------------------- ---------->
+				<!-- Reportes (ADMIN - oculto)-->
+				<!-- ------------------- ---------->
+				<li class="divider" id = "reportes_div" style="display:none"></li>
+				
+				<li id = "reportes" class = "has-dropdown" style="display:none">
+					<a >
+						<img alt = "reportes"
+						src="application/views/hotel_vw/config/img/reserva.png"
+						width="30px">
+						Reportes
+					</a>
+					
+					<ul class = "dropdown">
+						<li><a>Reservas</a></li>
+						<li><a>Usuario</a></li>
+						<li><a>Habitaciones</a></li>
+						<li><a>Llamadas</a></li>
+					</ul>
+				</li>
+				
 				
 				<li class="divider" id = "inicio_sesion_div"></li>
 				
@@ -188,16 +258,7 @@
 					<span id = "nombre_usuario">Nombre usuario</span>
 					</a>
 				</li>
-				
-				<!----------------------------->
-				<!-- Ocupar reservas(oculta) -->
-				<!----------------------------->
-				<li class="divider" id = "ocupar_reservas_div" style = "display:none"></li>
-				
-					<li id = "ocupar_reservas" style = "display:none">
-						<a  id = "ocupar_reservas" title = "Ocupar reservas"><img alt = "cerrar sesión"src="application/views/hotel_vw/config/img/reserva.png" width="30px">Ocupar reservas</a>
-					</li>
-				
+					
 				<!--------------------------->
 				<!-- Cerrar sesión (oculta)-->
 				<!--------------------------->
