@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	
+	
 		//----------------------
 		// DataTable
 		//----------------------
@@ -21,54 +23,36 @@ $(document).ready(function(){
         //------------------
         //Inicio de Sesion
         //------------------
-        $('a#boton_inicio_sesion').on('click',function(){
-			pass = $('input#clave').val();
-			usuario_ = $('input#usuario').val();
+		$('form#fr_inicio_sesion').on('submit',function(event){
+			event.preventDefault();
 			
-			params = {
-				usuario:usuario_,
-				clave: pass
-			};
-			//~ alert("entrooo");
-			//haciendo la llamada ajax
-			$.post("index.php/hotel/ini_sesion",params,
-				function(data){
-					obj = eval("(" + data + ")");//transformando el JSON a un Objeto JS
+			// store reference to the form
+			var $this = $(this);
+			// grab the url from the form element
+			var url = $this.attr('action');
+			
+			// enviando en la data del form
+			var dataToSend = $this.serialize();
+				
+			// the callback function that tells us what the server-side process had to say
+			var callback = function(data){
+					//Ojo la data está formateada en JSON
+					obj = data;
 					
 					if(obj.estatus == "ok"){ // el usuario y contraseña coinciden
-						$('li#registrarse_div').hide();
-						$('li#registrarse').hide();
-						$('li#inicio_sesion_div').hide();
-						$('li#inicio_sesion').hide();
-						
-						
-						$('span#nombre_usuario').text(obj.usuario);
-						$('li#sesion_iniciada').show();
-						$('li#cerrar_sesion_div').show();
-						$('li#cerrar_sesion').show();
-						
-						//cargar opciones especiales de admin
-						if(obj.rol == "admin"){
-							$('li#ocupar_reservas').show();
-							$('li#ocupar_reservas_div').show();
-						}
-						
-						//resetear
-						$('input#usuario').val('');
-						$('input#clave').val('');
-						$('div#error_inicio_sesion').hide();
-						
-						$('#aviso_inicio_sesion').foundation('reveal', 'open');
-						
+						config_inicio_sesion();
 					}else{
-						//~ alert('error');
 						$('div#error_inicio_sesion').show();
 					}
-					
-				}
-			);
-		});       
-        
+			}//end-of funcion de retorno
+			
+			// type of data to receive (in our case we're expecting an HTML snippet)
+			var tipo = 'json';
+			
+			//Haciendo la llamda al post con AJAX
+			$.post( url, dataToSend, callback,tipo);
+
+		});
         
         //----------------------------
         // Cerrar sesión
@@ -88,21 +72,157 @@ $(document).ready(function(){
 					$('li#cerrar_sesion').hide();
 					$('li#ocupar_reservas').hide();
 					$('li#ocupar_reservas_div').hide();
-					
-					
 				
 				$('#aviso_sesion_cerrada').foundation('reveal', 'open');
 			} 
 		);
 		
 		});
-        
-        
-        
-        
-        
-        
-        
+    
+    //Mensajes de Registro
+	$('#fr_registro_usuario')
+		.on('invalid', function () {
+		var invalid_fields = $(this).find('[data-invalid]');
+			alert(invalid_fields);
+			$('small.error').show();
+		});
+	
+	$('#fr_registro_usuario')
+		.on('valid', function () {
+			console.log('valid!');
+			$('small.error').hide();
+		});
+		
+	//Mensaje de error contraseñas no coinciden
+	$("input#confirmacion_clave").on('blur',function(){
+		c1 = $('input#clave_registro').val();
+		c2 = $('input#confirmacion_clave').val();
+
+		if( c1 != c2){
+			$('span#error_claves_distintas').show();
+		}else{
+			$('span#error_claves_distintas').hide();
+		}
+	});	
+	
+	
+	//------------------------------------------------------------------
+	//Existe usuario
+	//------------------------------------------------------------------
+	$('input#usuario_registro').on('blur',function(){
+		u = $('input#usuario_registro').val(); 
+		
+		params = {usuario:u};
+		var f1 = function(data){
+			if(data.existe_usr){
+				$('span#error_usuario_existente').show();
+			}else{
+				$('span#error_usuario_existente').hide();
+			}
+		}
+		$.post('index.php/hotel/existe_usuario',params, f1,'json');
+	});
+	
+	
+	//------------------------------------------------------------------
+	//Guardar usuario
+	//------------------------------------------------------------------
+	$('form#fr_registro_usuario').on('submit',function(event){
+		event.preventDefault();
+		// store reference to the form
+		var bk_this = $(this);
+		
+		// grab the url from the form element
+		var url = bk_this.attr('action');
+			
+		//Obteniendo la data del form
+		var dataToSend = bk_this.serialize();
+		
+		//verificar existencia de usuario y que las claves coincidan
+		var c1 = $('input#clave_registro').val();
+		var c2 = $('input#confirmacion_clave').val();
+		
+		//~ var fecha = $('input#fecha_nac').val();
+		
+		u = $('input#usuario_registro').val(); 
+		
+		params = {usuario:u};
+		var f1 = function(data){
+			if(!data.existe_usr && c1 == c2){
+				
+				//declaracion de función
+				var fo_enviar_data = function(data){
+					obj = data;
+					if(obj.estatus == "ok"){ // el usuario y contraseña coinciden
+						//Redireccionando
+						
+						location.href = 'index.php/hotel/';
+					}else{
+						$('#aviso_error_inesperado').foundation('reveal', 'open');
+					}
+				}//end-of funcion de retorno
+				
+				//Haciendo la llamda al post con AJAX
+				$.post( url, dataToSend, fo_enviar_data,'json');
+				
+			}else{
+				$('#aviso_error_registro').foundation('reveal', 'open');
+			}
+		}
+		$.post('index.php/hotel/existe_usuario',params, f1,'json');
+			
+			
+			
+			
+		});
+		
+		/**Configuraciones para el inicio de sesión formateando y escondiendo
+		 * ciertos elementos
+		 */ 
+		function config_inicio_sesion(){
+			$('li#registrarse_div').hide();
+			$('li#registrarse').hide();
+			$('li#inicio_sesion_div').hide();
+			$('li#inicio_sesion').hide();
+						
+			$('span#nombre_usuario').text(obj.usuario);
+			$('li#sesion_iniciada').show();
+			$('li#cerrar_sesion_div').show();
+			$('li#cerrar_sesion').show();
+						
+			//cargar opciones especiales de admin
+			if(obj.rol == "admin"){
+				$('li#ocupar_reservas').show();
+				$('li#ocupar_reservas_div').show();
+							
+				//Colocando el titulo de admin
+				titulo = $('title').val()  + '(admin)';
+				$('title').val(titulo); 
+			}
+			
+			//resetear
+			$('input#usuario').val('');
+			$('input#clave').val('');
+			$('div#error_inicio_sesion').hide();
+						
+			$('#aviso_inicio_sesion').foundation('reveal', 'open');
+		
+		}
+		//~ //Evento de Registrarse
+		//~ $('a#registrarse').on('click',function(){
+			//~ $('li#registrarse_div').hide();
+			//~ $('li#registrarse').hide();
+			//~ $('li#inicio_sesion_div').hide();
+			//~ $('li#inicio_sesion').hide();
+		//~ });
+		
+		
+		
+		///-----------------------------------------------------
+		
+		
+		//abrir en la misma ventana
+        //~ window.top.location.href = 'miPagina.html'
         
         $("#LogoTeam").animate({
 		height:'128px',

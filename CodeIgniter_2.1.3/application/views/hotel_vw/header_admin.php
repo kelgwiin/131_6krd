@@ -123,7 +123,7 @@
 				<!------------------------->
 				<li class="divider" id = "home_div"></li>
 				<li class="active" id  = "home">
-					<a href="index.php/hotel/">
+					<a id = "home" href="index.php/hotel/">
 					<img alt = "icono usuario"src="application/views/hotel_vw/config/img/home_w.png" width="30px">
 					Inicio </a>
 				</li>
@@ -132,7 +132,7 @@
 				<!------------------------->
 				<li class="divider"  id = "registrarse_div" style = "display:none"></li>
 				<li id = "registrarse" style = "display:none">
-					<a href="index.php/hotel/registro_usuario/">
+					<a id = "registrarse" href="index.php/hotel/registro_usuario/">
 						<img alt = "icono usuario"src="application/views/hotel_vw/config/img/vcard_add.png" width="30px">
 						Registrarse
 					</a>
@@ -140,39 +140,41 @@
 				
 				<li class="divider" id = "inicio_sesion_div"></li>
 				<!------------------------------->
-				<!-- Inicio de Sesión (oculta)--->
+				<!-- Inicio de Sesión --->
 				<!------------------------------->
-					<li id = "inicio_sesion" style = "display:none"><a  data-dropdown="drop2">
-						
-						<img alt = "icono usuario"src="application/views/hotel_vw/config/img/sesion.png" width="30px">
-						Iniciar Sesión
+				<li id = "inicio_sesion" style = "display:none">
+						<a  id = "inicio_sesion" data-dropdown="drop2" >
+						<img alt = "icono usuario"
+						src="application/views/hotel_vw/config/img/sesion.png" width="30px">
+						Iniciar Sesion
 						</a>
 					
 					<ul id="drop2" class="f-dropdown content" data-dropdown-content>
-					<form >
-						<label for="usuario"> <h6> Usuario </h6> </label>
-							<div class="row">
-							<div class="large-12 columns ">
-								<input id="usuario" type="text" placeholder="">
-							</div></div>	
-								
-						  <br>			
-						  <label for="clave"> <h6> Contraseña </h6> </label>
-							<div class="row">
-								<div class="large-12 columns ">
-									<input id="clave" type="password" placeholder="">
-									
-							</div></div>	
-								
-						<div class="row">
+					
+					<form class = "custom" data-abide id = "fr_inicio_sesion"
+					method = "post" action = "index.php/hotel/ini_sesion" >
+					 
+						<div class="input-wrapper">
+							<label for = "usuario"><h6>Usuario </h6></label>
+							<input id = "usuario" name = "usuario" type="text" required>
+							<small class="error">Ingrese el usuario</small>
+						</div>
+						
+						<div class="input-wrapper">
+							<label for = "clave"><h6>Contraseña </h6></label>
+							<input id = "clave" name = "clave" type="password" pattern = "alpha_numeric" required>
+							<small class="error">Ingrese la contraseña</small>
+						</div>		
+						  
+						  
+							<div class="row" align = "center">
 							<div class="large-12 columns" style="text-align:center;">
-								<br> <a  id="boton_inicio_sesion" class="button"> Entrar</a>
-							
+								<button type = "submit" >Entrar</button>
+							</div> </div>
 																
 					</form>
 							<!-- Mensaje de error, inicio sesión-->
 							<div id = "error_inicio_sesion" style = "display:none">
-							<br>
 							<span class="alert label">Clave o usuario incorrecto</span>
 							</div>
 					</ul>
@@ -181,7 +183,7 @@
 				<!-- Sesión Iniciada     -->
 				<!------------------------->
 				<li id = "sesion_iniciada" >
-					<a  data-dropdown="drop3" >
+					<a  id = "sesion_iniciada" data-dropdown="drop3" >
 					<img alt = "icono usuario"src="application/views/hotel_vw/config/img/sesion.png" width="30px">
 					
 					<span id = "nombre_usuario">
@@ -196,7 +198,7 @@
 				<li class="divider" id = "ocupar_reservas_div"></li>
 				
 					<li id = "ocupar_reservas" >
-						<a   title = "Ocupar reservas"><img alt = "cerrar sesión"src="application/views/hotel_vw/config/img/reserva.png" width="30px">Ocupar reservas</a>
+						<a id= "ocupar_reservas" title = "Ocupar reservas"><img alt = "cerrar sesión"src="application/views/hotel_vw/config/img/reserva.png" width="30px">Ocupar reservas</a>
 					</li>
 				
 				<!------------------------->
