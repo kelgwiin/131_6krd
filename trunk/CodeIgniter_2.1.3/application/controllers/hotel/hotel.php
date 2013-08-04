@@ -76,6 +76,13 @@
 		//	Sección de Funciones de Utilidades
 		//--------------------------------------------------------------
 		
+		public function guardar_usuario(){
+			$data_insert = array();
+			$data_insert['rol'] = 'estandar';
+			
+			
+			printf('{"estatus":"ok"}');
+		}
 		/*Obtiene el rol y el nombre del usuario de las cookies, cuyo
 		 * dominio es: {estandar,invitado,admin}. En función de ello se
 		 * mostrarán algunas vistas
@@ -100,6 +107,13 @@
 			return $rs;
 		}
 		
+		/*Verifica la existencia de un usuario. Se llama desde ajax
+		 */ 
+		public function existe_usuario(){
+			$usr = $this->input->post('usuario');
+			$rs = $this->droche_model->usuario_existe($usr);
+			printf('{"existe_usr":"%s"}',$rs['usuario']);
+		}
 		/* Función que permite iniciar sesión. Es llamada mediante AJAX
 		 */
 		public function ini_sesion(){
@@ -131,7 +145,11 @@
 				//esto es envia vía AJAX
 				printf('{"usuario":"%s","estatus":"%s","rol":"%s"}',$username,$msj,$rs['rol']);
 			}else{
-				echo "No tiene acceso a función desde este punto...";
+				//Vista de acceso denegado
+				$data['title'] = "Hotel D'roche";
+				$this->load->view('hotel_vw/header_plano', $data);
+				$this->load->view('hotel_vw/denegado');
+				$this->load->view('hotel_vw/footer_plano');
 			}
 			
 			

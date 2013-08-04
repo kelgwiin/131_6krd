@@ -1,84 +1,15 @@
-	<!-- footer -->
-   <div id="footerr">
-		<div style="color:white;font-size:13px;background-color:#383838;height:220px"> 
-        <br>
-               
-			<div style="margin-left:230px; width:200px;float:left">
-				
-			<h3>¿Quienes Somos?</h3>   
-		    <p> Rodeado del frondoso paisaje de un parque natural,
-			 el Hesperia D'roche, de cinco estrellas, ofrece 
-			 vistas a la resplandeciente arena blanca y al pacífico 
-			 y cristalino mar. A sólo 35 minutos del aeropuerto de Isla Margarita</p>
-			 </div>
-				
-				
-			<div style="margin-left:150px; width:200px;float:left">
-			<h3>¿Nuesta Vision?</h3>
-		    <p> Rodeado del frondoso paisaje de un parque natural,
-			 el Hesperia D'roche, de cinco estrellas, ofrece 
-			 vistas a la resplandeciente arena blanca y al pacífico 
-			 y cristalino mar. A sólo 35 minutos del aeropuerto de Isla Margarita</p>               
-		     </div>
-               
-               
-               
-		    <div style="margin-left:150px; width:200px;float:left">
-			<h3>¿Donde Estamos?</h3>
-			<ul class="vcard" style="font-size:14px">
-			<li class="fn">Salto Angel</li>
-			<li class="street-address">123 Mata verde</li>
-			<li class="locality">Venezuela</li>
-			<li><span class="state">Carabobo/valencia</span> 
-			<li><span class="zip">12345</span></li>
-			<li class="email"><a id = "correo">baltazar@gmail.com</a></li>
-			</ul>              
-		    </div>
-        </div>  
-		<div style="background-color:#181818 ;height:50px">
-			<div class="large-12 columns" style="text-align:center;">	
-							
-	<a   href="index.php/hotel/hotel/"> <img src="application/views/hotel_vw/config/img/twitter.png" style="width:40px;height:40px;" > </a>
-	<a   href="index.php/hotel/hotel/"> <img src="application/views/hotel_vw/config/img/facebook.png" style="margin-left:10px; width:40px;height:40px;" > </a>
-	<a   href="index.php/hotel/contactar/"> <img src="application/views/hotel_vw/config/img/mail.png" style="margin-left:10px;width:50px;height:40px;" > </a>
-							
-			</div>		
-		 <br>
-		 </div>                                 
-	</div>
-  
-  
+
   <!-- Carga de script -->
 
 	<script>
-		
-		
 	  $(function() {
-		
-		$("#datepicker_entrada" ).datepicker({ 
-			dateFormat: "yy-mm-dd" ,
-			dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
-			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
-			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
-			
-			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
-		}); 
-		
-		});
-		
-		
+		$("#datepicker_entrada" ).datepicker();
+	  });
 	 </script> 
 	 
 	<script>
 	  $(function() {
-		$("#datepicker_salida" ).datepicker({ 
-			dateFormat: "yy-mm-dd" ,
-			dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
-			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
-			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
-			
-			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
-		}); 
+		$("#datepicker_salida" ).datepicker();
 	  });
 	 </script> 			 
 			 
@@ -106,12 +37,7 @@
   <script>
     $(document).foundation()
      .foundation('abide', {
-	
-	live_validate : true,
-	focus_on_invalid : true,
-	timeout : 1000,
-	
-	patterns : {
+	  patterns : {
     alpha: /[a-zA-Z]+/,
     alpha_numeric : /[a-zA-Z0-9]+/,
     integer: /-?\d+/,
@@ -147,8 +73,8 @@
     color: /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
     }
   });
+    ;
   </script>
- 
  
   
   </body>

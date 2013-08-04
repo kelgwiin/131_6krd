@@ -33,7 +33,7 @@
 					<h6 style="color:white;" > Fecha de entrada </h6>
 					<div class="row collapse">						
 						<div class="large-8 columns ">
-							<input style="width:160px;" id="datepicker_entrada" type="text" placeholder="MM/DD/AAAA">
+							<input style="width:160px;" id="datepicker_entrada" type="text" placeholder="YYYY-MM-DD">
 						</div>
 					</div><br>
 					
@@ -41,14 +41,14 @@
 					<h6 style="color:white;" > Fecha de salida </h6>
 					<div class="row collapse">						
 						<div class="large-8 columns">					
-							<input style="width:160px;" id="datepicker_salida" type="text" placeholder="MM/DD/AAAA">										 									
+							<input style="width:160px;" id="datepicker_salida" type="text" placeholder="YYYY-MM-DD">										 									
 						</div>
 					</div><br>
 					
 					
 					<div class="row">
 						<div class="large-12 columns" style="text-align:center;">
-							<br> <a href="#" id="botones" class="button"  >
+							<br> <a href="#" id="botones" class="button small radius"  >
 								<img src="application/views/hotel_vw/config/img/buscar.png" width = "30px" >
 								Buscar
 							</a>
