@@ -7,7 +7,7 @@
 
 			<h3>Habitaciones Disponibles</h3><hr>
 			
-			<form style="margin-left:50px">
+			<form class = "custom" data-abide style="margin-left:50px">
 		 
 				<div class="row collapse">
 					<div class="small-3 large-1 columns">
@@ -53,6 +53,7 @@
 			</form> <hr><br>
 			
 			<form> 
+			
 			<div class="tabla_base" style="margin:auto;width:800px;" >
                <table >
 					<tr name = "pp">

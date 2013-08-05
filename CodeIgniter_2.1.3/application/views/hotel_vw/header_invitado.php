@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/examples/examples_support/themes/smoothness/jquery-ui-1.8.4.custom.css">
   <link rel="stylesheet" href="application/views/hotel_vw/config/DataTables-1.9.4/media/css/jquery.dataTables_themeroller.css">
   
+  
+  
   <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
   <link rel="stylesheet" href="application/views/hotel_vw/config/css/normalize.css" />
   <link rel="stylesheet" href="application/views/hotel_vw/config/css/config_f_krd.css" />
@@ -142,7 +144,9 @@
 				<li class="divider" id = "disponibilidad_div" ></li>
 				
 					<li id = "disponibilidad" >
-						<a  id = "disponibilidad" title = "Disponibilidad de habitaciones"><img alt = "disponibilidad de habitaciones"src="application/views/hotel_vw/config/img/casas.png" width="30px">Disponibilidad de Hab.</a>
+						<a  id = "disponibilidad" title = "Disponibilidad de habitaciones"
+						href = "index.php/hotel/disponibilidad"
+						><img alt = "disponibilidad de habitaciones"src="application/views/hotel_vw/config/img/casas.png" width="30px">Disponibilidad de Hab.</a>
 					</li>
 				
 				<!-------------------------------->

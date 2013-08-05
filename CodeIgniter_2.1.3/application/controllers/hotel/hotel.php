@@ -22,6 +22,7 @@
 			$this->load->view('hotel_vw/footer');	
 		}
 		
+		
 		public function registro_usuario()
 		{
 			$data['title'] = "Registro usuario - Hotel D'roche";
@@ -45,10 +46,13 @@
 				$data['usuario']['rol'] == 'admin'){
 				$data['title'] = "Ver reservas - Hotel D'roche";
 				$data['mostrar_mensaje'] = false;
+				$data['fecha_ini'] = $fecha_ini;
+				$data['fecha_fin'] = $fecha_fin;
+				
 				
 				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				 $data);
-				$this->load->view('hotel_vw/ver_reservas');
+				$this->load->view('hotel_vw/ver_reservas',$data);
 				$this->load->view('hotel_vw/footer');
 			}else{
 				$this->_pag_denegado();
@@ -66,6 +70,7 @@
 				$data['usuario']['rol'] == 'admin'){
 				$data['title'] = "Ver reservas - Hotel D'roche";
 				$data['mostrar_mensaje'] = false;
+				$data['nombre_usuario'] = $data['usuario']['username'];
 				
 				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				 $data);
@@ -78,7 +83,7 @@
 			}
 		}			
 		
-		public function disponibilidad()
+		public function disponibilidad($fecha_ini=null, $fecha_fin=null)
 		{
 			$data['usuario'] = $this->_get_usuario_activo();
 			
@@ -86,6 +91,8 @@
 				$data['usuario']['rol'] == 'admin'){
 				$data['title'] = "Disponibilidad - Hotel D'roche";
 				$data['mostrar_mensaje'] = false;
+				$data['fecha_ini'] = $fecha_ini;
+				$data['fecha_fin'] = $fecha_fin;
 				
 				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				 $data);

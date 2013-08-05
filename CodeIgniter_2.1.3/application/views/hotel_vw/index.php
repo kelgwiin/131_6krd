@@ -83,7 +83,8 @@
 			  de 50 metros cuadrados, que ofrece una cama King o 2 camas individuales, 2 sofás 
 			  individuales y un escritorio. Disfruta la brisa de la isla mientras ves la TV vía satélite. 
 			  Las comodidades incluyen botellas de agua mineral de cortesía y mucho más.</li>
-			  <li class="cta-button"><a id="botones" class="button" href="#">Reservar</a></li>
+			  <li class="cta-button"><a id="boton_reservar" class="button" 
+			  href="index.php/hotel/disponibilidad">Reservar</a></li>
 			</ul>
 		</div>
     
@@ -97,7 +98,8 @@
 			  dormitorio y área de estar independientes, con elegante decoración. Elige entre una cama 
 			  King en la Suite Presidencial o dos dormitorios con una cama King y dos camas individuales 
 			  en la Suite Royal, y disfruta de comodidades como minibar. </li>
-			  <li class="cta-button"><a id="botones"  class="button" href="#">Reservar</a></li>
+			  <li class="cta-button"><a id="boton_reservar" class="button" 
+			  href="index.php/hotel/disponibilidad">Reservar</a></li>
 			</ul>
 		</div>
     
@@ -111,7 +113,8 @@
 			  huéspedes un área de estar elegantemente decorada y dos dormitorios independientes. Disfruta 
 			  de un minibar, botellas de agua mineral de cortesía y TV vía satélite.  Las comodidades también
 			   incluyen un lujoso baño, caja fuerte y mucho más</li>
-			  <li class="cta-button"><a id="botones" class="button" href="#">Reservar</a></li>
+			  <li class="cta-button"><a id="boton_reservar" class="button" 
+			  href="index.php/hotel/disponibilidad">Reservar</a></li>
 			</ul>
 		</div>
    </div>
