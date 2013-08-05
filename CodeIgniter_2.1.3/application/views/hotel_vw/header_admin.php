@@ -67,7 +67,7 @@
 	<script src="application/views/hotel_vw/config/js/app.js" type="text/javascript"></script>
 	
   <link rel="icon"   type="image/x-icon"  
-	href="application/views/hotel_vw/config/img/favicon.ico" /> 
+	href="application/views/hotel_vw/config/img/corona_.ico" /> 
   
   
   	<title>
@@ -145,7 +145,7 @@
 				<li class="divider" id = "disponibilidad_div"></li>
 				
 					<li id = "disponibilidad">
-						<a  id = "disponibilidad" title = "Disponibilidad de habitaciones"><img alt = "disponibilidad de habitaciones"src="application/views/hotel_vw/config/img/reserva.png" width="30px">Disponibilidad de Hab.</a>
+						<a  id = "disponibilidad" title = "Disponibilidad de habitaciones"><img alt = "disponibilidad de habitaciones"src="application/views/hotel_vw/config/img/casas.png" width="30px">Disponibilidad de Hab.</a>
 					</li>
 				
 				<!------------------------->
@@ -196,7 +196,7 @@
 				<li id = "reportes" class = "has-dropdown" >
 					<a >
 						<img alt = "reportes"
-						src="application/views/hotel_vw/config/img/reserva.png"
+						src="application/views/hotel_vw/config/img/reportes.png"
 						width="30px">
 						Reportes
 					</a>
