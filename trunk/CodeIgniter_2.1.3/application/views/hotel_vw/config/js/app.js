@@ -79,7 +79,7 @@ function tabla(){
 		//----------------------
 		// DataTable
 		//----------------------
-       var oTable = $('#tb_rsv').dataTable({
+       var oTable = $('#tb_rsv,#tb_disponibilidad').dataTable({
              "bJQueryUI": true,
              "sPaginationType": "full_numbers",
              "oLanguage": {
@@ -90,9 +90,11 @@ function tabla(){
          $(window).bind('resize', function () {
 			oTable.fnAdjustColumnSizing();
 		} );
-        $('#tb_rsv tr').click(function() {
+        $('#tb_rsv tr,#tb_disponibilidad tr').click(function() {
             $(this).toggleClass('row_selected');
         } );
+        
+        
 }
 
 function inicio_sesion(){

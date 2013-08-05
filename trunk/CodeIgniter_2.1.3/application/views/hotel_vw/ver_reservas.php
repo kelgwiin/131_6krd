@@ -1,11 +1,13 @@
-
+<!--
 <style type="text/css" title="currentStyle">
 			@import "application/views/hotel_vw/config/DataTables-1.9.4/examples//examples_support/themes/smoothness/jquery-ui-1.8.4.custom.css";
-		</style>
+			
+			@impor "application/views/hotel_vw/config/css/tabla_round.css";
+		</style>-->
 
 <div class="row" style="margin:auto;" align = "center">
 		
-	<div class="large-12 columns">
+	<div class="large-12 columns" >
             <!--Inicio de TABs -->
             
             <!--Fin de TABs -->

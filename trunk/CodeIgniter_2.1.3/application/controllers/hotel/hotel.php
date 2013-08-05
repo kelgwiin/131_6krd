@@ -46,9 +46,7 @@
 				$data['usuario']['rol'] == 'admin'){
 				$data['title'] = "Ver reservas - Hotel D'roche";
 				$data['mostrar_mensaje'] = false;
-				$data['fecha_ini'] = $fecha_ini;
-				$data['fecha_fin'] = $fecha_fin;
-				
+					
 				
 				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				 $data);
@@ -87,22 +85,23 @@
 		{
 			$data['usuario'] = $this->_get_usuario_activo();
 			
-			if($data['usuario']['rol'] == 'estandar' || 
-				$data['usuario']['rol'] == 'admin'){
-				$data['title'] = "Disponibilidad - Hotel D'roche";
-				$data['mostrar_mensaje'] = false;
-				$data['fecha_ini'] = $fecha_ini;
-				$data['fecha_fin'] = $fecha_fin;
+			$data['title'] = "Disponibilidad - Hotel D'roche";
+			$data['mostrar_mensaje'] = false;
 				
-				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
-				 $data);
-				 
-				$this->load->view('hotel_vw/disponibilidad');
-				
-				$this->load->view('hotel_vw/footer');
-			}else{
-				$this->_pag_denegado();
+			//cuando la data viene del post sino vendría por ajax
+			if($fecha_ini == null || $fecha_fin !== null){
+				$fecha_ini = $this->input->post('fecha_ini');
+				$fecha_fin = $this->input->post('fecha_fin');
 			}
+			
+			$data['tabla'] = $this->droche_model->rsv_disponibilidad($fecha_ini, $fecha_fin);
+			
+			$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
+				 $data);
+			
+			$this->load->view('hotel_vw/disponibilidad',$data);
+				
+			$this->load->view('hotel_vw/footer');
 		}	
 		
 		/*Gestión de reservas adminstrador
