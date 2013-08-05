@@ -148,7 +148,9 @@
 				<li class="divider" id = "disponibilidad_div"></li>
 				
 					<li id = "disponibilidad">
-						<a  id = "disponibilidad" title = "Disponibilidad de habitaciones"><img alt = "disponibilidad de habitaciones"src="application/views/hotel_vw/config/img/casas.png" width="30px">Disponibilidad de Hab.</a>
+						<a  id = "disponibilidad" title = "Disponibilidad de habitaciones"
+						href = "index.php/hotel/disponibilidad"
+						><img alt = "disponibilidad de habitaciones"src="application/views/hotel_vw/config/img/casas.png" width="30px">Disponibilidad de Hab.</a>
 					</li>
 				
 				<!-------------------------------->

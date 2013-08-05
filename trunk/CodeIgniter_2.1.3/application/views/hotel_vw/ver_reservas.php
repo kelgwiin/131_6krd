@@ -1,11 +1,23 @@
 
-<div class="row" style="margin:auto;">
+<style type="text/css" title="currentStyle">
+			@import "application/views/hotel_vw/config/DataTables-1.9.4/examples//examples_support/themes/smoothness/jquery-ui-1.8.4.custom.css";
+		</style>
+
+<div class="row" style="margin:auto;" align = "center">
+		
 	<div class="large-12 columns">
             <!--Inicio de TABs -->
             
             <!--Fin de TABs -->
-            <h3>Reservas</h3>
-            <table id ="tb_rsv" cellpadding="0" cellspacing="0" border="0" class="display">
+            <h3 align = "left">Reservas</h3>
+            <?php 
+            echo '
+            <table id ="tb_rsv" cellpadding="0" cellspacing="0" border="0" class="display"> ' ;
+            
+            //~ echo '<table id = "tabla_rsv" class = "table_round"  width = "100%" >';
+            ?>
+            
+            
                 <thead>
                     <tr>
                         <th>#</th>
@@ -67,7 +79,8 @@
                 
             </table>
             
-        </div> 
+    </div> 
+    
 </div>
 
 
