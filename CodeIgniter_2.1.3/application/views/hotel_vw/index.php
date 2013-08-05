@@ -29,11 +29,12 @@
 		<div class="large-3 columns" >
 			<div class="panel radius" style="width:240px; height:450px; background-color:#383838; border-color:gray; border-width:1px; ">
 				<h4 style="color:white; text-align:center;">Habitaciones Disponibles</h4><br>
-				  <form>
+				  <form action = "index.php/hotel/disponibilidad" method = "post"
+				  data-abide class = "custom">
 					<h6 style="color:white;" > Fecha de entrada </h6>
 					<div class="row collapse">						
 						<div class="large-8 columns ">
-							<input style="width:160px;" id="datepicker_entrada" type="text" placeholder="YYYY-MM-DD">
+							<input name = "fecha_ini" style="width:160px;" id="datepicker_entrada" type="text" placeholder="YYYY-MM-DD">
 						</div>
 					</div><br>
 					
@@ -41,17 +42,17 @@
 					<h6 style="color:white;" > Fecha de salida </h6>
 					<div class="row collapse">						
 						<div class="large-8 columns">					
-							<input style="width:160px;" id="datepicker_salida" type="text" placeholder="YYYY-MM-DD">										 									
+							<input name = "fecha_fin" style="width:160px;" id="datepicker_salida" type="text" placeholder="YYYY-MM-DD">										 									
 						</div>
 					</div><br>
 					
 					
 					<div class="row">
 						<div class="large-12 columns" style="text-align:center;">
-							<br> <a href="#" id="botones" class="button small radius"  >
+							<br> <button href="index.php/hotel/disponibilidad" id="boton_buscar" class="button small radius"  >
 								<img src="application/views/hotel_vw/config/img/buscar.png" width = "30px" >
 								Buscar
-							</a>
+							</button>
 						</div>
 					</div>
 					

@@ -237,37 +237,37 @@ class Droche_model extends CI_Model {
         $num_1 = $this->rsv_num_habitaciones('N', 1) -
                 $this->rsv_num_habitaciones_ocupadas('N',1,
                         $fecha_ini, $fecha_fin);
-        $filas[] = Array('check-off','Normal','Individual',$num_1);
+        $filas[] = Array('check','Normal','Individual',$num_1);
         
        //normal/doble
         $num_2 = $this->rsv_num_habitaciones('N', 2) -
                 $this->rsv_num_habitaciones_ocupadas('N',2,
                          $fecha_ini, $fecha_fin);
-        $filas[] = Array('check-off','Normal','Doble',$num_2);
+        $filas[] = Array('check','Normal','Doble',$num_2);
        
         //Business/Individual
         $num_3 = $this->rsv_num_habitaciones('B', 1) -
                 $this->rsv_num_habitaciones_ocupadas('B',1,
                          $fecha_ini, $fecha_fin);
-        $filas[] = Array('check-off','Business','Individual',$num_3);
+        $filas[] = Array('check','Business','Individual',$num_3);
         
         //Business/Doble
         $num_4 = $this->rsv_num_habitaciones('B', 2) -
                 $this->rsv_num_habitaciones_ocupadas('B',2,
                          $fecha_ini, $fecha_fin);
-        $filas[] = Array('check-off','Business','Doble',$num_4);
+        $filas[] = Array('check','Business','Doble',$num_4);
         
         //Alta/Individual
         $num_5 = $this->rsv_num_habitaciones('A', 1) -
                 $this->rsv_num_habitaciones_ocupadas( 'A',1,
                          $fecha_ini, $fecha_fin);
-        $filas[] = Array('check-off','Alta','Individual',$num_5);
+        $filas[] = Array('check','Alta','Individual',$num_5);
         
         //Alta/Individual
         $num_6 = $this->rsv_num_habitaciones('A', 2) -
                 $this->rsv_num_habitaciones_ocupadas( 'A',2,
                          $fecha_ini, $fecha_fin);
-        $filas[] = Array('check-off','Alta','Doble',$num_6);
+        $filas[] = Array('check','Alta','Doble',$num_6);
         
         $data['filas'] = $filas;
         return $data;
