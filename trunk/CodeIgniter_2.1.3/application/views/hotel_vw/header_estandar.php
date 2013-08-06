@@ -169,7 +169,7 @@
 				
 				<li id = "reservas_estandar" class = "has-dropdown">
 					<a >
-						<img alt = "cerrar sesión"
+						<img alt = "reserva estándar"
 						src="application/views/hotel_vw/config/img/reserva.png"
 						width="30px">
 						Reservas
@@ -178,7 +178,7 @@
 					<ul class = "dropdown">
 						<li><a>Mis reservas</a></li>
 						<li><a>Mis facturas</a></li>
-						<li><a>Reservar</a></li>
+						<li><a href = "index.php/hotel/disponibilidad">Reservar</a></li>
 					</ul>
 				</li>
 				

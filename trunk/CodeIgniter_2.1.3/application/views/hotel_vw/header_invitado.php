@@ -174,7 +174,7 @@
 					<ul class = "dropdown">
 						<li><a>Mis reservas</a></li>
 						<li><a>Mis facturas</a></li>
-						<li><a>Reservar</a></li>
+						<li><a href = "index.php/hotel/disponibilidad">Reservar</a></li>
 					</ul>
 				</li>
 				

@@ -68,7 +68,7 @@
 				$data['usuario']['rol'] == 'admin'){
 				$data['title'] = "Ver reservas - Hotel D'roche";
 				$data['mostrar_mensaje'] = false;
-				$data['nombre_usuario'] = $data['usuario']['username'];
+				$data['nombre_usuario'] = $data['usuario']['nombre'];
 				
 				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				 $data);
@@ -81,7 +81,7 @@
 			}
 		}			
 		
-		public function disponibilidad($fecha_ini=null, $fecha_fin=null)
+		public function disponibilidad()
 		{
 			$data['usuario'] = $this->_get_usuario_activo();
 			
@@ -89,12 +89,19 @@
 			$data['mostrar_mensaje'] = false;
 				
 			//cuando la data viene del post sino vendría por ajax
-			if($fecha_ini == null || $fecha_fin !== null){
-				$fecha_ini = $this->input->post('fecha_ini');
-				$fecha_fin = $this->input->post('fecha_fin');
+			$fecha_ini = $this->input->post('fecha_ini');
+			$fecha_fin = $this->input->post('fecha_fin');
+			
+			if($fecha_ini !== false && $fecha_fin != false){
+				$data['hay_datos'] = true;
+			}else{
+				$data['hay_datos'] = false;
 			}
 			
+			//se procesa sin validar si hay algo o no en fechas para obtener cabeceras
 			$data['tabla'] = $this->droche_model->rsv_disponibilidad($fecha_ini, $fecha_fin);
+			
+			$data['nombre_usuario'] = $data['usuario']['nombre'];
 			
 			$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				 $data);
@@ -104,6 +111,31 @@
 			$this->load->view('hotel_vw/footer');
 		}	
 		
+		public function disponibilidad_ajax(){
+		 
+			$p = $this->input->post();
+			
+			$num_hab_disponibles = $this->droche_model->
+			rsv_num_habitaciones($p['categoria'], $p['tipo']) 
+			-
+			$this->droche_model->rsv_num_habitaciones_ocupadas($p['categoria'],
+			$p['tipo'], $p['fecha_ini'], $p['fecha_fin']);
+            
+            echo $num_hab_disponibles;
+		 }
+		 
+		 public function disponibilidad_todos_ajax(){
+			$p = $this->input->post();
+			$rs  = $this->droche_model->rsv_disponibilidad($p['fecha_ini'],
+			$p['fecha_fin']);
+			
+			//formateando en json
+			for($i = 0; $i < count($rs['filas']); $i++){
+				$rs['filas'][$i][0] = '<input type = "checkbox">';
+			}
+			$info = json_encode($rs['filas']);
+			echo $info;
+		 }
 		/*Gestión de reservas adminstrador
 		 */ 
 		public function reservas_admin(){

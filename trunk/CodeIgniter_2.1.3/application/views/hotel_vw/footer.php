@@ -50,42 +50,7 @@
   
   <!-- Carga de script -->
 
-	<script>
-		
-		
-	  $(function() {
-		
-		$("#datepicker_entrada" ).datepicker({ 
-			dateFormat: "yy-mm-dd" ,
-			dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
-			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
-			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
-			
-			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
-			changeYear:true,
-			yearRange:"c-100:c+100"
-		}); 
-		
-		});
-		
-		
-	 </script> 
-	 
-	<script>
-	  $(function() {
-		$("#datepicker_salida" ).datepicker({ 
-			dateFormat: "yy-mm-dd" ,
-			dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
-			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
-			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
-			
-			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
-			changeYear:true,
-			yearRange:"c-100:c+100"
-		}); 
-	  });
-	 </script> 			 
-			 
+	
   
   <script src="application/views/hotel_vw/config/js/vendor/custom.modernizr.js"></script>
   <script src="application/views/hotel_vw/config/js/foundation.min.js"></script>
@@ -120,8 +85,33 @@
 			</p>
 		</div>
    </div>
-  
+ 
 <a class="close-reveal-modal">&#215;</a>
+
+</div>
+
+<!-- Aviso emergente de Completar Reserva-->
+<div id="completar_reserva" class="reveal-modal small">
+	<div>
+		<div class = "large-12 columns">
+		<h3 id = "titulo_habitaciones"></h3>
+		<div name = "tipo"></div>
+		<div name = "categoria"></div>
+		
+		<p>Escoja el número de camas infantiles</p>
+		
+		<form class = "custom" data-abide>
+			<input type = "text">
+			
+			<a class = "button secondary radius"title = "Completar reserva y salir" id = "completar_reserva">Completar reserva</a>
+			<br>
+			<br>
+			<button>Cancelar</button>
+		</form>
+  </div>
+<a class="close-reveal-modal">&#215;</a>
+</div>
+
 
   
   
