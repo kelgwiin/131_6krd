@@ -107,7 +107,6 @@
 <a class="close-reveal-modal">&#215;</a>
 </div>
 
-
 <!-- Barra superior-->
 <div class="contain-to-grid sticky"> 
 	<nav class = "top-bar">   
@@ -175,7 +174,7 @@
 					<ul class = "dropdown">
 						<li><a>Mis reservas</a></li>
 						<li><a>Mis facturas</a></li>
-						<li><a>Reservar</a></li>
+						<li><a href = "index.php/hotel/disponibilidad">Reservar</a></li>
 					</ul>
 				</li>
 				

@@ -1,3 +1,5 @@
+
+calendarios();
 //Principal
 _main();
 
@@ -5,22 +7,30 @@ function _main(){
 	$(document).ready(function(){
 		msj_creacion_nuevo_usr();
 	
-		tabla();
-		
 		inicio_sesion();
         
 		cerrar_sesion();
+		
+		existe_usr();
+		
+		tabla();
     
 		msj_registro_usr();
 		
 		msj_error_claves();
 	
-		existe_usr();
-	
 		validacion_tarjeta();
 	
 		guardar_usuario();
 	
+		filtrar_disponibilidad();
+		
+		disponibilidad_todos();
+		
+		boton_hacer_reservar();
+		
+		boton_completar_reserva();
+		
 		//pendiente viejo sin desarrollar mucho
 		boton_reservar();
 		
@@ -28,6 +38,120 @@ function _main(){
 	
 }//end-of-function: main
 
+function boton_completar_reserva(){
+	$('a#completar_reserva').on('click',function(){
+		$('#completar_reserva').foundation('reveal', 'close');
+	});
+}
+
+function boton_hacer_reservar(){
+	$('a#boton_hacer_reservar').on('click', function(){
+		 
+		checkboxs = $("div table.display  td > :checked") ;
+		longitud = checkboxs.length;
+		
+		var categoria, tipo, num_habitaciones ;
+		  
+		if(longitud == 1 && /**confirm('¿Está seguro que desea reservar la siguientes habitaciones ?')**/ true ){
+			checkboxs.each(		
+				function(){
+					cb = $(this);
+					categoria = cb.parent().parent().find('td:eq(1)').text();
+					tipo = cb.parent().parent().find('td:eq(2)').text() ;
+					num_habitaciones = cb.parent().parent().find('td:eq(3)').text();
+				}
+			);
+			
+			
+			$('div[name="tipo"]').val(tipo);
+			$('div[name="categoria"]').val(categoria);
+			$('div[name="num_habitaciones"]').val(num_habitaciones);
+			
+			//abrir la ventana emergente
+			$('#completar_reserva').foundation('reveal', 'open');
+			
+		}else{
+			if(longitud > 1){
+				alert('Debe selecionar sólo un tipo de habitación');
+			}else{
+				alert('Debe selecionar un tipo de habitación');
+			}
+		}
+	});
+}
+
+function disponibilidad_todos(){
+	$('input#todos_disp').on('change',function(e){
+		cb = e.currentTarget;
+		
+		if(cb.checked){
+			$('select#tipo, select#categoria').attr('disabled','disabled');
+		}else{
+			$('select#tipo, select#categoria').removeAttr('disabled');
+		}
+	});
+}
+function filtrar_disponibilidad(){
+	$('a#boton_filtrar_disponibilidad').on('click',function(){
+
+		fecha_ini_ = $('input[name="fecha_ini"]').val();
+		fecha_fin_ = $('input[name="fecha_fin"]').val();
+		categoria_ = $('select#categoria').val();
+		categoria_name = $('select#categoria option').attr('id');
+		tipo_ = $('select#tipo').val();
+		tipo_name = $('select#tipo option').attr('id');
+		
+		if(fecha_ini_.length > 0 && fecha_fin_.length > 0){
+			$('span#error_ingresa_fechas').hide();
+			
+			//Limpiando la tabla
+			objTabla = $('#tb_disponibilidad').dataTable();
+			objTabla.fnClearTable();	
+			
+			//verificando si es todo o filtrado
+			if($('input#todos_disp').is(':checked') ){//todos
+				p = {
+					fecha_ini:fecha_ini_,
+					fecha_fin:fecha_fin_
+				};
+				
+				var ftodos = function(tabla_info){
+					objTabla.fnAddData(tabla_info);
+				} 
+				
+				$.post('index.php/hotel/disponibilidad_todos_ajax',
+				p,ftodos,'json');
+				
+			}else{//filtrado
+					params = {
+						fecha_ini:fecha_ini_,
+						fecha_fin:fecha_fin_,
+						categoria:categoria_,
+						tipo:tipo_
+					};
+					
+					//función para pasar al post
+					var fdispo = function(cant_hab_disp){
+						//actualizando la tabla
+						data_tabla = [
+							'<input type = "checkbox">',
+							categoria_name,
+							tipo_name,
+							cant_hab_disp
+						];
+						objTabla.fnAddData(data_tabla);
+					}
+			
+					//llamada ajax
+					$.post('index.php/hotel/disponibilidad_ajax',params,fdispo);
+				
+			}//end-of if
+			
+		}else{
+			$('span#error_ingresa_fechas').show();
+		}
+	});
+}
 
 
 /**Configuraciones para el inicio de sesión formateando y escondiendo
@@ -44,6 +168,7 @@ function config_inicio_sesion(obj){
 			$('li#cerrar_sesion_div').show();
 			$('li#cerrar_sesion').show();
 			
+			$('a#boton_hacer_reservar').show();
 						
 			//cargar opciones especiales de admin
 			if(obj.rol == "admin"){
@@ -90,11 +215,21 @@ function tabla(){
          $(window).bind('resize', function () {
 			oTable.fnAdjustColumnSizing();
 		} );
-        $('#tb_rsv tr,#tb_disponibilidad tr').click(function() {
+		
+        $('#tb_rsv tr').click(function() {
             $(this).toggleClass('row_selected');
         } );
         
+        $('#tb_disponibilidad tr').click(function() {
+            $(this).toggleClass('row_selected');
+        } );
         
+        //resaltando agregando la clase css hightlighted
+        oTable.$('td').hover( function() {
+			oTable.$('tr').addClass( 'highlighted' );
+		}, function() {
+			oTable.$('td.highlighted').removeClass('highlighted');
+		} );
 }
 
 function inicio_sesion(){
@@ -158,6 +293,8 @@ function cerrar_sesion(){
 					$('li#reservas_admin_div').hide();
 					$('li#reportes_div').hide();
 					$('li#reportes').hide();
+					
+					$('a#boton_hacer_reservar').hide();
 				
 				$('#aviso_sesion_cerrada').foundation('reveal', 'open');
 			} 
@@ -421,7 +558,80 @@ function _notas_viejas(){
 		//~ });
 }
 
+function calendarios(){
+		
+		
+	  $(function() {
+		
+		$("#datepicker_entrada" ).datepicker({ 
+			dateFormat: "yy-mm-dd" ,
+			dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
+			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			
+			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+			changeYear:true,
+			yearRange:"c-100:c+100"
+		}); 
+		
+		});
+		
+		
+	 
+	  $(function() {
+		$("#datepicker_salida" ).datepicker({ 
+			dateFormat: "yy-mm-dd" ,
+			dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
+			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			
+			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+			changeYear:true,
+			yearRange:"c-100:c+100"
+		}); 
+	  });
+	 
+	  $(function() {
+		$("#datepicker_registro").datepicker({ 
+			dateFormat: "yy-mm-dd" ,
+			dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
+			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			
+			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+			changeYear:true,
+			yearRange:"c-100:c+100"
+		}); 
+	  });
+	 
+	  $(function() {
+		$("#datepicker_disp_ini" ).datepicker({ 
+			dateFormat: "yy-mm-dd" ,
+			dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
+			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			
+			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+			changeYear:true,
+			yearRange:"c-100:c+100"
+		}); 
+	  });
+	 		 
+	  $(function() {
+		$("#datepicker_disp_sal" ).datepicker({ 
+			dateFormat: "yy-mm-dd" ,
+			dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
+			dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			dayNamesShort:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+			
+			monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+			changeYear:true,
+			yearRange:"c-100:c+100"
+		}); 
+	  });
+			 
 
+}
 
 
 

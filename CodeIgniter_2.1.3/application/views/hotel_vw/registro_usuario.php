@@ -18,7 +18,6 @@
 
 </div>
 
-
 <div class="row" style="margin:auto;">
 	<div class="large-12 columns" style="text-align:center;">	
 		<div class="panel radius" style=" background-color:white;">	
@@ -146,7 +145,7 @@
 					<div class = "large-3 columns">
 						<label for = "fecha_nac">Fecha de Nacimiento
 						 <small>Requerido</small></label>
-						<input name = "fecha_nac" id="datepicker_entrada" 
+						<input name = "fecha_nac" id = "datepicker_registro" 
 						type="text" placeholder="YYYY-MM-DD" required >
 						
 						<small class = "error" data-error-message style="display:none">
