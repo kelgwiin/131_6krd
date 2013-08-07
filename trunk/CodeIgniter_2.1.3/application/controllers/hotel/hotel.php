@@ -94,6 +94,8 @@
 			
 			if($fecha_ini !== false && $fecha_fin != false){
 				$data['hay_datos'] = true;
+				$data['fecha_ini'] = $fecha_ini;
+				$data['fecha_fin'] = $fecha_fin;
 			}else{
 				$data['hay_datos'] = false;
 			}
