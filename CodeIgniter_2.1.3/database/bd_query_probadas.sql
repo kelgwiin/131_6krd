@@ -23,7 +23,7 @@ and fecha_fin;
 select * from reserva_ocupa;
    
     delete from reserva_ocupa
-    where id_reserva_ocupa > 0;
+    where id_reserva_ocupa = 56;
 
 -- Habitaciones agrupadas por categoría y tipo
 select categoria, tipo, count(*)
@@ -120,6 +120,8 @@ select * from ci_sessions;
 select * from usuario;
 
 delete from ci_sessions;
+
+select * from reserva_ocupa where id_usuario = 'baltazar666';
 
 CREATE TABLE IF NOT EXISTS  `ci_sessions` (
 	session_id varchar(40) DEFAULT '0' NOT NULL,

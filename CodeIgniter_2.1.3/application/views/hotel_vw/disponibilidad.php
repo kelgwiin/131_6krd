@@ -76,7 +76,7 @@ table.display tr.odd.row_selected td {
 							<select  name = "categoria" id = "categoria" >
 								<option value = "B" id = "Business">Business</option>
 								<option value = "N" id = "Normal">Normal</option>
-								<option value = "A" id "Alta">Alta</option>
+								<option value = "A" id = "Alta">Alta</option>
 							</select>
 						</div>
 					</div>
@@ -101,7 +101,7 @@ table.display tr.odd.row_selected td {
 				<div class = "row">
 					<div class = "large-2 columns">
 						<label for="todos_disp">
-							<input type="checkbox" id="todos_disp" >
+							<input checked = "on" type="checkbox" id="todos_disp" >
 							<span class="custom checkbox"></span> Todos
 						</label>
 					</div>

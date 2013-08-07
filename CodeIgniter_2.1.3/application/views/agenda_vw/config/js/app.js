@@ -173,7 +173,6 @@ function isNumber(num){
 	}else{
 		return false;
 	}
-	
 }
 
 function isValidEmail(email){
