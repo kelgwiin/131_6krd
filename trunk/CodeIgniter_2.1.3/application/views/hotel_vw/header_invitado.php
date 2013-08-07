@@ -172,7 +172,7 @@
 					</a>
 					
 					<ul class = "dropdown">
-						<li><a>Mis reservas</a></li>
+						<li><a href= "index.php/hotel/mis_reservas">Mis reservas</a></li>
 						<li><a>Mis facturas</a></li>
 						<li><a href = "index.php/hotel/disponibilidad">Reservar</a></li>
 					</ul>
@@ -259,7 +259,7 @@
 				<li id = "sesion_iniciada" style = "display:none">
 					<a  id = "sesion_iniciada" data-dropdown="drop3" >
 					<img id = "sesion_iniciada" alt = "icono usuario"src="application/views/hotel_vw/config/img/sesion.png" width="30px">
-					<span id = "nombre_usuario">Nombre usuario</span>
+					<span id = "nombre_usuario" value="ninguno">Nombre usuario</span>
 					</a>
 				</li>
 					

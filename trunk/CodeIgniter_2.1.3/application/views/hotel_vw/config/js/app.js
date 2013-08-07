@@ -31,6 +31,12 @@ function _main(){
 		
 		boton_completar_reserva();
 		
+		boton_no_completar_reserva();
+		
+		cerrar_msj_hab();
+		
+		boton_cancelar_reserva();
+		
 		//pendiente viejo sin desarrollar mucho
 		boton_reservar();
 		
@@ -38,24 +44,140 @@ function _main(){
 	
 }//end-of-function: main
 
+function boton_cancelar_reserva(){
+	$('a#boton_cancelar_reserva').on('click',function(){
+		checkboxs = $("div table.display  td > :checked") ;
+		longitud = checkboxs.length;
+		
+		var id_, celda_estatus ;
+		
+		
+		if(longitud == 1){
+			//confirmacion
+			if(confirm('¿Está seguro que desea cancelar la reserva?') ){
+			checkboxs.each(		
+				function(){
+					cb = $(this);
+					fila = cb.parent().parent();
+					id_ = fila.find('td:eq(1)').text();
+					celda_estatus = fila.find('td:eq(9)');
+				}
+			);
+			
+			if(celda_estatus.text() != 'cancelada'){
+			
+				//llamada ajax
+				$.post('index.php/hotel/cancelar_reserva_ajax',{id:id_},function(resp){
+					if(resp == 'ok'){
+						//cambiando el estaus de la fila
+						celda_estatus.html('cancelada');
+						
+						$('p#msj_hab').
+						html('Reserva cancelada');
+						$('#mensaje_habitaciones').foundation('reveal', 'open');
+					}else{
+						alert('Error inesperado');
+					}
+				});
+			}else{
+				$('p#msj_hab').
+				html('La reserva ya fue cancelada');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}
+			
+		  }//end-of if: confirmación
+		}else{
+			
+			if(longitud > 1){
+				$('p#msj_hab').
+				html('Debe selecionar sólo una reseva');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}else{
+				$('p#msj_hab').
+				html('Debe selecionar una reserva');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}
+		}
+		
+	});
+
+}
+
 function boton_completar_reserva(){
 	$('a#completar_reserva').on('click',function(){
+		//armando los parámetros para ingresarlos en la BD
+		
+		usr = $('span#nombre_usuario').attr('value');
+		num_camas = $('select#num_camas_infantiles').val();
+		fecha_ini_ = $('input[name="fecha_ini"]').val();
+		fecha_fin_ = $('input[name="fecha_fin"]').val();
+		c = $('div[name="categoria"]').attr('value');
+		t = $('div[name="tipo"]').attr('value');
+		
+		//Para almacenar en la BD
+		params = {
+			id_usuario:usr,
+			num_camas_infantiles:num_camas,
+			fecha_ini:fecha_ini_,
+			fecha_fin:fecha_fin_,
+			categoria_habitacion:c,
+			tipo_habitacion:t
+		};
+		
+		
+		//~ alert('.'+usr + '. '+ num_camas + ' ' + fecha_ini_ + ' ' +fecha_fin_
+		//~ +' '+c + ' ' +t);
+		
+		//haciendo la llamada ajax al servidor
+		$.post('index.php/hotel/reservar_ajax',params, function(resp){
+			
+			if(resp == 'ok'){
+				//actualizar la fila gráfica
+				index_fila = $('div[name="index_fila"]').attr('value');
+			
+				//disminuyendo la cantidad de habitaciones	
+				fila_sel = $('div table.display  tbody tr:eq('+index_fila+')');
+				celda = fila_sel.find('td:eq(3)');
+				val_celda = parseInt(celda.text());
+				celda.html(val_celda-1);
+				
+				alert('Reserva creada');
+				//cerrando la ventana de num de habitaciones
+				$('#completar_reserva').foundation('reveal', 'close');
+			}else{
+				alert('error inesperado del servidor');
+			}
+		});
+	});
+}
+
+function boton_no_completar_reserva(){
+	$('a#no_completar_reserva').on('click',function(){
 		$('#completar_reserva').foundation('reveal', 'close');
 	});
 }
 
+function cerrar_msj_hab(){
+	$('a#cerrar_msj_hab').on('click',function(){ 
+		$('#mensaje_habitaciones').foundation('reveal', 'close');
+	});
+}
 function boton_hacer_reservar(){
 	$('a#boton_hacer_reservar').on('click', function(){
 		 
 		checkboxs = $("div table.display  td > :checked") ;
 		longitud = checkboxs.length;
 		
-		var categoria, tipo, num_habitaciones ;
+		var categoria, tipo, num_habitaciones, index_fila ;
 		  
-		if(longitud == 1 && /**confirm('¿Está seguro que desea reservar la siguientes habitaciones ?')**/ true ){
+		if(longitud == 1 ){
 			checkboxs.each(		
 				function(){
 					cb = $(this);
+					index_fila = cb.parent().parent().index();
 					categoria = cb.parent().parent().find('td:eq(1)').text();
 					tipo = cb.parent().parent().find('td:eq(2)').text() ;
 					num_habitaciones = cb.parent().parent().find('td:eq(3)').text();
@@ -63,18 +185,55 @@ function boton_hacer_reservar(){
 			);
 			
 			
-			$('div[name="tipo"]').val(tipo);
-			$('div[name="categoria"]').val(categoria);
-			$('div[name="num_habitaciones"]').val(num_habitaciones);
+			if(num_habitaciones != 0){// validando la cantidad de habitaciones
+				
+				switch (categoria)
+				{
+					case 'Normal':
+						cat_val = 'N';
+						break;
+					case 'Business':
+						cat_val = 'B';
+						break;
+					case 'Alta':
+						cat_val = 'A';
+						break;
+				}
+				
+				if(tipo == "Individual"){
+					tipo_val = 1;
+				}else{
+					tipo_val = 2;
+				}
 			
-			//abrir la ventana emergente
-			$('#completar_reserva').foundation('reveal', 'open');
+				$('div [name="tipo"]').attr('value',tipo_val);
+				$('div [name="categoria"]').attr('value',cat_val);
+				$('div [name="index_fila"]').attr('value',index_fila);
+			
+				$('h5#titulo_habitaciones').html('Habitación '+ categoria + ' - ' +tipo);
+			
+				//abrir la ventana emergente
+				$('#completar_reserva').foundation('reveal', 'open');
+			}else{
+				$('p#msj_hab').
+				html('No hay habitaciones disponibles, no se puede reservar ');
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+				//~ alert('No hay habitaciones disponibles, no se puede reservar ');
+			}
 			
 		}else{
 			if(longitud > 1){
-				alert('Debe selecionar sólo un tipo de habitación');
+				$('p#msj_hab').
+				html('Debe selecionar sólo un tipo de habitación');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+				//~ alert('Debe selecionar sólo un tipo de habitación');
 			}else{
-				alert('Debe selecionar un tipo de habitación');
+				$('p#msj_hab').
+				html('Debe selecionar un tipo de habitación');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+				//~ alert('Debe selecionar un tipo de habitación');
 			}
 		}
 	});
@@ -97,9 +256,10 @@ function filtrar_disponibilidad(){
 		fecha_ini_ = $('input[name="fecha_ini"]').val();
 		fecha_fin_ = $('input[name="fecha_fin"]').val();
 		categoria_ = $('select#categoria').val();
-		categoria_name = $('select#categoria option').attr('id');
+		categoria_name = $('select#categoria option:selected').attr('id');
 		tipo_ = $('select#tipo').val();
-		tipo_name = $('select#tipo option').attr('id');
+		tipo_name = $('select#tipo option:selected').attr('id');
+		
 		
 		if(fecha_ini_.length > 0 && fecha_fin_.length > 0){
 			$('span#error_ingresa_fechas').hide();
@@ -164,6 +324,8 @@ function config_inicio_sesion(obj){
 			$('li#inicio_sesion').hide();
 						
 			$('span#nombre_usuario').text(obj.usuario);
+			$('span#nombre_usuario').attr('value',obj.usuario);
+			
 			$('li#sesion_iniciada').show();
 			$('li#cerrar_sesion_div').show();
 			$('li#cerrar_sesion').show();
@@ -204,12 +366,15 @@ function tabla(){
 		//----------------------
 		// DataTable
 		//----------------------
-       var oTable = $('#tb_rsv,#tb_disponibilidad').dataTable({
-             "bJQueryUI": true,
+       var oTable = $('#tb_rsv,#tb_disponibilidad,#tb_mis_reservas').dataTable({
+             "bJQueryUI": false,
              "sPaginationType": "full_numbers",
              "oLanguage": {
                 "sUrl": "application/views/hotel_vw/config/DataTables-1.9.4/languages/datatable.es.txt"
-            }
+            },
+             "sScrollX": "100%",
+			"sScrollXInner": "110%",
+			"bScrollCollapse": true
         });
         //Cuando cambia de tamaño
          $(window).bind('resize', function () {
@@ -629,11 +794,15 @@ function calendarios(){
 			yearRange:"c-100:c+100"
 		}); 
 	  });
-			 
-
 }
 
-
+function isNumber(num){
+	if(/^([0-9])*$/.test(num) ){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 
 

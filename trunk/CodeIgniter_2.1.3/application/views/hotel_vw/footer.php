@@ -90,25 +90,58 @@
 
 </div>
 
-<!-- Aviso emergente de Completar Reserva-->
+  <!-- Mensajes Habitaciones -->
+<div id="mensaje_habitaciones" class="reveal-modal small">
+   <div class = "row">
+		<div class = "large-10 columns ">
+			<p id = "msj_hab"></p>
+			<a class = "button radius small secondary" id = "cerrar_msj_hab">Ok</a>
+		</div>
+   </div>
+<a class="close-reveal-modal">&#215;</a>
+</div>
+
+<!-- Aviso emergente de Completar Reserva y llenado de camas infantiles-->
 <div id="completar_reserva" class="reveal-modal small">
-	<div>
+	<div class = "row">
 		<div class = "large-12 columns">
-		<h3 id = "titulo_habitaciones"></h3>
-		<div name = "tipo"></div>
-		<div name = "categoria"></div>
+			<h5 id = "titulo_habitaciones"></h3>
 		
-		<p>Escoja el número de camas infantiles</p>
-		
-		<form class = "custom" data-abide>
-			<input type = "text">
+			<!-- Desde jquery se le colocará el valor al attr value-->
+			<div name = "tipo" value = ""></div>
+			<div name = "categoria" value = ""></div>
+			<div  name = "index_fila" value = ""></div>
+
+			<br>
+			<label for = "num_camas_infantiles">Números de camas extras infantiles </label>	
+		</div>
+	</div>
+	
+	
+	
+	<div class = "row">
+		<div class = "large-3 columns">
+			<form class = "custom" data-abide>
+				<select name = "num_camas_infantiles" id = "num_camas_infantiles">
+					<option value = "0">0</option>
+					<option value = "1">1</option>
+					<option value = "2">2</option>
+					<option value = "3">3</option>
+				</select>
+			</form>
+		</div>
+	</div>
+	
 			
-			<a class = "button secondary radius"title = "Completar reserva y salir" id = "completar_reserva">Completar reserva</a>
 			<br>
-			<br>
-			<button>Cancelar</button>
-		</form>
-  </div>
+			<a class = "button radius small secondary" id = "no_completar_reserva">Cancelar</a>
+				&nbsp;&nbsp;&nbsp;
+			<a class = "button radius small success" id = "completar_reserva">Completar reserva </a>
+	
+	
+	
+	
+  
 <a class="close-reveal-modal">&#215;</a>
 </div>
 

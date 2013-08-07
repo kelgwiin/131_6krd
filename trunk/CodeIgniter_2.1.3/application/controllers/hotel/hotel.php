@@ -136,6 +136,74 @@
 			$info = json_encode($rs['filas']);
 			echo $info;
 		 }
+		 
+		 /* Permite Guardar un registro en la tabla de reservas.
+		  * Es llamada a través de ajax 
+		  */
+		 public function reservar_ajax(){
+			$data['usuario'] = $this->_get_usuario_activo();
+			
+			if($data['usuario']['rol'] == 'admin' ||
+				$data['usuario']['rol'] == 'estandar'){
+				
+				$p = $this->input->post();
+				
+				if($this->droche_model->add($p,'reserva_ocupa') ){
+					echo 'ok';
+				}else{
+					echo 'no';
+				}
+				
+			}else{
+				$this->_pag_denegado();
+			}
+		 }
+		 
+		 public function mis_reservas(){
+			 $data['usuario'] = $this->_get_usuario_activo();
+			 
+			if($data['usuario']['rol'] == 'admin' ||
+				$data['usuario']['rol'] == 'estandar'){
+				
+				$data['title'] = "Mis reservas - Hotel D'roche";
+				$data['mostrar_mensaje'] = false;
+				
+				$info = $this->droche_model->
+				rsv_por_usuario($data['usuario']['nombre']);
+				
+				$data['tabla'] = $info;
+				
+				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
+				 $data);
+				 
+				$this->load->view('hotel_vw/mis_reservas',$data);
+				
+				$this->load->view('hotel_vw/footer');
+				
+			}else{
+				$this->_pag_denegado();
+			}
+		 }
+		 
+		 public function cancelar_reserva_ajax(){
+			$data['usuario'] = $this->_get_usuario_activo();
+			 
+			if($data['usuario']['rol'] == 'admin' ||
+				$data['usuario']['rol'] == 'estandar'){
+				
+				$p = $this->input->post();
+				$clave = array('id_reserva_ocupa' =>$p['id']);
+				$info = array('estatus_reserva' => 'cancelada');
+				
+				if($this->droche_model->update('reserva_ocupa',$clave,$info)){
+					echo 'ok';
+				}else{
+					echo 'no';
+				}
+			}else{
+				$this->_pag_denegado();
+			}
+		 }
 		/*Gestión de reservas adminstrador
 		 */ 
 		public function reservas_admin(){
