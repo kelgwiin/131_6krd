@@ -48,7 +48,15 @@ table.display tr.odd.row_selected td {
 						</div>
 						
 						<div class = "large-6 columns">
-							<input  name = "fecha_ini" id="datepicker_disp_ini" type="text" placeholder="YYYY-MM-DD">
+							<input  name = "fecha_ini" id="datepicker_disp_ini" type="text"
+								<?php 
+									if($hay_datos){
+										printf('value = "%s"',$fecha_ini);
+									}else{
+										echo 'placeholder="YYYY-MM-DD"';
+									}
+								?>
+							 ><!-- fin de input-->
 						</div>
 					</div>
 				</div>
@@ -61,7 +69,15 @@ table.display tr.odd.row_selected td {
 						</div>
 						<div class = "large-6 columns">
 							<input  name = "fecha_fin" 
-							id="datepicker_disp_sal" type="text" placeholder="YYYY-MM-DD">
+							id="datepicker_disp_sal" type="text" 
+								<?php 
+									if($hay_datos){
+										printf('value = "%s"',$fecha_fin);
+									}else{
+										echo 'placeholder ="YYYY-MM-DD"';
+									}
+								?>
+							><!-- fin de input-->
 						</div>
 					</div>
 				</div>
