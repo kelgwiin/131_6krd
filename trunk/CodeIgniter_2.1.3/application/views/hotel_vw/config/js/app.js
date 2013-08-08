@@ -1007,9 +1007,3 @@ function isNumber(num){
 		return false;
 	}
 }
-
-
-
-
-
-
