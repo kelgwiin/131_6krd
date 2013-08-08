@@ -64,7 +64,7 @@
 			
    				<div class="row">
 				<div class="large-12 columns" style="margin-top:15px; text-align:center;">
-					<br> <a href="#" id="" class="button"  >Enviar Mensaje</a>
+					<br> <a href="index.php/hotel/hotel/" id="" class="button"  >Enviar Mensaje</a>
 				</div>         
 				</div>			
 			
