@@ -37,18 +37,214 @@ function _main(){
 		
 		boton_cancelar_reserva();
 		
+		boton_ocupar_reserva();
+		
+		boton_cerrar_reserva();
+		
+		boton_ver_factura();
+		
 		//pendiente viejo sin desarrollar mucho
-		boton_reservar();
+		//~ boton_reservar();
 		
 	}); //End-of: Funcion ready
 	
 }//end-of-function: main
 
+function boton_ver_factura(){
+	$('a#boton_ver_factura').on('click',function(){
+		checkboxs = $("div table.display  td > :checked") ;
+		longitud = checkboxs.length;
+		
+		var id_, celda_estatus ;
+		
+		
+		if(longitud == 1){
+			
+			checkboxs.each(		
+				function(){
+					cb = $(this);
+					fila = cb.parent().parent();
+					id_ = fila.find('td:eq(1)').text();
+					celda_estatus = fila.find('td:eq(9)');
+				}
+			);
+			
+			if(celda_estatus.text() == 'cerrada' || 
+			celda_estatus.text() == 'cancelada'){
+				
+				//abriendo una nueva ventana
+				open('index.php/hotel/ver_facturas/'+id_);
+				
+			}else{
+				$('p#msj_hab').
+				html('La reserva no ha sido cerrada o cancelada');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}
+			
+		}else{
+			
+			if(longitud > 1){
+				$('p#msj_hab').
+				html('Debe selecionar sólo una reseva');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}else{
+				$('p#msj_hab').
+				html('Debe selecionar una reserva');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}
+		}
+		
+	});
+
+}
+
+function boton_cerrar_reserva(){
+	$('a#boton_cerrar_reserva').on('click',function(){
+		checkboxs = $("div table.display  td > :checked") ;
+		longitud = checkboxs.length;
+		
+		var id_, celda_estatus ;
+		
+		
+		if(longitud == 1){
+			//confirmacion
+			if(confirm('¿Está seguro que desea cerrar la reserva?') ){
+			checkboxs.each(		
+				function(){
+					cb = $(this);
+					fila = cb.parent().parent();
+					id_ = fila.find('td:eq(1)').text();
+					categoria_ = fila.find('td:eq(7)').text();
+					tipo_ = fila.find('td:eq(8)').text();
+					celda_estatus = fila.find('td:eq(9)');
+				}
+			);
+			
+			if(celda_estatus.text() != 'cerrada' &&
+			celda_estatus.text() == 'ocupada'){
+				
+				params = {
+					id:id_,
+					categoria_hab:categoria_,
+					tipo_hab:tipo_
+				}
+				//llamada ajax
+				$.post('index.php/hotel/cerrar_reserva_ajax',params,function(data){
+					
+					//cambiando el estatus de la fila
+					celda_estatus.html('cerrada');
+					
+					$('p#msj_hab').
+					html('Reserva cerrada, ya puede ver factura');
+					$('#mensaje_habitaciones').foundation('reveal', 'open');
+				
+				});
+			}else{
+				$('p#msj_hab').
+				html('La reserva ya fue cerrada o no está ocupada');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}
+			
+		  }//end-of if: confirmación
+		}else{
+			
+			if(longitud > 1){
+				$('p#msj_hab').
+				html('Debe selecionar sólo una reseva');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}else{
+				$('p#msj_hab').
+				html('Debe selecionar una reserva');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}
+		}
+		
+	});
+
+}
+
+function boton_ocupar_reserva(){
+	$('a#boton_ocupar_reserva').on('click',function(){
+		checkboxs = $("div table.display  td > :checked") ;
+		longitud = checkboxs.length;
+		
+		var id_, celda_estatus ;
+		
+		
+		if(longitud == 1){
+			//confirmacion
+			if(confirm('¿Está seguro que desea ocupar la reserva?') ){
+			checkboxs.each(		
+				function(){
+					cb = $(this);
+					fila = cb.parent().parent();
+					id_ = fila.find('td:eq(1)').text();
+					categoria_ = fila.find('td:eq(7)').text();
+					tipo_ = fila.find('td:eq(8)').text();
+					celda_estatus = fila.find('td:eq(9)');
+					celda_id_hab = fila.find('td:eq(2)');
+				}
+			);
+			
+			if(celda_estatus.text() != 'ocupada' &&
+			celda_estatus.text() == 'activa'){
+				
+				params = {
+					id:id_,
+					categoria_hab:categoria_,
+					tipo_hab:tipo_
+				}
+				//llamada ajax
+				$.post('index.php/hotel/ocupar_reserva_ajax',params,function(id_hab){
+					
+					//cambiando el estatus de la fila
+					celda_estatus.html('ocupada');
+					
+					//asignando el número de habitación
+					celda_id_hab.html(id_hab);
+					
+					$('p#msj_hab').
+					html('Reserva ocupada');
+					$('#mensaje_habitaciones').foundation('reveal', 'open');
+				
+				});
+			}else{
+				$('p#msj_hab').
+				html('La reserva ya fue ocupada o no está activa');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}
+			
+		  }//end-of if: confirmación
+		}else{
+			
+			if(longitud > 1){
+				$('p#msj_hab').
+				html('Debe selecionar sólo una reseva');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}else{
+				$('p#msj_hab').
+				html('Debe selecionar una reserva');
+				
+				$('#mensaje_habitaciones').foundation('reveal', 'open');
+			}
+		}
+		
+	});
+
+}
 function boton_cancelar_reserva(){
 	$('a#boton_cancelar_reserva').on('click',function(){
 		checkboxs = $("div table.display  td > :checked") ;
 		longitud = checkboxs.length;
-		
+
 		var id_, celda_estatus ;
 		
 		
@@ -64,11 +260,12 @@ function boton_cancelar_reserva(){
 				}
 			);
 			
-			if(celda_estatus.text() != 'cancelada'){
-			
+			if(celda_estatus.text() != 'cancelada' && 
+			celda_estatus.text() == 'activa'){
+				
 				//llamada ajax
 				$.post('index.php/hotel/cancelar_reserva_ajax',{id:id_},function(resp){
-					if(resp == 'ok'){
+					if(resp.estatus == 'ok'){
 						//cambiando el estaus de la fila
 						celda_estatus.html('cancelada');
 						
@@ -78,10 +275,10 @@ function boton_cancelar_reserva(){
 					}else{
 						alert('Error inesperado');
 					}
-				});
+				},'json');
 			}else{
 				$('p#msj_hab').
-				html('La reserva ya fue cancelada');
+				html('La reserva ya fue cancelada o no está activa');
 				
 				$('#mensaje_habitaciones').foundation('reveal', 'open');
 			}
@@ -366,7 +563,7 @@ function tabla(){
 		//----------------------
 		// DataTable
 		//----------------------
-       var oTable = $('#tb_rsv,#tb_disponibilidad,#tb_mis_reservas').dataTable({
+       var oTable = $('#tb_rsv,#tb_disponibilidad,#tb_mis_reservas, #tb_reservas_reservas_admin').dataTable({
              "bJQueryUI": false,
              "sPaginationType": "full_numbers",
              "oLanguage": {
@@ -461,7 +658,10 @@ function cerrar_sesion(){
 					
 					$('a#boton_hacer_reservar').hide();
 				
-				$('#aviso_sesion_cerrada').foundation('reveal', 'open');
+				//se deberían de quitar los hides de arriba pero me da flojera
+				//~ $('#aviso_sesion_cerrada').foundation('reveal', 'open');
+				//redirigiendo a inicio
+				$(location).attr('href','index.php/hotel/');
 			} 
 		);
 		

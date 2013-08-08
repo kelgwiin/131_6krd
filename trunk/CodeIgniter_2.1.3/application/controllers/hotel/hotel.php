@@ -41,17 +41,23 @@
 		public function ver_reservas()
 		{
 			$data['usuario'] = $this->_get_usuario_activo();
-			
-			if($data['usuario']['rol'] == 'estandar' || 
-				$data['usuario']['rol'] == 'admin'){
-				$data['title'] = "Ver reservas - Hotel D'roche";
+			 
+			if($data['usuario']['rol'] == 'admin'){
+				
+				$data['title'] = "Reservas (admin) - Hotel D'roche";
 				$data['mostrar_mensaje'] = false;
-					
+				
+				$info = $this->droche_model->all('reserva_ocupa');
+				
+				$data['tabla'] = $info;
 				
 				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
 				 $data);
+				 
 				$this->load->view('hotel_vw/ver_reservas',$data);
+				
 				$this->load->view('hotel_vw/footer');
+				
 			}else{
 				$this->_pag_denegado();
 			}
@@ -60,22 +66,27 @@
 		/* url: Mis facturas
 		 * Muestra las reservas que tiene un usuario
 		 */  
-		public function ver_facturas()
+		public function ver_facturas($id_rsv=1)
 		{
 			$data['usuario'] = $this->_get_usuario_activo();
 			
 			if($data['usuario']['rol'] == 'estandar' || 
 				$data['usuario']['rol'] == 'admin'){
-				$data['title'] = "Ver reservas - Hotel D'roche";
+				$data['title'] = "Factura - Hotel D'roche";
 				$data['mostrar_mensaje'] = false;
 				$data['nombre_usuario'] = $data['usuario']['nombre'];
 				
-				$this->load->view('hotel_vw/header_'.$data['usuario']['rol'],
-				 $data);
-				 echo "facturas<br>";
-				//~ $this->load->view('hotel_vw/ver_reservas');
+				//obteniendo el id del usuario dado el id de la reserva
+				$id_usr = $this->droche_model->get_id_usuario($id_rsv);
 				
-				$this->load->view('hotel_vw/footer');
+				// obteniendo la factura
+				$factura = $this->droche_model->get_factura($id_usr);
+				$data['f'] = $factura;
+				
+				//carga de las vistas
+				$this->load->view('hotel_vw/header_plano',$data);
+				$this->load->view('hotel_vw/factura', $data);
+				$this->load->view('hotel_vw/footer_plano');
 			}else{
 				$this->_pag_denegado();
 			}
@@ -197,11 +208,56 @@
 				$clave = array('id_reserva_ocupa' =>$p['id']);
 				$info = array('estatus_reserva' => 'cancelada');
 				
-				if($this->droche_model->update('reserva_ocupa',$clave,$info)){
-					echo 'ok';
+				$id_usr = $this->droche_model->get_id_usuario($p['id']);
+				
+				//generando la factura por cancelacion
+				$this->droche_model->facturar($id_usr, array(array($p['id'],
+				'cancelacion')) );//*
+				
+				
+				if($this->droche_model->update('reserva_ocupa',$clave,$info)){//*
+					printf('{"estatus":"ok", "usr":"%s"}',$id_usr);
 				}else{
-					echo 'no';
+					echo '{"estatus":"no"}';
 				}
+			}else{
+				$this->_pag_denegado();
+			}
+		 }
+		 
+		 public function cerrar_reserva_ajax(){
+			$data['usuario'] = $this->_get_usuario_activo();
+			 
+			if($data['usuario']['rol'] == 'admin' ){
+				
+				$p = $this->input->post();//obteniendo data del post
+				
+				//obteniendo id usuario
+				$id_usr = $this->droche_model->get_id_usuario($p['id']);
+				
+				//generando la factura por cierre
+				$this->droche_model->facturar($id_usr, array(array($p['id'],
+				'cierre')) );
+				
+				echo 'ok';
+			}else{
+				$this->_pag_denegado();
+			}
+		 }
+		 
+		 public function ocupar_reserva_ajax(){
+			$data['usuario'] = $this->_get_usuario_activo();
+			 
+			if($data['usuario']['rol'] == 'admin'){
+				
+				$p = $this->input->post();
+				
+				//ocupando la habitacion
+				$id_habitacion = $this->droche_model->rsv_ocupar($p['id'],
+				$p['categoria_hab'], $p['tipo_hab'] );
+				
+				$id_usr = $this->droche_model->get_id_usuario($p['id']);
+				printf('%s',$id_habitacion); // enviando id a la página
 			}else{
 				$this->_pag_denegado();
 			}
