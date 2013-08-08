@@ -7,6 +7,7 @@ function _main(){
 	$(document).ready(function(){
 		inicio_sesion();
 		
+		guardar_usuario();
 		
 		msj_registro_usr();
 		
@@ -25,7 +26,7 @@ function _main(){
 	
 		validacion_tarjeta();
 	
-		guardar_usuario();
+		
 	
 		filtrar_disponibilidad();
 		
