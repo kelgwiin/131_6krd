@@ -15,10 +15,10 @@
 				
 			<div style="margin-left:185px; width:200px;float:left">
 			<h3>Mapa</h3>
-			<a href="index.php/hotel/hotel/" > <h4 style="color:#2ba6cb;"> Inicio </h4>  </a>
-			<a href="index.php/hotel/registro_usuario/" > <h4 style="color:#2ba6cb;"> Registrarse </h4></a>
-			<a href="index.php/hotel/ver_reservas/" > <h4 style="color:#2ba6cb;"> Reservar </h4></a>
-			<a href="index.php/hotel/disponibilidad/" > <h4 style="color:#2ba6cb;" > Disponibilidad </h4></a>
+			<a href="index.php/hotel/hotel/" > <h5 style="color:#2ba6cb;"> Inicio </h5>  </a>
+			<a href="index.php/hotel/registro_usuario/" > <h5 style="color:#2ba6cb;"> Registrarse </h5></a>
+			<a href="index.php/hotel/ver_reservas/" > <h5 style="color:#2ba6cb;"> Reservar </h5></a>
+			<a href="index.php/hotel/disponibilidad/" > <h5 style="color:#2ba6cb;" > Disponibilidad </h5></a>
 		     </div>
                
                
