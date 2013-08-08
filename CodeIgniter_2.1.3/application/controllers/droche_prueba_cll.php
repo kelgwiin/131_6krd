@@ -88,8 +88,8 @@ class Droche_prueba_cll extends CI_Controller {
 //        echo '<br>ocupando<br>';
         
         //PRUEBA DE FACTURACION
-//        $this->droche_model->facturar('baltazar666',array(array(1,'cierre')));
-//        echo "<br>fin de cierre facturacion<br>";
+        //$this->droche_model->facturar('baltazar666',array(array(1,'cierre')));
+        //echo "<br>fin de cierre facturacion<br>";
         
         echo "<br> <br>cuerpo<br>";
         echo'</body> </html>';

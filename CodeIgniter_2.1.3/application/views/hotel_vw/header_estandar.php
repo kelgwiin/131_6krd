@@ -159,7 +159,7 @@
 				<li class="divider" id = "reservas_admin_div" style = "display:none"></li>
 				
 					<li id = "reservas_admin" style = "display:none">
-						<a id= "reservas_admin" title = "Reservas"><img alt = "Reservas"src="application/views/hotel_vw/config/img/reserva.png" width="30px">Reservas (admin) </a>
+						<a href = "index.php/hotel/ver_reservas" id= "reservas_admin" title = "Reservas"><img alt = "Reservas"src="application/views/hotel_vw/config/img/reserva.png" width="30px">Reservas (admin) </a>
 					</li>
 				
 				<!-- ------------------- -->
@@ -177,7 +177,6 @@
 					
 					<ul class = "dropdown">
 						<li><a href= "index.php/hotel/mis_reservas">Mis reservas</a></li>
-						<li><a>Mis facturas</a></li>
 						<li><a href = "index.php/hotel/disponibilidad">Reservar</a></li>
 					</ul>
 				</li>
@@ -196,6 +195,7 @@
 				<!-- ------------------- ---------->
 				<!-- Reportes (ADMIN - oculto)-->
 				<!-- ------------------- ---------->
+				<!--
 				<li class="divider" id = "reportes_div" style="display:none"></li>
 				
 				<li id = "reportes" class = "has-dropdown" style="display:none">
@@ -212,7 +212,7 @@
 						<li><a>Habitaciones</a></li>
 						<li><a>Llamadas</a></li>
 					</ul>
-				</li>
+				</li> -->
 				
 				<li class="divider" id = "inicio_sesion_div"></li>
 				<!------------------------------->

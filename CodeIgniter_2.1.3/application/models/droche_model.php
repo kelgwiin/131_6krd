@@ -360,6 +360,8 @@ class Droche_model extends CI_Model {
      * @param int $id_reserva_ocupa id de la tabla de reserva_ocupa
      * @param char $categoria_hab Categoría de la habitación {'N','B','A'}
      * @param int $tipo_hab Tipo de habitación {1,2}.
+     * 
+     * @return int $id_hab Es el id de la habitación asignada 
      */
     public function rsv_ocupar($id_reserva_ocupa,$categoria_hab, $tipo_hab){
         //Generando el minibar
@@ -384,6 +386,7 @@ class Droche_model extends CI_Model {
         //Actualizar el estatus de la habitación
         $this->update('habitacion', array('id_habitacion' => $id_hab) , 
                 array('estatus_habitacion' => 'ocupada'));
+        return $id_hab;
     }
     //end-of Gestión de Reservas
 
@@ -772,4 +775,44 @@ class Droche_model extends CI_Model {
     }//end-of function: facturar
     
     //end-of Gestión de Facturas
+    
+    /**
+     * Obtiene el id del usuario dado el id de una reserva
+     * @param int $id_reserva Id asociado a la reserva
+     * @return String id del usuario
+     */ 
+    public function get_id_usuario($id_reserva){
+		$sql = 'SELECT id_usuario ' . 
+				'FROM reserva_ocupa '.
+				'WHERE id_reserva_ocupa = ?; ';
+		$query_id_usr = $this->db->query($sql, array($id_reserva) );
+		
+		$rs_id_usr = $query_id_usr->first_row('array');
+		
+		return $rs_id_usr['id_usuario'];	
+	}
+	
+	public function get_factura($id_usr){
+		$sql = 'SELECT id_factura AS id, fecha_emision AS fe '.
+				'FROM factura '.
+				"WHERE id_usuario = ? AND estatus_factura = 'actual' ;";
+		
+		$qf = $this->db->query($sql, array($id_usr) );
+		$rs_f = $qf->first_row('array');
+		
+		$hay = true;
+		if($qf->num_rows() < 0 ){
+			$hay = false;
+		}
+		//obteniendo items de la factura
+		$sql = 'SELECT nombre, precio, cantidad, num_habitacion as num_hab '.
+				'FROM items_factura '.
+				'WHERE id_factura = ? ;';
+				
+		$q_items = $this->db->query($sql, array($rs_f['id']) );
+		$rs_items = $q_items->result_array();
+		
+		return array('fecha_emision' => $rs_f['fe'], 'items' => $rs_items,
+		'#'=>$rs_f['id'], 'hay_fact' => $hay);
+	}
 }

@@ -67,7 +67,7 @@
 	<script src="application/views/hotel_vw/config/js/app.js" type="text/javascript"></script>
 	
   <link rel="icon"   type="image/x-icon"  
-	href="application/views/hotel_vw/config/img/favicon.ico" /> 
+	href="application/views/hotel_vw/config/img/corona_.ico" /> 
   
   
   	<title>

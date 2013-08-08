@@ -1,181 +1,120 @@
-<!--
+<!-- 
 <style type="text/css" title="currentStyle">
 			@import "application/views/hotel_vw/config/DataTables-1.9.4/examples//examples_support/themes/smoothness/jquery-ui-1.8.4.custom.css";
 			
 			@impor "application/views/hotel_vw/config/css/tabla_round.css";
-		</style>-->
+		</style>
+-->
 
-<div class="row" style="margin:auto;" align = "center">
-		
-	<div class="large-12 columns" >
-            <!--Inicio de TABs -->
-            
-            <!--Fin de TABs -->
-            <h3 align = "left">Reservas</h3>
-            <?php 
-            echo '
-            <table id ="tb_rsv" cellpadding="0" cellspacing="0" border="0" class="display"> ' ;
-            
-            //~ echo '<table id = "tabla_rsv" class = "table_round"  width = "100%" >';
-            ?>
-            
-            
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Fecha de Entrada</th>
-                        <th>Fecha de Salida</th>
-                        <th>Categoría</th>
-                        <th>Tipo</th>
-                        <th>Cama Adicional</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    <tr >
-                        <td>1</td>
-                        <td>2013-08-15</td>
-                        <td>2030-08-30</td>
-                        <td>N|B|A</td>
-                        <td>1|2</td>
-                        <td>N°</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2013-08-15</td>
-                        <td>2030-08-30</td>
-                        <td>N|B|A</td>
-                        <td>1|2</td>
-                        <td>N°</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>2013-08-15</td>
-                        <td>2030-08-30</td>
-                        <td>N|B|A</td>
-                        <td>1|2</td>
-                        <td>N°</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>2013-08-15</td>
-                        <td>2030-08-30</td>
-                        <td>N|B|A</td>
-                        <td>1|2</td>
-                        <td>N°</td>
-                    </tr>
-                    <?php
-                        for($i = 0 ; $i < 30; $i++){
-                            echo '<tr>
-                                <td>33</td>
-                        <td>2013-08-15</td>
-                        <td>2030-08-30</td>
-                        <td>N|B|A</td>
-                        <td>1|2</td>
-                        <td>N°</td>
-                    </tr>';
-                        }
-                    ?>
-                    
-                </tbody>
-                
-            </table>
-            
-    </div> 
-    
-</div>
+<!-- Para resaltar-->
+<style type="text/css" >
+	
+tbody tr.even:hover, tbody tr.even td.highlighted {
+	background-color: #ECFFB3;
+}
+
+tbody tr.odd:hover, tbody tr.odd td.highlighted {
+	background-color: #E6FF99;
+}
+
+table.display tr.even.row_selected td {
+	background-color: #B0BED9;
+}
+
+table.display tr.odd.row_selected td {
+	background-color: #9FAFD1;
+}
 
 
-<!--<div class="row" style="margin:auto;">
+</style>
+
+<div class="row" style="margin:auto;">
 	<div class="large-12 columns" style="text-align:center;">	
-		<div class="panel radius" style=" background-color:white;border-color:gray; border-width:3px; ">	
+		<div class="panel radius" style=" background-color:white;border-color:#DFD6D6; border-width:2px; ">	
 
-
-			<h3>Reservas</h3><hr>
+			<h3 align = "left" >Gestión de Reservas</h3>
 			
-			<form> 
-			<div class="tabla_base" style="margin:auto;width:800px;" >
-               <table id ="reservas">
-					<tr name = "pp">
-						<td>
-							Check
-						</td>
-						<td>
-                           fecha de entrada
-						</td>
-						<td>
-                           fecha de salida
-						</td>												
-						<td>
-                           Categoria
-						</td>
-                        <td >
-                            Tipo
-                        </td>
-                        <td>
-                           cama adicional 
-                        </td>
-                    </tr>
-                    
-					<tr name = "pp">
-						<td>
-							    <input type = "checkbox" name = "ooo"> 
-						</td>
-						<td>
-                           fecha de entrada
-						</td>
-						<td>
-                           fecha de salida
-						</td>												
-						<td>
-                           Categoria
-						</td>
-                        <td >
-                            Tipo
-                        </td>
-                        <td>
-                           cama adicional 
-                        </td>
-                    </tr>                 
-                 
-					<tr name = "pp">
-						<td>
-							    <input type = "checkbox" name = "ooo"> 
-						</td>
-						<td>
-                           fecha de entrada
-						</td>
-						<td>
-                           fecha de salida
-						</td>												
-						<td>
-                           Categoria
-						</td>
-                        <td >
-                            Tipo
-                        </td>
-                        <td>
-                           cama adicional 
-                        </td>
-                    </tr>
-  					
-                </table>
-                
-            </div>
-            
-            <hr>           
-   				<div align="center" class="row">
-				<div class="large-12 columns" style="margin-top:30px; text-align:center;">
-					<a style="width:150px;height:50px;" id="bt_reservar" class="button"  >Modificar reserva</a>
-					<a style="margin-left:45px;width:150px;height:50px;" id="bt_reservar" class="button"  >Cancelar reserva</a>				
-				</div>         
+			<hr>
+			<div class = "row">
+				<div class = "large-3 columns">
+					<a align = "left" class = "button secondary radius small"
+				 id="boton_cancelar_reserva" title = "Cancelar reserva" >
+					Cancelar reserva
+					</a>
 				</div>
-            
-          </form>
-        
-         <hr><br>     
-        
-		</div>
+				
+				<div class = "large-3 columns">
+					<a align = "left" class = "button secondary radius small"
+				 id="boton_ocupar_reserva" title = "ocupar reserva" >
+					Ocupar reserva
+					</a>
+				</div>
+				
+				<div class = "large-3 columns">
+					<a align = "left" class = "button secondary radius small"
+				 id="boton_cerrar_reserva" title = "Cerrar reserva" >
+					Cerrar reserva
+					</a>
+				</div>
+				
+				<div class = "large-3 columns">
+					<a align = "left" class = "button secondary radius small"
+				 id="boton_ver_factura" title = "Cerrar reserva" >
+					Ver factura
+					</a>
+				</div>
+				
+			</div>
+			
+			<!---------------------->	
+			<!-- Tabla principal -->
+			<!--------------------->
+			
+					<!-- Creación de la tabla-->
+					<table class="display" id ="tb_reservas_reservas_admin" cellpadding="0" 
+					cellspacing="0" border="0" width = "100%">
+					
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>id</th>
+							<th>id_hab</th>
+							<th>id_usuario</th>
+							<th>camas_infantiles</th>
+							<th>fecha_ini</th>
+							<th>fecha_fin</th>
+							<th>categoria_habitacion</th>
+							<th>tipo_habitacion</th>
+							<th>estatus_reserva</th>
+							<th>caso_especial</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<?php
+						foreach($tabla as $fila){
+							echo '<tr>';
+							echo '<td ><input type = "checkbox"></td>';
+							foreach($fila as $item ){
+								if($item !== NULL){
+									printf('<td>%s</td>',$item);
+								}else{
+									printf('<td></td>',$item);
+								}
+							}
+							echo '</tr>';
+						}
+						?>
+					</tbody>
+					
+					</table>
+				
+			
+			
+			<br>
+			<hr><br>
+			
+		</div><!-- fin de panel radius -->
 	</div>		
-</div>            -->
-            
+</div>            
+           
