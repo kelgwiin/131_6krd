@@ -6,7 +6,6 @@ _main();
 function _main(){
 	$(document).ready(function(){
 		
-		
 		msj_creacion_nuevo_usr();
 	
 		inicio_sesion();
@@ -14,16 +13,14 @@ function _main(){
 		cerrar_sesion();
 		
 		existe_usr();
-		
-		
     
 		msj_registro_usr();
 		
 		msj_error_claves();
 	
 		validacion_tarjeta();
-	
 		
+		guardar_usuario();
 	
 		filtrar_disponibilidad();
 		
@@ -45,7 +42,7 @@ function _main(){
 		
 		boton_ver_factura();
 		
-		guardar_usuario();
+		
 		
 		tabla();
 		
