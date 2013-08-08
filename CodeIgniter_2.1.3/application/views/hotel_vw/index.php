@@ -60,9 +60,9 @@
 					<div class="row" >
 						<div class="large-12 columns" style="text-align:center;">	
 							
-	<a   href="#"> <img src="application/views/hotel_vw/config/img/twitter.png" style="width:40px;height:40px;" > </a>
-	<a   href="#"> <img src="application/views/hotel_vw/config/img/facebook.png" style="margin-left:10px; width:40px;height:40px;" > </a>
-	<a   href="#"> <img src="application/views/hotel_vw/config/img/mail.png" style="margin-left:10px;width:50px;height:40px;" > </a>
+	<a   href="index.php/hotel/hotel/"> <img src="application/views/hotel_vw/config/img/twitter.png" style="width:40px;height:40px;" > </a>
+	<a   href="index.php/hotel/hotel/"> <img src="application/views/hotel_vw/config/img/facebook.png" style="margin-left:10px; width:40px;height:40px;" > </a>
+	<a   href="index.php/hotel/contactar/"> <img src="application/views/hotel_vw/config/img/mail.png" style="margin-left:10px;width:50px;height:40px;" > </a>
 							
 						</div>
 					</div>								
