@@ -5,7 +5,7 @@ _main();
 
 function _main(){
 	$(document).ready(function(){
-		guardar_usuario();
+		
 		
 		msj_creacion_nuevo_usr();
 	
@@ -44,6 +44,8 @@ function _main(){
 		boton_cerrar_reserva();
 		
 		boton_ver_factura();
+		
+		guardar_usuario();
 		
 		//pendiente viejo sin desarrollar mucho
 		//~ boton_reservar();
@@ -775,12 +777,13 @@ function guardar_usuario(){
 				var fo_enviar_data = function(data){
 					obj = data;
 					if(obj.estatus == "ok"){
+						$(location).attr('href','index.php/hotel/true');
 						/** Redireccionando si todo va bien
 						* 	en el registro automáticamente inicia sesión con
 						*	con los permisos correspondientes. Por defecto es
 						* 	un usuario estándar	
 						*/
-						$(location).attr('href','index.php/hotel/true');
+						
 					}else{
 						$('#aviso_error_inesperado').foundation('reveal', 'open');
 					}
