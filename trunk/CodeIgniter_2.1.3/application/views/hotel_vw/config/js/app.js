@@ -5,22 +5,19 @@ _main();
 
 function _main(){
 	$(document).ready(function(){
-		inicio_sesion();
-		
 		guardar_usuario();
-		
-		msj_registro_usr();
-		
 		
 		msj_creacion_nuevo_usr();
 	
+		inicio_sesion();
+        
 		cerrar_sesion();
 		
 		existe_usr();
 		
 		tabla();
     
-		
+		msj_registro_usr();
 		
 		msj_error_claves();
 	
