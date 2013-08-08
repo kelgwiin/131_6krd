@@ -13,12 +13,12 @@
 			 </div>
 				
 				
-			<div style="margin-left:150px; width:200px;float:left">
-			<h3>¿Nuesta Vision?</h3>
-		    <p> Rodeado del frondoso paisaje de un parque natural,
-			 el Hesperia D'roche, de cinco estrellas, ofrece 
-			 vistas a la resplandeciente arena blanca y al pacífico 
-			 y cristalino mar. A sólo 35 minutos del aeropuerto de Isla Margarita</p>               
+			<div style="margin-left:185px; width:200px;float:left">
+			<h3>Mapa</h3>
+			<a href="index.php/hotel/hotel/" > <h4 style="color:#2ba6cb;"> Inicio </h4>  </a>
+			<a href="index.php/hotel/registro_usuario/" > <h4 style="color:#2ba6cb;"> Registrarse </h4></a>
+			<a href="index.php/hotel/ver_reservas/" > <h4 style="color:#2ba6cb;"> Reservar </h4></a>
+			<a href="index.php/hotel/disponibilidad/" > <h4 style="color:#2ba6cb;" > Disponibilidad </h4></a>
 		     </div>
                
                
