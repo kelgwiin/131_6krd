@@ -15,7 +15,7 @@ function _main(){
 		
 		existe_usr();
 		
-		tabla();
+		
     
 		msj_registro_usr();
 		
@@ -46,6 +46,8 @@ function _main(){
 		boton_ver_factura();
 		
 		guardar_usuario();
+		
+		tabla();
 		
 		//pendiente viejo sin desarrollar mucho
 		//~ boton_reservar();
