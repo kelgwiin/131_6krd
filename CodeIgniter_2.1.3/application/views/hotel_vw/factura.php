@@ -8,7 +8,15 @@
 						<p align = "center">Hotel Droche</p>
 					<p> Factura #<?php echo $f['#']; ?> </p>
 					Fecha: <?php echo $f['fecha_emision']; ?> <br>
-					Número Habitación: <?php echo $f['items'][0]['num_hab'];?><br>
+					Número Habitación:
+					 <?php  
+					 if(isset($f['items'][0]['num_hab'])){
+						echo $f['items'][0]['num_hab'];
+					 }else{
+						echo 'N/A';
+					 }
+					
+					?><br>
 					
 					<table>
 						<thead>
